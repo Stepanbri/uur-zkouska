@@ -1,7 +1,11 @@
 import LaunchIcon from '@mui/icons-material/Launch';
 import { Box, Button, Stack } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { generateStagSyllabusUrl, generateCoursewareUrl, openInNewTab } from '../utils/externalLinksUtils';
+import {
+    generateStagSyllabusUrl,
+    generateCoursewareUrl,
+    openInNewTab,
+} from '../utils/externalLinksUtils';
 
 /**
  * Komponenta pro zobrazení externích odkazů na STAG a Courseware
@@ -12,12 +16,12 @@ import { generateStagSyllabusUrl, generateCoursewareUrl, openInNewTab } from '..
  * @param {boolean} props.compact - Kompaktní zobrazení bez textu, jen ikony, default false
  * @param {boolean} props.fullWidth - Rozložení tlačítek na celou šířku, default false
  */
-const ExternalLinksComponent = ({ 
-    course, 
-    direction = 'row', 
-    size = 'small', 
+const ExternalLinksComponent = ({
+    course,
+    direction = 'row',
+    size = 'small',
     compact = false,
-    fullWidth = false
+    fullWidth = false,
 }) => {
     const { t, i18n } = useTranslation();
 
@@ -27,24 +31,22 @@ const ExternalLinksComponent = ({
 
     const currentLanguage = i18n.language?.split('-')[0] || 'cs';
 
-    const handleStagClick = (e) => {
+    const handleStagClick = e => {
         e.stopPropagation();
         const url = generateStagSyllabusUrl(
-            course.departmentCode, 
-            course.courseCode, 
+            course.departmentCode,
+            course.courseCode,
             currentLanguage
         );
         openInNewTab(url);
     };
 
-    const handleCoursewareClick = (e) => {
+    const handleCoursewareClick = e => {
         e.stopPropagation();
-        const url = generateCoursewareUrl(
-            course.departmentCode, 
-            course.courseCode
-        );
+        const url = generateCoursewareUrl(course.departmentCode, course.courseCode);
         openInNewTab(url);
-    };    const buttonProps = {
+    };
+    const buttonProps = {
         size,
         variant: 'outlined',
         onClick: handleStagClick,
@@ -64,7 +66,7 @@ const ExternalLinksComponent = ({
                 bgcolor: 'action.hover',
             },
             ...(fullWidth && { flex: 1 }),
-        }
+        },
     };
 
     const coursewareButtonProps = {
@@ -87,21 +89,27 @@ const ExternalLinksComponent = ({
                 bgcolor: 'action.hover',
             },
             ...(fullWidth && { flex: 1 }),
-        }
-    };    return (
+        },
+    };
+    return (
         <Box sx={{ mt: compact ? 0 : 1 }}>
-            <Stack 
-                direction={direction} 
-                spacing={compact ? 0.25 : 0.5} 
+            <Stack
+                direction={direction}
+                spacing={compact ? 0.25 : 0.5}
                 alignItems={compact && direction === 'column' ? 'flex-end' : 'center'}
-                sx={{ 
-                    ...(fullWidth && direction === 'row' && { width: '100%' })
+                sx={{
+                    ...(fullWidth && direction === 'row' && { width: '100%' }),
                 }}
-            ><Button {...buttonProps}>
-                    {compact ? 'IS/STAG' : t('externalLinks.stagSylabus', 'View syllabus in IS/STAG')}
+            >
+                <Button {...buttonProps}>
+                    {compact
+                        ? 'IS/STAG'
+                        : t('externalLinks.stagSylabus', 'View syllabus in IS/STAG')}
                 </Button>
                 <Button {...coursewareButtonProps}>
-                    {compact ? 'COURSEWARE' : t('externalLinks.courseware', 'Open in ZCU Courseware')}
+                    {compact
+                        ? 'COURSEWARE'
+                        : t('externalLinks.courseware', 'Open in ZCU Courseware')}
                 </Button>
             </Stack>
         </Box>

@@ -328,7 +328,8 @@ export const useStagStudentPlanLoader = () => {
                             semestr: semesterForEventsApi,
                         },
                         lang
-                    );                    const transformedEvents = (
+                    );
+                    const transformedEvents = (
                         Array.isArray(scheduleEventsData) ? scheduleEventsData : []
                     )
                         .map(stagEvent => transformStagEvent(stagEvent, subjectData, planParams, t))
@@ -349,7 +350,8 @@ export const useStagStudentPlanLoader = () => {
                         useDemoApi
                     );
 
-                    addCourse(courseDataForWorkspace);const subjectIdentifier = {
+                    addCourse(courseDataForWorkspace);
+                    const subjectIdentifier = {
                         name: `${subjectData.rawSubject.katedra}/${subjectData.rawSubject.zkratka} - ${subjectData.rawSubject.nazev}`,
                         departmentCode: subjectData.rawSubject.katedra,
                         courseCode: subjectData.rawSubject.zkratka,

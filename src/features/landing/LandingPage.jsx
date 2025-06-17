@@ -9,7 +9,7 @@ import {
     Divider,
     Grid,
     Typography,
-    useTheme
+    useTheme,
 } from '@mui/material';
 import React from 'react';
 import { useTranslation } from 'react-i18next';

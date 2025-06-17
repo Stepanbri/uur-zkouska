@@ -1,8 +1,17 @@
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-import LanguageIcon from '@mui/icons-material/Language';
 import MenuIcon from '@mui/icons-material/Menu';
-import { AppBar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Tooltip } from '@mui/material';
+import {
+    AppBar,
+    Box,
+    Button,
+    Container,
+    IconButton,
+    Menu,
+    MenuItem,
+    Toolbar,
+    Tooltip,
+} from '@mui/material';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
@@ -37,31 +46,36 @@ const Header = ({
 }) => {
     const { t } = useTranslation();
     const location = useLocation();
-    
+
     // State pro menu výběru jazyka
     const [languageMenuAnchor, setLanguageMenuAnchor] = useState(null);
     const isLanguageMenuOpen = Boolean(languageMenuAnchor);
-    
-    const handleLanguageMenuOpen = (event) => {
+
+    const handleLanguageMenuOpen = event => {
         setLanguageMenuAnchor(event.currentTarget);
     };
-    
+
     const handleLanguageMenuClose = () => {
         setLanguageMenuAnchor(null);
     };
-    
-    const handleLanguageChange = (langCode) => {
+
+    const handleLanguageChange = langCode => {
         changeLanguage(langCode);
         handleLanguageMenuClose();
     };
-      // Funkce pro získání kódu vlajky
-    const getFlagCode = (langCode) => {
+    // Funkce pro získání kódu vlajky
+    const getFlagCode = langCode => {
         switch (langCode) {
-            case 'en': return 'gb';
-            case 'cs': return 'cz';
-            case 'uk': return 'ua';
-            case 'ja': return 'jp';
-            default: return langCode;
+            case 'en':
+                return 'gb';
+            case 'cs':
+                return 'cz';
+            case 'uk':
+                return 'ua';
+            case 'ja':
+                return 'jp';
+            default:
+                return langCode;
         }
     };
 
@@ -101,14 +115,19 @@ const Header = ({
                                 >
                                     {t(item.textKey)}
                                 </Button>
-                            ))}                            {/* Tlačítko pro výběr jazyka */}
+                            ))}{' '}
+                            {/* Tlačítko pro výběr jazyka */}
                             <Button
                                 color="inherit"
                                 onClick={handleLanguageMenuOpen}
                                 variant="outlined"
                                 size="small"
-                                startIcon={<LanguageIcon />}
-                                endIcon={<span className={`fi fi-${getFlagCode(currentLanguage)}`} style={{ marginLeft: '4px' }} />}
+                                endIcon={
+                                    <span
+                                        className={`fi fi-${getFlagCode(currentLanguage)}`}
+                                        style={{ marginLeft: '4px' }}
+                                    />
+                                }
                                 sx={{
                                     ml: 1,
                                     mr: 0.5,
@@ -122,7 +141,7 @@ const Header = ({
                             >
                                 {currentLanguage.toUpperCase()}
                             </Button>
-                              {/* Menu výběru jazyka */}
+                            {/* Menu výběru jazyka */}
                             <Menu
                                 id="language-menu"
                                 anchorEl={languageMenuAnchor}
@@ -134,16 +153,16 @@ const Header = ({
                                     },
                                 }}
                             >
-                                {languages.map((lang) => (
-                                    <MenuItem 
+                                {languages.map(lang => (
+                                    <MenuItem
                                         key={lang.code}
                                         onClick={() => handleLanguageChange(lang.code)}
                                         selected={currentLanguage === lang.code}
-                                        sx={{ 
+                                        sx={{
                                             display: 'flex',
                                             justifyContent: 'space-between',
                                             minWidth: '140px',
-                                            gap: 1
+                                            gap: 1,
                                         }}
                                     >
                                         <span>{lang.name}</span>
@@ -151,7 +170,6 @@ const Header = ({
                                     </MenuItem>
                                 ))}
                             </Menu>
-                            
                             {/* Tlačítko pro přepnutí motivu */}
                             <Tooltip
                                 title={

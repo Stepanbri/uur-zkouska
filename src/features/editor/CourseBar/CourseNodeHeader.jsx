@@ -84,8 +84,11 @@ const CourseNodeHeader = ({
                         py: '4px',
                     }}
                 >
-                    <Stack direction="column" spacing={0.5} flexGrow={1} overflow="hidden" pr={1}>                        <Typography
-                            variant="subtitle1"                            sx={{
+                    <Stack direction="column" spacing={0.5} flexGrow={1} overflow="hidden" pr={1}>
+                        {' '}
+                        <Typography
+                            variant="subtitle1"
+                            sx={{
                                 fontSize: '0.8rem', // Menší font pro předměty
                                 whiteSpace: 'nowrap',
                                 overflow: 'hidden',
@@ -115,11 +118,13 @@ const CourseNodeHeader = ({
                                     minWidth: 0, // Umožní flexu správně fungovat s ellipsis
                                 }}
                             >
-                                <Box component="span" sx={{ fontWeight: 600, flexShrink: 0 }}>{course.courseCode}</Box>
-                                <Box 
-                                    component="span" 
-                                    sx={{ 
-                                        fontWeight: 400, 
+                                <Box component="span" sx={{ fontWeight: 600, flexShrink: 0 }}>
+                                    {course.courseCode}
+                                </Box>
+                                <Box
+                                    component="span"
+                                    sx={{
+                                        fontWeight: 400,
                                         color: 'rgba(255, 255, 255, 0.7)',
                                         overflow: 'hidden',
                                         textOverflow: 'ellipsis',
@@ -129,9 +134,15 @@ const CourseNodeHeader = ({
                                     {course.name}
                                 </Box>
                             </Box>
-                        </Typography>{isExpanded && (
+                        </Typography>
+                        {isExpanded && (
                             <Stack direction="column" spacing={1}>
-                                <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap">
+                                <Stack
+                                    direction="row"
+                                    spacing={1}
+                                    alignItems="center"
+                                    flexWrap="wrap"
+                                >
                                     <Chip
                                         icon={
                                             areAllRequirementsMet ? (
@@ -161,23 +172,24 @@ const CourseNodeHeader = ({
                         aria-label={t('tooltips.removeCourse', { courseName: course.name })}
                     >
                         <DeleteIcon fontSize="small" />
-                    </IconButton>                </Box>
+                    </IconButton>{' '}
+                </Box>
             </Tooltip>
-            
+
             {/* Sekce externích odkazů s dividerem */}
             {isExpanded && (
                 <Box sx={{ width: '100%', mt: 0 }}>
                     <Divider sx={{ mb: 0.5, opacity: 0.6 }} />
-                    <ExternalLinksComponent 
-                        course={course} 
-                        direction="row" 
+                    <ExternalLinksComponent
+                        course={course}
+                        direction="row"
                         size="small"
                         compact={true}
                         fullWidth={true}
                     />
                 </Box>
             )}
-            
+
             <GenericConfirmationDialog
                 open={isConfirmDeleteDialogOpen}
                 onClose={handleCloseConfirmDialog}

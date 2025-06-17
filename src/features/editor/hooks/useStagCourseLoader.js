@@ -216,7 +216,8 @@ export const useStagCourseLoader = () => {
                             departmentCode: subjectInfo.katedra,
                             courseCode: subjectInfo.zkratka,
                             durationHours: durationHours, // Délka akce v hodinách
-                        };                    })
+                        };
+                    })
                     .filter(Boolean);
 
                 // Kontrola, zda předmět má alespoň jednu rozvrhovou akci pro daný semestr

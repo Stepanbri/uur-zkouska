@@ -44,7 +44,8 @@ function CourseBar({
             >
                 <CircularProgress />
                 <Typography sx={{ ml: 2 }}>{t('labels.loadingCourses')}</Typography>
-            </Box>        );
+            </Box>
+        );
     }
 
     let enrolledEventIds = new Set();
@@ -59,29 +60,30 @@ function CourseBar({
     }
 
     // Získání hierarchické struktury fakult -> katedr -> kurzů
-    const hierarchicalStructure = isHierarchyLoaded 
-        ? getHierarchicalStructure(courses || [])
-        : {};    // Fallback pro případ, že hierarchie není načtena
-    const coursesByDepartment = courses ? courses.reduce((acc, course) => {
-        const dept = course.departmentCode || t('labels.unknownDepartment');
-        if (!acc[dept]) {
-            acc[dept] = {
-                courses: [],
-                name: course.departmentName || dept // Pokusíme se získat plný název katedry
-            };
-        }
-        acc[dept].courses.push(course);
-        return acc;
-    }, {}) : {};
+    const hierarchicalStructure = isHierarchyLoaded ? getHierarchicalStructure(courses || []) : {}; // Fallback pro případ, že hierarchie není načtena
+    const coursesByDepartment = courses
+        ? courses.reduce((acc, course) => {
+              const dept = course.departmentCode || t('labels.unknownDepartment');
+              if (!acc[dept]) {
+                  acc[dept] = {
+                      courses: [],
+                      name: course.departmentName || dept, // Pokusíme se získat plný název katedry
+                  };
+              }
+              acc[dept].courses.push(course);
+              return acc;
+          }, {})
+        : {};
 
     const useHierarchicalView = isHierarchyLoaded && Object.keys(hierarchicalStructure).length > 0;
 
-    const getItemId = (prefix, id) => `${prefix}-${id}`;    // Render pro hierarchické zobrazení
+    const getItemId = (prefix, id) => `${prefix}-${id}`; // Render pro hierarchické zobrazení
     const renderHierarchicalView = () => {
         return Object.entries(hierarchicalStructure).map(([facultyCode, facultyData]) => (
             <TreeItem
                 key={getItemId('faculty', facultyCode)}
-                itemId={getItemId('faculty', facultyCode)}                label={
+                itemId={getItemId('faculty', facultyCode)}
+                label={
                     <Tooltip title={`${facultyCode} ${facultyData.name}`} placement="right">
                         <Typography
                             sx={{
@@ -91,11 +93,19 @@ function CourseBar({
                                 display: 'flex',
                                 alignItems: 'center',
                                 gap: 0.75,
-                                cursor: 'default'
+                                cursor: 'default',
                             }}
                         >
-                            <Box component="span" sx={{ fontWeight: 700 }}>{facultyCode}</Box> {/* Ještě tučnější */}
-                            <Box component="span" sx={{ fontWeight: 400, color: 'rgba(255, 255, 255, 0.8)' }}>{facultyData.name}</Box>
+                            <Box component="span" sx={{ fontWeight: 700 }}>
+                                {facultyCode}
+                            </Box>{' '}
+                            {/* Ještě tučnější */}
+                            <Box
+                                component="span"
+                                sx={{ fontWeight: 400, color: 'rgba(255, 255, 255, 0.8)' }}
+                            >
+                                {facultyData.name}
+                            </Box>
                         </Typography>
                     </Tooltip>
                 }
@@ -103,8 +113,7 @@ function CourseBar({
                     '& > .MuiTreeItem-content': {
                         py: '4px',
                         '&:hover': {
-                            backgroundColor: theme =>
-                                alpha(theme.palette.action.hover, 0.06),
+                            backgroundColor: theme => alpha(theme.palette.action.hover, 0.06),
                         },
                     },
                 }}
@@ -112,8 +121,12 @@ function CourseBar({
                 {Object.entries(facultyData.departments).map(([departmentCode, departmentData]) => (
                     <TreeItem
                         key={getItemId('dept', departmentCode)}
-                        itemId={getItemId('dept', departmentCode)}                        label={
-                            <Tooltip title={`${departmentCode} ${departmentData.name || departmentCode}`} placement="right">
+                        itemId={getItemId('dept', departmentCode)}
+                        label={
+                            <Tooltip
+                                title={`${departmentCode} ${departmentData.name || departmentCode}`}
+                                placement="right"
+                            >
                                 <Typography
                                     sx={{
                                         fontSize: '0.875rem', // Středně velký font pro katedry
@@ -122,11 +135,19 @@ function CourseBar({
                                         display: 'flex',
                                         alignItems: 'center',
                                         gap: 0.75,
-                                        cursor: 'default'
+                                        cursor: 'default',
                                     }}
                                 >
-                                    <Box component="span" sx={{ fontWeight: 650 }}>{departmentCode}</Box> {/* Mírně tučnější */}
-                                    <Box component="span" sx={{ fontWeight: 400, color: 'rgba(255, 255, 255, 0.7)' }}>{departmentData.name || departmentCode}</Box>
+                                    <Box component="span" sx={{ fontWeight: 650 }}>
+                                        {departmentCode}
+                                    </Box>{' '}
+                                    {/* Mírně tučnější */}
+                                    <Box
+                                        component="span"
+                                        sx={{ fontWeight: 400, color: 'rgba(255, 255, 255, 0.7)' }}
+                                    >
+                                        {departmentData.name || departmentCode}
+                                    </Box>
                                 </Typography>
                             </Tooltip>
                         }
@@ -145,12 +166,13 @@ function CourseBar({
                 ))}
             </TreeItem>
         ));
-    };    // Render function pro klasické zobrazení podle katedr
+    }; // Render function pro klasické zobrazení podle katedr
     const renderDepartmentalView = () => {
         return Object.entries(coursesByDepartment).map(([departmentCode, deptData]) => (
             <TreeItem
                 key={getItemId('dept', departmentCode)}
-                itemId={getItemId('dept', departmentCode)}                label={
+                itemId={getItemId('dept', departmentCode)}
+                label={
                     <Tooltip title={`${departmentCode} ${deptData.name}`} placement="right">
                         <Typography
                             sx={{
@@ -160,11 +182,19 @@ function CourseBar({
                                 display: 'flex',
                                 alignItems: 'center',
                                 gap: 0.75,
-                                cursor: 'default'
+                                cursor: 'default',
                             }}
                         >
-                            <Box component="span" sx={{ fontWeight: 650 }}>{departmentCode}</Box> {/* Mírně tučnější */}
-                            <Box component="span" sx={{ fontWeight: 400, color: 'rgba(255, 255, 255, 0.7)' }}>{deptData.name}</Box>
+                            <Box component="span" sx={{ fontWeight: 650 }}>
+                                {departmentCode}
+                            </Box>{' '}
+                            {/* Mírně tučnější */}
+                            <Box
+                                component="span"
+                                sx={{ fontWeight: 400, color: 'rgba(255, 255, 255, 0.7)' }}
+                            >
+                                {deptData.name}
+                            </Box>
                         </Typography>
                     </Tooltip>
                 }
@@ -172,8 +202,7 @@ function CourseBar({
                     '& > .MuiTreeItem-content': {
                         py: '2px',
                         '&:hover': {
-                            backgroundColor: theme =>
-                                alpha(theme.palette.action.hover, 0.04),
+                            backgroundColor: theme => alpha(theme.palette.action.hover, 0.04),
                         },
                     },
                 }}
@@ -184,7 +213,7 @@ function CourseBar({
     };
 
     // Společná render function pro kurz a jeho eventy
-    const renderCourseItem = (course) => {
+    const renderCourseItem = course => {
         const courseItemId = getItemId('course', course.id);
         const isCourseExpanded = expandedItems.includes(courseItemId);
         const enrolledHours = course.getEnrolledHours(enrolledEventIds);
@@ -207,14 +236,12 @@ function CourseBar({
                     '& > .MuiTreeItem-content': {
                         py: '1px',
                         '&:hover': {
-                            bgcolor: theme =>
-                                alpha(theme.palette.action.hover, 0.08),
+                            bgcolor: theme => alpha(theme.palette.action.hover, 0.08),
                         },
                     },
                     '& > .MuiTreeItem-content.Mui-focused, & > .MuiTreeItem-content.Mui-selected, & > .MuiTreeItem-content.Mui-selected.Mui-focused':
                         {
-                            backgroundColor: theme =>
-                                alpha(theme.palette.primary.main, 0.12),
+                            backgroundColor: theme => alpha(theme.palette.primary.main, 0.12),
                         },
                 }}
             >
@@ -239,9 +266,7 @@ function CourseBar({
 
                             const timeA = a.startTime.split(':').map(Number);
                             const timeB = b.startTime.split(':').map(Number);
-                            return (
-                                timeA[0] * 60 + timeA[1] - (timeB[0] * 60 + timeB[1])
-                            );
+                            return timeA[0] * 60 + timeA[1] - (timeB[0] * 60 + timeB[1]);
                         })
                         .map(event => {
                             const isEnrolled = enrolledEventIds.has(event.id);
@@ -258,15 +283,9 @@ function CourseBar({
 
                             if (typeRequirementMetForCourse && !isEnrolled) {
                                 canEnroll = false;
-                                disabledTooltipText = t(
-                                    'tooltips.enrollDisabledTypeMet',
-                                    {
-                                        eventType: t(
-                                            `courseEvent.${eventTypeKey}`,
-                                            event.type
-                                        ),
-                                    }
-                                );
+                                disabledTooltipText = t('tooltips.enrollDisabledTypeMet', {
+                                    eventType: t(`courseEvent.${eventTypeKey}`, event.type),
+                                });
                             }
 
                             return (
@@ -393,7 +412,8 @@ function CourseBar({
                 >
                     <Typography color="text.secondary">{t('labels.noCoursesToDisplay')}</Typography>
                 </Box>
-            ) : (                <Box sx={{ flexGrow: 1, overflowY: 'auto', scrollbarGutter: 'stable' }}>
+            ) : (
+                <Box sx={{ flexGrow: 1, overflowY: 'auto', scrollbarGutter: 'stable' }}>
                     <SimpleTreeView
                         expandedItems={expandedItems}
                         onExpandedItemsChange={handleExpandedItemsChange}

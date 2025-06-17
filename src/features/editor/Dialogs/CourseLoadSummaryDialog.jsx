@@ -66,8 +66,11 @@ const CourseLoadSummaryDialog = ({ open, onClose, summary }) => {
                             borderRadius: 1,
                             mt: 2,
                         }}
-                    >                        {allItems.map((item, index) => (                            <ListItem 
-                                key={index} 
+                    >
+                        {' '}
+                        {allItems.map((item, index) => (
+                            <ListItem
+                                key={index}
                                 divider={index < allItems.length - 1}
                                 sx={{ display: 'flex', alignItems: 'center', py: 1 }}
                             >

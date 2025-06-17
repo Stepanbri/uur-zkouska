@@ -25,10 +25,11 @@ class HierarchyManager {
             return true;
         }
 
-        this.isLoading = true;        try {
+        this.isLoading = true;
+        try {
             const response = await stagApiService.getHierarchiePracovist(language);
             console.log('Hierarchy API response:', response);
-            
+
             // Zkusíme nejdříve response.pracoviste (standardní struktura)
             let hierarchyData = null;
             if (response && response.pracoviste && Array.isArray(response.pracoviste)) {
@@ -38,7 +39,7 @@ class HierarchyManager {
             else if (Array.isArray(response)) {
                 hierarchyData = response;
             }
-              if (hierarchyData && hierarchyData.length > 0) {
+            if (hierarchyData && hierarchyData.length > 0) {
                 this.hierarchy = hierarchyData;
                 this.currentLanguage = language; // uložíme aktuální jazyk
                 this._buildMaps();
@@ -47,7 +48,7 @@ class HierarchyManager {
                     totalWorkplaces: this.hierarchy.length,
                     faculties: this._getFaculties().length,
                     departmentMappings: this.facultyMap.size,
-                    language: this.currentLanguage
+                    language: this.currentLanguage,
                 });
                 return true;
             } else {
@@ -58,10 +59,11 @@ class HierarchyManager {
                     isArray: Array.isArray(response),
                     isArrayPracoviste: !!(response && Array.isArray(response.pracoviste)),
                     length: response?.length,
-                    pracovisteLength: response?.pracoviste?.length
+                    pracovisteLength: response?.pracoviste?.length,
                 });
                 throw new Error('Invalid hierarchy response structure');
-            }} catch (error) {
+            }
+        } catch (error) {
             console.error('Failed to load workplace hierarchy:', error);
             console.error('Response received:', error.response || 'No response data');
             this.isLoaded = false;
@@ -82,22 +84,23 @@ class HierarchyManager {
 
         // Vytvoření mapy katedra -> fakulta
         this.hierarchy.forEach(workplace => {
-            if (workplace.typPracoviste === 'K') { // Katedra
+            if (workplace.typPracoviste === 'K') {
+                // Katedra
                 const faculty = this._findFacultyForWorkplace(workplace);
                 if (faculty) {
                     this.facultyMap.set(workplace.zkratka, faculty);
                 }
             }
         });
-    }    // Najde fakultu pro dané pracoviště (procházením hierarchie nahoru)
+    } // Najde fakultu pro dané pracoviště (procházením hierarchie nahoru)
     _findFacultyForWorkplace(workplace) {
         if (!workplace) return null;
-        
+
         // Speciální případ pro REK - není to fakulta, ale rektorát
         if (workplace.zkratka === 'REK') {
             return null;
         }
-        
+
         // Pokud je pracoviště samo fakultou (ale ne REK)
         if (workplace.typPracoviste === 'F' && workplace.zkratka !== 'REK') {
             return workplace;
@@ -108,12 +111,12 @@ class HierarchyManager {
         while (current && current.nadrazenePracoviste) {
             const parent = this.workplaceMap.get(current.nadrazenePracoviste);
             if (!parent) break;
-            
+
             // Speciální případ pro REK - není to fakulta
             if (parent.zkratka === 'REK') {
                 return null;
             }
-            
+
             if (parent.typPracoviste === 'F') {
                 return parent;
             }
@@ -142,7 +145,7 @@ class HierarchyManager {
         }
 
         return null;
-    }    // Získá všechny fakulty (bez REK)
+    } // Získá všechny fakulty (bez REK)
     _getFaculties() {
         if (!this.hierarchy) return [];
         return this.hierarchy.filter(w => w.typPracoviste === 'F' && w.zkratka !== 'REK');
@@ -153,9 +156,10 @@ class HierarchyManager {
         if (!this.isLoaded || !facultyCode) return [];
 
         const departments = [];
-        
+
         this.hierarchy.forEach(workplace => {
-            if (workplace.typPracoviste === 'K') { // Katedra
+            if (workplace.typPracoviste === 'K') {
+                // Katedra
                 const faculty = this.getFacultyForDepartment(workplace.zkratka);
                 if (faculty && faculty.zkratka === facultyCode) {
                     departments.push(workplace);
@@ -175,9 +179,9 @@ class HierarchyManager {
         courses.forEach(course => {
             const departmentCode = course.departmentCode;
             const faculty = this.getFacultyForDepartment(departmentCode);
-              let facultyKey = 'UNKNOWN';
+            let facultyKey = 'UNKNOWN';
             let facultyName = this._getLocalizedText('Neznámá fakulta', 'Unknown Faculty');
-            
+
             if (faculty) {
                 facultyKey = faculty.zkratka;
                 facultyName = this._getWorkplaceName(faculty);
@@ -191,9 +195,15 @@ class HierarchyManager {
                         facultyName = this._getLocalizedText('Rektorát', 'Rectorate');
                     }
                     // Pokud je nadřazené pracoviště REK nebo je to pracoviště bez nadřazeného
-                    else if (workplace.nadrazenePracoviste === 'REK' || !workplace.nadrazenePracoviste) {
+                    else if (
+                        workplace.nadrazenePracoviste === 'REK' ||
+                        !workplace.nadrazenePracoviste
+                    ) {
                         facultyKey = 'REK';
-                        facultyName = this._getLocalizedText('Rektorát a centrální pracoviště', 'Rectorate and Central Departments');
+                        facultyName = this._getLocalizedText(
+                            'Rektorát a centrální pracoviště',
+                            'Rectorate and Central Departments'
+                        );
                     }
                     // Pokud pracoviště nepatří pod žádnou fakultu
                     else {
@@ -211,14 +221,14 @@ class HierarchyManager {
             if (!structure[facultyKey]) {
                 structure[facultyKey] = {
                     name: facultyName,
-                    departments: {}
+                    departments: {},
                 };
             }
 
             if (!structure[facultyKey].departments[departmentCode]) {
                 structure[facultyKey].departments[departmentCode] = {
                     name: this._getDepartmentName(departmentCode),
-                    courses: []
+                    courses: [],
                 };
             }
 
@@ -231,12 +241,12 @@ class HierarchyManager {
     // Helper funkce pro získání názvu pracoviště v aktuálním jazyce
     _getWorkplaceName(workplace) {
         if (!workplace) return '';
-        
+
         // Pro češtinu nebo pokud anglický název neexistuje, použijeme český
         if (this.currentLanguage === 'cs' || !workplace.anNazev) {
             return workplace.nazev;
         }
-        
+
         // Pro ostatní jazyky preferujeme anglický název, pokud existuje
         return workplace.anNazev || workplace.nazev;
     }
@@ -253,7 +263,7 @@ class HierarchyManager {
             return czechText;
         }
         return englishText;
-    }    // Resetuje načtenou hierarchii (pro účely testování nebo obnovení)
+    } // Resetuje načtenou hierarchii (pro účely testování nebo obnovení)
     reset() {
         this.hierarchy = null;
         this.facultyMap.clear();
@@ -264,12 +274,13 @@ class HierarchyManager {
     }
 
     // Získá informace o stavu načítání
-    getStatus() {        return {
+    getStatus() {
+        return {
             isLoaded: this.isLoaded,
             isLoading: this.isLoading,
             hierarchySize: this.hierarchy ? this.hierarchy.length : 0,
             facultyMappings: this.facultyMap.size,
-            currentLanguage: this.currentLanguage
+            currentLanguage: this.currentLanguage,
         };
     }
 }

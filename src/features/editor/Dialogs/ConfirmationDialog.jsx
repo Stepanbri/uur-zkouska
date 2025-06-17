@@ -66,7 +66,14 @@ const ConfirmationDialog = ({
                                 p: 1,
                                 bgcolor: 'action.hover',
                             }}
-                        >                            {itemsToOverwrite.map((item, index) => (                                <ListItem key={`overwrite-${index}`} disablePadding sx={{ pl: 1, display: 'flex', alignItems: 'center' }}>
+                        >
+                            {' '}
+                            {itemsToOverwrite.map((item, index) => (
+                                <ListItem
+                                    key={`overwrite-${index}`}
+                                    disablePadding
+                                    sx={{ pl: 1, display: 'flex', alignItems: 'center' }}
+                                >
                                     <ListItemText
                                         slotProps={{
                                             primary: { variant: 'body2' },
@@ -76,12 +83,23 @@ const ConfirmationDialog = ({
                                         secondary={typeof item === 'string' ? null : item.details}
                                         sx={{ flex: 1, pr: 1 }}
                                     />
-                                    <Box sx={{ ml: 'auto', flexShrink: 0, display: 'flex', alignItems: 'center' }}>
-                                        <ExternalLinksComponent 
-                                            course={typeof item === 'string' ? null : {
-                                                departmentCode: item.rawSubject?.katedra,
-                                                courseCode: item.rawSubject?.zkratka
-                                            }}
+                                    <Box
+                                        sx={{
+                                            ml: 'auto',
+                                            flexShrink: 0,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                        }}
+                                    >
+                                        <ExternalLinksComponent
+                                            course={
+                                                typeof item === 'string'
+                                                    ? null
+                                                    : {
+                                                          departmentCode: item.rawSubject?.katedra,
+                                                          courseCode: item.rawSubject?.zkratka,
+                                                      }
+                                            }
                                             compact={true}
                                             size="small"
                                             direction="column"
@@ -111,8 +129,14 @@ const ConfirmationDialog = ({
                                 p: 1,
                                 bgcolor: 'action.hover',
                             }}
-                        >                            {itemsToAdd.map((item, index) => (
-                                <ListItem key={`add-${index}`} disablePadding sx={{ pl: 1, display: 'flex', alignItems: 'center' }}>
+                        >
+                            {' '}
+                            {itemsToAdd.map((item, index) => (
+                                <ListItem
+                                    key={`add-${index}`}
+                                    disablePadding
+                                    sx={{ pl: 1, display: 'flex', alignItems: 'center' }}
+                                >
                                     <ListItemText
                                         slotProps={{
                                             primary: { variant: 'body2' },
@@ -122,12 +146,23 @@ const ConfirmationDialog = ({
                                         secondary={typeof item === 'string' ? null : item.details}
                                         sx={{ flex: 1, pr: 1 }}
                                     />
-                                    <Box sx={{ ml: 'auto', flexShrink: 0, display: 'flex', alignItems: 'center' }}>
-                                        <ExternalLinksComponent 
-                                            course={typeof item === 'string' ? null : {
-                                                departmentCode: item.rawSubject?.katedra,
-                                                courseCode: item.rawSubject?.zkratka
-                                            }}
+                                    <Box
+                                        sx={{
+                                            ml: 'auto',
+                                            flexShrink: 0,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                        }}
+                                    >
+                                        <ExternalLinksComponent
+                                            course={
+                                                typeof item === 'string'
+                                                    ? null
+                                                    : {
+                                                          departmentCode: item.rawSubject?.katedra,
+                                                          courseCode: item.rawSubject?.zkratka,
+                                                      }
+                                            }
                                             compact={true}
                                             size="small"
                                             direction="column"

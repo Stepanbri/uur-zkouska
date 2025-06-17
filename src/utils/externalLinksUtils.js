@@ -12,15 +12,23 @@ import { getCurrentAcademicYear } from './academicYearUtils';
  * @param {string} year - Akademický rok (např. "2024"), default aktuální rok
  * @returns {string} URL pro STAG sylabus
  */
-export const generateStagSyllabusUrl = (departmentCode, courseCode, language = 'cs', year = null) => {
+export const generateStagSyllabusUrl = (
+    departmentCode,
+    courseCode,
+    language = 'cs',
+    year = null
+) => {
     if (!departmentCode || !courseCode) {
-        console.warn('generateStagSyllabusUrl: Missing required parameters', { departmentCode, courseCode });
+        console.warn('generateStagSyllabusUrl: Missing required parameters', {
+            departmentCode,
+            courseCode,
+        });
         return '';
     }
 
     // Použijeme aktuální akademický rok pokud není specifikován
     const academicYear = year || getCurrentAcademicYear().split('/')[0];
-    
+
     // STAG podporuje pouze cs a en
     const stagLanguage = ['cs', 'en'].includes(language) ? language : 'cs';
 
@@ -30,7 +38,7 @@ export const generateStagSyllabusUrl = (departmentCode, courseCode, language = '
         predmetZkrPrac: departmentCode.trim().toUpperCase(),
         predmetZkrPred: courseCode.trim().toUpperCase(),
         predmetRok: academicYear,
-        plang: stagLanguage
+        plang: stagLanguage,
     });
 
     return `${baseUrl}?${params.toString()}`;
@@ -44,7 +52,10 @@ export const generateStagSyllabusUrl = (departmentCode, courseCode, language = '
  */
 export const generateCoursewareUrl = (departmentCode, courseCode) => {
     if (!departmentCode || !courseCode) {
-        console.warn('generateCoursewareUrl: Missing required parameters', { departmentCode, courseCode });
+        console.warn('generateCoursewareUrl: Missing required parameters', {
+            departmentCode,
+            courseCode,
+        });
         return '';
     }
 
@@ -59,7 +70,7 @@ export const generateCoursewareUrl = (departmentCode, courseCode) => {
  * Otevře URL v novém tabu/okně
  * @param {string} url - URL k otevření
  */
-export const openInNewTab = (url) => {
+export const openInNewTab = url => {
     if (!url) {
         console.warn('openInNewTab: No URL provided');
         return;

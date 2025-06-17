@@ -26,7 +26,7 @@ const MainAppContent = () => {
     const { t, i18n } = useTranslation();
     const location = useLocation();
     const { mode, toggleColorMode } = useAppContextTheme();
-    const theme = useTheme();    // Lokální stav pro jazyk, synchronizovaný s i18next a localStorage
+    const theme = useTheme(); // Lokální stav pro jazyk, synchronizovaný s i18next a localStorage
     const [currentLanguage, setCurrentLanguage] = useState(() => {
         const storedLang = localStorage.getItem('i18nextLng');
         return storedLang ? storedLang.split('-')[0] : 'cs';
@@ -47,7 +47,8 @@ const MainAppContent = () => {
     // Efekt pro nastavení jazyka při prvním načtení komponenty
     useEffect(() => {
         const savedLang = localStorage.getItem('i18nextLng')?.split('-')[0];
-        const targetLang = savedLang && languages.some(lang => lang.code === savedLang) ? savedLang : 'cs';
+        const targetLang =
+            savedLang && languages.some(lang => lang.code === savedLang) ? savedLang : 'cs';
         setCurrentLanguage(targetLang);
         if (i18n.language !== targetLang) {
             i18n.changeLanguage(targetLang);
@@ -55,9 +56,10 @@ const MainAppContent = () => {
     }, [i18n]);
 
     // Zjištění, zda se jedná o mobilní zobrazení pro responzivní chování
-    const isMobileOrSmaller = useMediaQuery(theme.breakpoints.down('sm'));    const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
+    const isMobileOrSmaller = useMediaQuery(theme.breakpoints.down('sm'));
+    const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
-    const changeLanguage = (lang) => {
+    const changeLanguage = lang => {
         setCurrentLanguage(lang);
         i18n.changeLanguage(lang);
     };
@@ -71,7 +73,9 @@ const MainAppContent = () => {
     return (
         <>
             <CssBaseline />
-            <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>                <Header
+            <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+                {' '}
+                <Header
                     navItems={navItems}
                     mode={mode}
                     currentLanguage={currentLanguage}
@@ -81,7 +85,6 @@ const MainAppContent = () => {
                     onDrawerToggle={handleDrawerToggle}
                     isMobileOrSmaller={isMobileOrSmaller}
                 />
-
                 <SideDrawer
                     navItems={navItems}
                     mode={mode}
@@ -93,7 +96,6 @@ const MainAppContent = () => {
                     mobileOpen={mobileOpen}
                     isMobileOrSmaller={isMobileOrSmaller}
                 />
-
                 <Box
                     component="main"
                     sx={{

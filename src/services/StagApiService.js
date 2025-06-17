@@ -365,7 +365,7 @@ class StagApiService {
         const params = { ...criteria, jenRozvrhoveAkce: true, lang };
         const response = await this._doRequest('rozvrhy/getRozvrhByPredmet', params, 'GET', true); // auth?
         return Array.isArray(response?.rozvrhovaAkce) ? response.rozvrhovaAkce : [];
-    }    /**
+    } /**
      * Vrátí hierarchii pracovišť (fakulty, katedry, ústavy).
      * Endpoint: ciselniky/getHierarchiePracovist
      * @param {string} [lang='en'] - Jazyk odpovědi.
@@ -373,7 +373,12 @@ class StagApiService {
      */
     async getHierarchiePracovist(lang = 'en') {
         const params = { lang };
-        const response = await this._doRequest('ciselniky/getHierarchiePracovist', params, 'GET', false);
+        const response = await this._doRequest(
+            'ciselniky/getHierarchiePracovist',
+            params,
+            'GET',
+            false
+        );
         return response;
     }
 }

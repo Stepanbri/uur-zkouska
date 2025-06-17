@@ -49,27 +49,32 @@ const SideDrawer = ({
 }) => {
     const { t } = useTranslation();
     const location = useLocation();
-    
+
     // State pro rozbalení seznamu jazyků
     const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
-    
-    const handleLanguageMenuToggle = (e) => {
+
+    const handleLanguageMenuToggle = e => {
         e.stopPropagation(); // Zabraňuje propagaci události k rodičovskému Box, který by zavřel drawer
         setLanguageMenuOpen(!languageMenuOpen);
     };
-    
+
     const handleLanguageChange = (langCode, e) => {
         e.stopPropagation(); // Zabraňuje propagaci události k rodičovskému Box, který by zavřel drawer
         changeLanguage(langCode);
     };
-      // Funkce pro získání kódu vlajky
-    const getFlagCode = (langCode) => {
+    // Funkce pro získání kódu vlajky
+    const getFlagCode = langCode => {
         switch (langCode) {
-            case 'en': return 'gb';
-            case 'cs': return 'cz';
-            case 'uk': return 'ua';
-            case 'ja': return 'jp';
-            default: return langCode;
+            case 'en':
+                return 'gb';
+            case 'cs':
+                return 'cz';
+            case 'uk':
+                return 'ua';
+            case 'ja':
+                return 'jp';
+            default:
+                return langCode;
         }
     };
 
@@ -102,24 +107,29 @@ const SideDrawer = ({
                 ))}
             </List>
             <Divider />
-            <List>                <ListItem disablePadding>
+            <List>
+                {' '}
+                <ListItem disablePadding>
                     <ListItemButton onClick={handleLanguageMenuToggle}>
                         <ListItemIcon sx={{ minWidth: 'auto', mr: 2 }}>
                             <LanguageIcon />
                         </ListItemIcon>
                         <ListItemText primary={t('languageToggle')} />
-                        <span className={`fi fi-${getFlagCode(currentLanguage)}`} style={{ marginRight: '8px' }} />
+                        <span
+                            className={`fi fi-${getFlagCode(currentLanguage)}`}
+                            style={{ marginRight: '8px' }}
+                        />
                         {languageMenuOpen ? <ExpandLess /> : <ExpandMore />}
                     </ListItemButton>
                 </ListItem>
                 <Collapse in={languageMenuOpen} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
-                        {languages.map((lang) => (
-                            <ListItemButton 
+                        {languages.map(lang => (
+                            <ListItemButton
                                 key={lang.code}
                                 sx={{ pl: 4 }}
                                 selected={currentLanguage === lang.code}
-                                onClick={(e) => handleLanguageChange(lang.code, e)}
+                                onClick={e => handleLanguageChange(lang.code, e)}
                             >
                                 <ListItemText primary={lang.name} />
                                 <span className={`fi fi-${getFlagCode(lang.code)}`} />

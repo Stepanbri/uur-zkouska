@@ -10,7 +10,7 @@ import {
     TableHead,
     TableRow,
     Typography,
-    styled
+    styled,
 } from '@mui/material';
 import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -151,43 +151,46 @@ function ScheduleBox() {
         activeScheduleIndex,
         setActiveGeneratedSchedule,
     } = useWorkspace();
-    
+
     const { toggleEventInSchedule } = useCourseManagement();
 
     const scheduledEvents = activeSchedule ? activeSchedule.getAllEnrolledEvents() : [];
-    const enrolledEventIds = useMemo(() => 
-        new Set(scheduledEvents.map(event => event.id)), 
+    const enrolledEventIds = useMemo(
+        () => new Set(scheduledEvents.map(event => event.id)),
         [scheduledEvents]
     );
 
-    const handleToggleEvent = useCallback((event, isCurrentlyEnrolled) => {
-        const courseContext = courses.find(c => c.id === event.courseId);
-        toggleEventInSchedule(event, isCurrentlyEnrolled, courseContext);
-    }, [courses, toggleEventInSchedule]);
+    const handleToggleEvent = useCallback(
+        (event, isCurrentlyEnrolled) => {
+            const courseContext = courses.find(c => c.id === event.courseId);
+            toggleEventInSchedule(event, isCurrentlyEnrolled, courseContext);
+        },
+        [courses, toggleEventInSchedule]
+    );
 
     // Get all events that should be shown in the schedule (enrolled + available for enrollment)
     const visibleEvents = useMemo(() => {
         // Map to store type requirements status for each course
         const courseTypeRequirementsMet = new Map();
-        
+
         // Helper function to check if the required hours for a type are met
         const isTypeRequirementMet = (course, typeKey) => {
             const courseId = course.id;
             if (!courseTypeRequirementsMet.has(courseId)) {
                 courseTypeRequirementsMet.set(courseId, {});
             }
-            
+
             if (courseTypeRequirementsMet.get(courseId)[typeKey] === undefined) {
                 const result = course.isEnrollmentTypeRequirementMet(typeKey, enrolledEventIds);
                 courseTypeRequirementsMet.get(courseId)[typeKey] = result;
             }
-            
+
             return courseTypeRequirementsMet.get(courseId)[typeKey];
         };
-        
+
         // Events to show in the schedule
         const allVisibleEvents = [];
-        
+
         // First, add all enrolled events
         scheduledEvents.forEach(event => {
             const course = courses.find(c => c.id === event.courseId);
@@ -195,23 +198,24 @@ function ScheduleBox() {
                 allVisibleEvents.push({ ...event, course, isEnrolled: true });
             }
         });
-        
+
         // Then, add available events that should be visible based on requirements
         courses.forEach(course => {
             course.events.forEach(event => {
                 // Skip if already enrolled
                 if (enrolledEventIds.has(event.id)) return;
-                
+
                 const normalizedEventType = event.type?.toLowerCase() || '';
-                const eventTypeKey = EVENT_TYPE_TO_KEY_MAP[normalizedEventType] || normalizedEventType;
-                
+                const eventTypeKey =
+                    EVENT_TYPE_TO_KEY_MAP[normalizedEventType] || normalizedEventType;
+
                 // Show this event if requirements for this type are not met
                 if (!isTypeRequirementMet(course, eventTypeKey)) {
                     allVisibleEvents.push({ ...event, course, isEnrolled: false });
                 }
             });
         });
-        
+
         return allVisibleEvents;
     }, [courses, scheduledEvents, enrolledEventIds]);
 
@@ -220,13 +224,13 @@ function ScheduleBox() {
         const grouped = Array(7)
             .fill(null)
             .map(() => []);
-            
+
         visibleEvents.forEach(event => {
             if (event.day >= 0 && event.day < 7) {
                 grouped[event.day].push(event);
             }
         });
-        
+
         return grouped.map(dayEvents => layoutEvents(dayEvents));
     }, [visibleEvents]);
 

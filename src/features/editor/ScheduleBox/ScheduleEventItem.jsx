@@ -7,7 +7,7 @@ import {
     Tooltip,
     Typography,
     alpha,
-    styled
+    styled,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { useState } from 'react';
@@ -73,7 +73,14 @@ const EventWrapper = styled(Box)(({ theme, eventcolor, notchcolor, patternimage,
 // Komponenta ScheduleEventItem zobrazuje jednotlivé akce v rozvrhu
 // Používá se v komponentě ScheduleBox pro zobrazení jednotlivých akcí v rozvrhu
 // Přijímá data rozvrhových akcí, předměty a další stylování jako props
-function ScheduleEventItem({ eventData, course, style, scheduleColorMode, isEnrolled, onToggleEvent }) {
+function ScheduleEventItem({
+    eventData,
+    course,
+    style,
+    scheduleColorMode,
+    isEnrolled,
+    onToggleEvent,
+}) {
     const { t } = useTranslation();
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = useState(null);
@@ -88,8 +95,8 @@ function ScheduleEventItem({ eventData, course, style, scheduleColorMode, isEnro
     const handleClose = () => setAnchorEl(null);
     const open = Boolean(anchorEl);
     const popoverId = open ? `event-popover-${eventData.id}` : undefined;
-    
-    const handleToggle = (event) => {
+
+    const handleToggle = event => {
         event.stopPropagation();
         if (onToggleEvent) {
             onToggleEvent(eventData, isEnrolled);
@@ -166,15 +173,15 @@ function ScheduleEventItem({ eventData, course, style, scheduleColorMode, isEnro
                     >
                         {(displayInstructorName || '-').substring(0, 15)}
                     </Typography>
-                    
-                    <Box 
+
+                    <Box
                         className="event-checkbox"
                         onClick={e => e.stopPropagation()}
                         sx={{
                             position: 'absolute',
                             bottom: '2px',
                             right: '2px',
-                            zIndex: 5
+                            zIndex: 5,
                         }}
                     >
                         <Checkbox
@@ -189,7 +196,7 @@ function ScheduleEventItem({ eventData, course, style, scheduleColorMode, isEnro
                                 },
                                 '&:hover': {
                                     backgroundColor: alpha(theme.palette.common.white, 0.1),
-                                }
+                                },
                             }}
                         />
                     </Box>
@@ -212,8 +219,14 @@ function ScheduleEventItem({ eventData, course, style, scheduleColorMode, isEnro
                         {t(`courseEvent.${eventTypeKey}`, eventData.type)}
                     </Typography>
                     <Divider sx={{ my: 1 }} />
-                    <Typography variant="body2" color={isEnrolled ? "success.main" : "text.primary"} fontWeight={isEnrolled ? "bold" : "normal"}>
-                        {isEnrolled ? t('labels.enrolledStatus', 'Zapsáno') : t('labels.notEnrolledStatus', 'Nezapsáno')}
+                    <Typography
+                        variant="body2"
+                        color={isEnrolled ? 'success.main' : 'text.primary'}
+                        fontWeight={isEnrolled ? 'bold' : 'normal'}
+                    >
+                        {isEnrolled
+                            ? t('labels.enrolledStatus', 'Zapsáno')
+                            : t('labels.notEnrolledStatus', 'Nezapsáno')}
                     </Typography>
                     <Typography variant="body2">
                         {t('labels.time', 'Čas')}: {`${eventData.startTime} - ${eventData.endTime}`}
@@ -233,18 +246,14 @@ function ScheduleEventItem({ eventData, course, style, scheduleColorMode, isEnro
                             `courseEvent.${eventData.recurrence.toLowerCase().replace(/\s+/g, '')}`,
                             eventData.recurrence
                         )}
-                    </Typography>                    {eventData.note && (
+                    </Typography>{' '}
+                    {eventData.note && (
                         <Typography variant="body2" sx={{ mt: 1, fontStyle: 'italic' }}>
                             {t('labels.notes', 'Poznámka')}: {eventData.note}
                         </Typography>
                     )}
-                    
                     <Divider sx={{ my: 1 }} />
-                    <ExternalLinksComponent 
-                        course={course} 
-                        direction="column" 
-                        size="small"
-                    />
+                    <ExternalLinksComponent course={course} direction="column" size="small" />
                 </Paper>
             </Popover>
         </>
