@@ -216,9 +216,22 @@ export const useStagCourseLoader = () => {
                             departmentCode: subjectInfo.katedra,
                             courseCode: subjectInfo.zkratka,
                             durationHours: durationHours, // Délka akce v hodinách
-                        };
-                    })
+                        };                    })
                     .filter(Boolean);
+
+                // Kontrola, zda předmět má alespoň jednu rozvrhovou akci pro daný semestr
+                if (!transformedEvents || transformedEvents.length === 0) {
+                    showSnackbar(
+                        t('alerts.subjectHasNoEventsForSemester', {
+                            subjectCode: `${formData.departmentCode}/${formData.subjectCode}`,
+                            semester: formData.semester,
+                            year: formData.year,
+                        }),
+                        'warning'
+                    );
+                    setIsProcessingCourse(false);
+                    return;
+                }
 
                 // courseDataForWorkspace obsahuje všechny potřebné informace o předmětu a jeho akcích
                 // Připravíme data pro přidání do workspace

@@ -328,13 +328,19 @@ export const useStagStudentPlanLoader = () => {
                             semestr: semesterForEventsApi,
                         },
                         lang
-                    );
-
-                    const transformedEvents = (
+                    );                    const transformedEvents = (
                         Array.isArray(scheduleEventsData) ? scheduleEventsData : []
                     )
                         .map(stagEvent => transformStagEvent(stagEvent, subjectData, planParams, t))
                         .filter(event => event !== null);
+
+                    // Kontrola, zda předmět má alespoň jednu rozvrhovou akci pro daný semestr
+                    if (!transformedEvents || transformedEvents.length === 0) {
+                        console.log(
+                            `Předmět ${subjectData.rawSubject.katedra}/${subjectData.rawSubject.zkratka} nemá žádné rozvrhové akce pro semestr ${semesterForEventsApi}, přeskakuje se.`
+                        );
+                        continue; // Přeskočíme tento předmět a pokračujeme dalším
+                    }
 
                     const courseDataForWorkspace = transformStagSubject(
                         subjectData,
@@ -343,7 +349,7 @@ export const useStagStudentPlanLoader = () => {
                         useDemoApi
                     );
 
-                    addCourse(courseDataForWorkspace);                    const subjectIdentifier = {
+                    addCourse(courseDataForWorkspace);const subjectIdentifier = {
                         name: `${subjectData.rawSubject.katedra}/${subjectData.rawSubject.zkratka} - ${subjectData.rawSubject.nazev}`,
                         departmentCode: subjectData.rawSubject.katedra,
                         courseCode: subjectData.rawSubject.zkratka,
