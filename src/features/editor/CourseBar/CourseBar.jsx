@@ -79,7 +79,7 @@ function CourseBar({
 
     const getItemId = (prefix, id) => `${prefix}-${id}`;
 
-    // Render function pro hierarchické zobrazení
+    // Render pro hierarchické zobrazení
     const renderHierarchicalView = () => {
         return Object.entries(hierarchicalStructure).map(([facultyCode, facultyData]) => (
             <TreeItem
@@ -97,7 +97,6 @@ function CourseBar({
                             gap: 1,
                         }}
                     >
-                        <AccountBalanceIcon fontSize="small" />
                         {facultyData.name}
                     </Typography>
                 }
@@ -126,7 +125,6 @@ function CourseBar({
                                     gap: 1,
                                 }}
                             >
-                                <BusinessIcon fontSize="small" />
                                 {departmentData.name || departmentCode}
                             </Typography>
                         }
