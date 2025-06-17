@@ -1,0 +1,445 @@
+{
+  "appTitle": "ZCU Schedule Planner",
+  "appTitleShort": "Schedule Planner",
+  "nav": {
+    "editor": "Schedule Editor",
+    "faq": "FAQ",
+    "landing": "Home"
+  },
+  "languageToggle": "Language",
+  "themeToggle": {
+    "light": "Light Mode",
+    "dark": "Dark Mode",
+    "lightTooltip": "Switch to light mode",
+    "darkTooltip": "Switch to dark mode"
+  },
+  "common": {
+    "loading": "Loading...",
+    "saving": "Saving...",
+    "processing": "Processing...",
+    "processingStudentPlan": "Processing student data...",
+    "processingCourse": "Processing course...",
+    "loadingApp": "Loading workspace...",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Information",
+    "cancel": "Cancel",
+    "add": "Add",
+    "save": "Save",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "continue": "Continue",
+    "close": "Close",
+    "notSpecified": "-",
+    "unknownType": "Unknown type",
+    "noAdditionalInfo": "No additional information",
+    "scheduleNotAvailable": "Schedule is not available or is currently loading."
+  },
+  "alerts": {
+    "workspaceSaved": "Workspace saved.",
+    "loadedDummyData": "Demo data has been loaded.",
+    "workspaceLoadedFromLocalStorage": "Workspace loaded from Local Storage.",
+    "stagLoginSuccessful": "STAG login successful.",
+    "stagLoginNoRoles": "Login successful, but no roles were found or user information is missing.",
+    "courseRemoved": "Course {{courseId}} has been removed.",
+    "allCoursesRemoved": "All courses have been removed.",
+    "confirmRemoveAllCourses": "Are you sure you want to remove all courses and their enrolled events from the schedule? This action is irreversible.",
+    "internalError": "Internal application error.",
+    "eventFull": "Capacity for '{{eventType}}' of course {{courseCode}} is full.",
+    "typeRequirementMet": "The required number of '{{eventType}}' events for course {{courseCode}} is already met.",
+    "eventEnrolled": "Event '{{eventType}}' of course {{courseCode}} has been enrolled.",
+    "eventUnenrolled": "Event '{{eventType}}' of course {{courseCode}} has been unenrolled.",
+    "courseOverwritten": "Course {{courseCode}} has been overwritten with new data.",
+    "courseAdded": "Course {{courseCode}} has been added.",
+    "stagSubjectNotFound": "Course {{subjectCode}} was not found in STAG system.",
+    "stagLoadError": "Error communicating with STAG API.",
+    "identitySelectedLog": "Role/Identity {{stagUser}} has been selected.",
+    "fetchStudentInfoErrorNoStudyDetails": "Failed to retrieve student's field of study ID from STAG.",
+    "fetchStudentInfoErrorNoData": "Failed to retrieve complete student information from STAG.",
+    "fetchStudentInfoError": "Failed to load student details.",
+    "loadingStudyPlanSubjects": "Loading study plan courses...",
+    "noStudentContextForPlan": "Student context (field of study ID) is missing for loading courses.",
+    "noSubjectsFoundForField": "No courses found for the given field of study and plan version.",
+    "noSubjectsMatchCriteria": "No courses found matching the specified year, semester, and status criteria.",
+    "fetchingSubjectDetailsCount": "Fetching details and schedule events for {{count}} courses...",
+    "studyPlanLoadSummary_one": "{{added}} course added, {{overwritten}} course overwritten. {{failed}} failed to process.",
+    "studyPlanLoadSummary_other": "{{added}} courses added, {{overwritten}} courses overwritten. {{failed}} failed to process.",
+    "studyPlanLoadError": "Error loading study plan courses.",
+    "identitySelectionCancelledAndTicketCleared": "Identity selection was cancelled. STAG session has been terminated.",
+    "studyParamsSelectionCancelled": "Study parameters selection was cancelled. STAG session has been terminated.",
+    "confirmRemoveCourse": "Are you sure you want to remove course {{courseName}} ({{courseStagId}}) and unenroll all its registered events from the current schedule?",
+    "workspaceCleared": "Workspace has been cleared.",
+    "workspaceExported": "Workspace exported successfully.",
+    "workspaceExportFailed": "Failed to export workspace.",
+    "workspaceImported": "Workspace imported successfully.",
+    "workspaceImportFailed": "Failed to import workspace. The file might be corrupted or in an invalid format.",
+    "fileReadError": "Error reading file.",
+    "imageSaveError": "Error saving schedule image.",
+    "allPreferencesRemoved": "All preferences have been removed.",
+    "confirmRemoveAllPreferences": "Are you sure you want to remove all preferences? This action is irreversible.",
+    "workspaceNotInitializedYet": "Workspace has not been loaded yet."
+  },
+  "courseEvent": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "lecture": "Lecture",
+    "practical": "Practical",
+    "seminar": "Seminar",
+    "přednáška": "Přednáška",
+    "cvičení ": "Cvičení",
+    "seminář": "Seminář",
+    "exam": "Exam",
+    "credit": "Credit",
+    "block": "Block teaching",
+    "unknown": "Unknown type",
+    "recurrence": "Recurrence",
+    "recurrenceShort": {
+      "každýtýden": "",
+      "sudýtýden": "Even",
+      "lichýtýden": "Odd",
+      "jednorázově": "Once",
+      "jiný": "Other"
+    },
+    "každýtýden": "Every week",
+    "sudýtýden": "Even week",
+    "lichýtýden": "Odd week",
+    "jednorázově": "One-time",
+    "jiný": "Other"
+  },
+  "enrollmentShort": {
+    "lecture": "L",
+    "practical": "P",
+    "seminar": "S"
+  },
+  "labels": {
+    "credits_one": "{{count}} credit",
+    "credits_other": "{{count}} credits",
+    "requirementsMet": "Requirements met ({{count}})",
+    "requirementsMetSimple": "Requirements met",
+    "remaining": "Rem: {{needed}} (Enr: {{enrolledCount}})",
+    "remainingSimple": "Remaining",
+    "eventType": "Event Type",
+    "enrolled": "Enrolled",
+    "enroll": "Enroll",
+    "room": "Room",
+    "virtualEvent": "Virtual Event",
+    "capacity": "Capacity",
+    "maxCapacityPrefix": "Max:",
+    "full": "Full",
+    "instructor": "Instructor",
+    "notes": "Note",
+    "recurrence": "Recurrence",
+    "loadingCourses": "Loading courses...",
+    "unknownDepartment": "Unknown Department",
+    "noCoursesToDisplay": "No courses to display. Add a course or load a saved state.",
+    "noEventsForCourse": "This course has no schedule events.",
+    "time": "Time",
+    "enrolledStatus": "Enrolled",
+    "notEnrolledStatus": "Not enrolled"
+  },
+  "tooltips": {
+    "removeCourse": "Remove course {{courseName}} from workspace",
+    "requiredEnrollments": "Required enrollments: {{enrolledReqStr}}",
+    "enrollAction": "Enroll event in your schedule",
+    "unenrollAction": "Unenroll event from your schedule",
+    "enrollDisabledCapacityFull": "This event's capacity is full.",
+    "enrollDisabledTypeMet": "The required number of \"{{eventType}}\" events for this course is already met."
+  },
+  "propertiesBar": {
+    "title": "Generation Settings",
+    "addPreferenceButton": "Add Preference",
+    "generateButton": "Generate Schedule",
+    "generateScheduleLog": "Generating schedule with preferences...",
+    "generateScheduleAlert": "Schedule generation started with {{count}} active preferences.",
+    "generateScheduleSuccess": "Schedules were successfully generated.",
+    "generateScheduleFailure": "Failed to generate any schedules meeting the criteria.",
+    "addDialog": {
+      "title": "Add New Preference",
+      "preferenceType": "Preference Type"
+    },
+    "preferenceList": {
+      "noPreferences": "No preferences have been added yet."
+    },
+    "preferenceItem": {
+      "increasePriority": "Increase priority",
+      "decreasePriority": "Decrease priority",
+      "toggleActive": "Activate/deactivate preference",
+      "deactivatePreference": "Deactivate preference",
+      "activatePreference": "Activate preference",
+      "deletePreference": "Delete preference"
+    },
+    "removeAllPreferences": "Remove All Preferences",
+    "removeAllPreferencesTooltip": "Remove all configured preferences."
+  },
+  "preferences": {
+    "types": {
+      "FREE_DAY": {
+        "label": "Free day of the week",
+        "shortLabel": "Free Day"
+      },
+      "AVOID_TIMES": {
+        "label": "Free time block",
+        "shortLabel": "Free Time"
+      },
+      "PREFER_INSTRUCTOR": {
+        "label": "Prefer instructor",
+        "shortLabel": "Prefer Instr."
+      }
+    },
+    "params": {
+      "day": "Day",
+      "startTime": "Start time",
+      "endTime": "End time",
+      "courseCode": "Course Code",
+      "instructorName": "Instructor Name",
+      "eventType": "Event Type"
+    },
+    "displayLabels": {
+      "freeDay": "Free day: {{day}}",
+      "avoidTimes": "Unavailable {{day}}: {{startTime}} - {{endTime}}",
+      "preferInstructor": "Prefer {{instructorName}} for {{courseCode}} ({{eventType}})"
+    },
+    "dayOptions": {
+      "PO": "Monday",
+      "UT": "Tuesday",
+      "ST": "Wednesday",
+      "CT": "Thursday",
+      "PA": "Friday",
+      "SO": "Saturday",
+      "NE": "Sunday",
+      "pondělí": "Monday",
+      "úterý": "Tuesday",
+      "středa": "Wednesday",
+      "čtvrtek": "Thursday",
+      "pátek": "Friday",
+      "sobota": "Saturday",
+      "neděle": "Sunday",
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday"
+    },
+    "alerts": {
+      "added": "Preference successfully added.",
+      "deleted": "Preference has been removed.",
+      "allDeleted": "All preferences have been removed.",
+      "updated": "Preference has been updated.",
+      "priorityChanged": "Preference priority has been adjusted.",
+      "activityChanged": "Preference activity has been changed."
+    }
+  },
+  "Dialogs": {
+    "deletePreference": {
+      "title": "Delete preference",
+      "message": "Are you sure you want to delete the preference {{preferenceLabel}}?"
+    },
+    "selectStudyParams": {
+      "title": "Parameters for Loading Field of Study Courses",
+      "studentInfo": "Loading for:",
+      "studyProgram": "Program/Field:",
+      "studyYearNumLabel": "Grade",
+      "scheduleAcademicYearLabel": "Version",
+      "semesterLabel": "Course Semester",
+      "semesterZS": "Winter (ZS)",
+      "semesterLS": "Summer (LS)",
+      "semesterBoth": "Both (ZS & LS)",
+      "subjectStatusesTitle": "Course Statuses to Load:",
+      "statusAll": "All",
+      "statusA": "A (Compulsory)",
+      "statusB": "B (Compulsory Elect.)",
+      "statusC": "C (Elective)",
+      "submitButton": "Load Courses",
+      "errorNoStatusSelected": "You must select at least one course status.",
+      "errorStudyYearInvalid": "Year of study must be a number (e.g., 1-5).",
+      "errorScheduleYearInvalid": "Academic year for schedule events is invalid (format YYYY/YYYY).",
+      "errorSemesterRequired": "Semester is required."
+    },
+    "selectIdentity": {
+      "title": "Select STAG Identity/Role",
+      "loadingRoles": "Loading roles...",
+      "errorNoTicket": "A valid STAG ticket is missing for loading roles. Please try logging in again.",
+      "noValidRolesFound": "No valid STAG roles/identities were found.",
+      "noRolesFound": "No STAG roles/identities found for your account.",
+      "errorFetchingRoles": "Failed to load STAG roles.",
+      "pleaseSelectRole": "Please select one role.",
+      "noRolesAvailable": "No STAG roles are currently available for your account or they could not be loaded."
+    },
+    "loadFromStudentRedirect": {
+      "title": "Load Courses from Student Plan",
+      "p1": "To load courses according to your study plan, you need to log in to the STAG information system.",
+      "p2": "After clicking \"Continue\", you will be redirected to the UWB login page (Orion login). After successful login, you will be automatically returned to the Schedule Planner application.",
+      "p3": "This application does not store your login credentials. The temporary access key (ticket) obtained is used only for communication with the STAG API during this session.",
+      "faqLink": "More information about security and login functionality",
+      "continueButton": "Continue to Login"
+    },
+    "loadCourseFromSTAG": {
+      "title": "Load Course from STAG",
+      "courseCodeLabel": "Course Code (e.g., KIV/PPA)",
+      "academicYearLabel": "Version",
+      "semesterLabel": "Semester",
+      "semesterZS": "Winter (ZS)",
+      "semesterLS": "Summer (LS)",
+      "submitButton": "Load",
+      "errorCourseCodeRequired": "Course code is required.",
+      "errorCourseCodeFormat": "Invalid code format (e.g., KIV/PPA or KIV/ZEP-E).",
+      "errorYearRequired": "Academic year is required.",
+      "errorYearFormat": "Invalid year format (e.g., 2023/2024).",
+      "errorSemesterRequired": "Semester is required."
+    },
+    "existingCourseWarning": {
+      "title": "Course Already Exists",
+      "message": "Course \"{{courseIdentifier}}\" is already loaded. Do you want to overwrite its existing data (year, semester, events) with new data from STAG?",
+      "confirmButton": "Overwrite"
+    },
+    "loadingProcess": {
+      "defaultMessage": "Processing request..."
+    },
+    "confirmation": {
+      "overwriteListTitle": "The following items will be overwritten:",
+      "addListTitle": "The following items will be added:",
+      "courseDetails": "Year: {{year}}, Semester: {{semester}}"
+    },
+    "studentPlanOverwrite": {
+      "title": "Confirm Load Courses from Plan",
+      "message": "The following action may add new courses and overwrite existing courses in your workspace (if they have the same department/course code) with data from STAG for the specified year and semester. Do you wish to continue?"
+    },
+    "summary": {
+      "title": "Course Loading Results",
+      "overallResult": "The process of loading courses from the study plan has been completed.",
+      "addedCourses": "Successfully added courses",
+      "overwrittenCourses": "Overwritten courses",
+      "failedCourses": "Courses that failed to process",
+      "noItems": "No items in this category."
+    }
+  },
+  "courseBar": {
+    "loadSingleFromSTAG": "Load course from STAG",
+    "loadFromStudentPlan": "Load courses from student plan",
+    "removeAllCourses": "Remove all courses",
+    "removeAllCoursesTooltip": "Remove all loaded courses and their enrolled events.",
+    "title": "Courses",
+    "fromDemoStagTooltip": "Loaded from DEMO STAG"
+  },
+  "editorPage": {
+    "mobileDrawer": {
+      "coursesTitle": "Courses",
+      "propertiesTitle": "Preferences",
+      "coursesTab": "Courses",
+      "propertiesTab": "Preferences"
+    }
+  },
+  "schedule": {
+    "dayTime": "Day/Time",
+    "switcherTitle": "Schedule Variants",
+    "primarySchedule": "Primary Schedule",
+    "generatedSchedule": "Generated Schedule #{{number}}"
+  },
+  "landingPage": {
+    "hero": {
+      "title": "Schedule Planner for UWB",
+      "description": "Easily plan your semester schedule, optimize your time, and be prepared for enrollments at the University of West Bohemia.",
+      "editorButton": "Launch Planner",
+      "universityButton": "UWB Website"
+    },
+    "functions": {
+      "sectionTitle": "Key Features",
+      "intro": "Discover tools that will simplify your semester planning and maximize your efficiency.",
+      "func1": {
+        "title": "Load from STAG",
+        "desc": "Import courses and their schedule events directly from the IS/STAG university system by course code or your study plan."
+      },
+      "func2": {
+        "title": "Visual Schedule Editor",
+        "desc": "Clearly assemble and edit your schedule in an intuitive Czech-format table view."
+      },
+      "func3": {
+        "title": "Preference Management",
+        "desc": "Define your priorities – free days, times to avoid, or preferred instructors."
+      },
+      "func4": {
+        "title": "Automatic Generation",
+        "desc": "Let the application suggest optimal schedule variants based on your courses and set preferences."
+      },
+      "func5": {
+        "title": "Save and Export",
+        "desc": "Save your work in the browser, export your workspace to a file, or download the finished schedule as an image."
+      },
+      "func6": {
+        "title": "Responsive Design",
+        "desc": "Plan your schedule comfortably on your computer, tablet, or mobile phone."
+      }
+    },
+    "tech": {
+      "sectionTitle": "Technologies Used",
+      "versionLabel": "Version",
+      "reactDesc": "A modern JavaScript library for building user interfaces.",
+      "muiDesc": "A comprehensive suite of React components implementing Material Design.",
+      "viteDesc": "A next-generation fast frontend build tool for web projects.",
+      "i18nextDesc": "A powerful internationalization framework for JavaScript applications."
+    },
+    "author": {
+      "sectionTitle": "About the Project",
+      "namePlaceholder": "Štěpán Bříza",
+      "summary": "This Schedule Planner was created as part of a semester project for the KIV/UUR course at the Faculty of Applied Sciences, University of West Bohemia in Pilsen. KIV/UUR introduces the fundamental principles of user interface design. The goal of the project was to build a modern and user-friendly tool for students to plan their schedules before the official course registration opens. Although the project originated as a semester assignment, it is currently under active development, with new features and bug fixes being added. I would like to thank Ing. Richard Lipka, Ph.D., and Ing. Michal Nykl, Ph.D., for their excellent instruction.",
+      "githubButton": "Source Code on GitHub"
+    }
+  },
+  "faqPage": {
+    "title": "Frequently Asked Questions (FAQ)",
+    "q1": "What is the UWB Schedule Planner?",
+    "a1": "The UWB Schedule Planner is a tool designed for students of the University of West Bohemia to help them visualize and plan their semester schedules. It allows loading courses from STAG, adding them to the schedule, setting preferences, and generating possible schedule variants.",
+    "q2": "How can I load my courses?",
+    "a2": "You can load courses in several ways: individually using the course code from STAG, collectively for your entire study plan (requires logging into STAG), or by importing a previously saved workspace from a file.",
+    "q3": "How does STAG login work? Is it secure?",
+    "a3": "To load courses from your study plan, we use the standard STAG login mechanism (via UWB Orion login). You enter your credentials (username and password) directly on the UWB pages; our application does not have access to them. After successful login, we only receive a temporary anonymous key (a \"ticket\"), which allows us to retrieve publicly available information about courses and your study plan. This key is valid for a limited time and does not permit any changes to your studies. The application does not store this key anywhere.",
+    "q4": "What does the 'DEMO' mode mean?",
+    "a4": "DEMO mode is used for testing and demonstration purposes. When active, all communication is not with the production (live) STAG system, but with its publicly available 'demo' version. Data in the demo STAG may not be up-to-date and is only for development and testing purposes. This mode is useful if you just want to try the application without having to work with real data, or if the production STAG is temporarily unavailable.\n\nYou can activate/deactivate DEMO mode using the button in the toolbar above the schedule (switch icon with 'DEMO' label). When DEMO mode is active, a 'DEMO' indicator is displayed in the top right corner of the application. In this mode, all operations are performed against the demo version of STAG, which means that the loaded data may be outdated or incomplete.",
+    "q5": "What happens to my data when I close the application?",
+    "a5": "The application saves your workspace (loaded courses, enrolled events, preferences) only in your browser's local storage. This data is not sent to any server and remains solely with you. If you wish, you can export your workspace to a file and later import it again. Clearing browser data or using incognito mode may lead to data loss if not exported.",
+    "q6": "Why are some of my courses or schedule events not displaying?",
+    "a6": "Ensure you have the correct academic year and semester set for loading courses in the \"Load Course from STAG\" or \"Parameters for Loading Field of Study Courses\" dialogs. Data in STAG may not always be complete, especially for future periods or less common event types. The application only displays data provided by the STAG API. If the problem persists, verify data availability directly in the STAG system.",
+    "q7": "Can I officially enroll in courses through this application?",
+    "a7": "No. This application is solely for visualizing and planning your schedule. Official enrollment in courses and schedule events must be done through the standard STAG/Portal UWB system within the designated periods.",
+    "q8": "I found a bug or have an idea for an improvement. What should I do?",
+    "a8": "Great! As this is a student project, feedback is very welcome. To report bugs or suggest new features, please use the 'Issues' tab on the project's GitHub: https://github.com/stepanbri/uwb-schedule-editor/issues.",
+    "q9": "Why do I have to log in through an external UWB page?",
+    "a9": "This process is called OAuth 2.0 and it is a standard and secure way to grant a third-party application (like this one) limited access to your data without having to share your password with it. By entering your password on the UWB pages, you can be sure that our application will never see it. The application only receives a temporary, limited-validity 'ticket' that authorizes it to retrieve your study data from STAG. It's the same principle as when you log into other services using your Google or Facebook account.",
+    "q10": "What do the colors in the schedule mean?",
+    "a10": "Schedule events can be color-coded in two ways, which can be switched using a button in the toolbar:\n1. Colors by event type: This is the default mode. Each event type (lecture, practical, seminar) has its own specific color (e.g., red for lectures, green for practicals). This helps to quickly visually distinguish event types in the schedule.\n2. Colors by course: In this mode, each course (e.g., KIV/PPA) is assigned its own unique color. All events belonging to this course will then have this background color. To distinguish the event type, a small colored 'notch' on the left side of each event is used, the color of which corresponds to the color of the event type (lecture, practical...).",
+    "q11": "What do the event recurrence abbreviations (EW, EvenW, OddW) mean?",
+    "a11": "These abbreviations, taken from the STAG system, determine how often the given schedule event takes place:\n- EW (Every Week): The event takes place every week of the semester.\n- EvenW (Even Week): The event takes place only in the even weeks of the semester.\n- OddW (Odd Week): The event takes place only in the odd weeks of the semester.\n- Once (One-time): The event takes place only on a single specific date."
+  },
+  "scheduleToolbar": {
+    "downloadImage": "Download PNG",
+    "downloadImageTooltip": "Download current schedule as image (.png)",
+    "exportWorkspace": "Export JSON",
+    "exportWorkspaceTooltip": "Export current workspace (courses, schedule, preferences) to file (.json)",
+    "importWorkspace": "Import JSON",
+    "importWorkspaceTooltip": "Import workspace from file (.json)",
+    "resetWorkspace": "Reset Workspace",
+    "resetWorkspaceTooltip": "Reset workspace",
+    "confirmResetWorkspace": "Are you sure you want to reset the entire workspace? This action is irreversible.",
+    "compactView": "Compact View",
+    "compactViewTooltip": "Toggle compact schedule display",
+    "fullWeekView": "Full Week",
+    "fullWeekViewTooltip": "Toggle display of weekend days in the schedule",
+    "resetWorkspaceCleanTooltip": "Reset workspace (clear all)",
+    "resetWorkspaceCleanTitle": "Clear workspace?",
+    "confirmResetWorkspaceClean": "Are you sure you want to clear the entire workspace? This action is irreversible.",
+    "switchToProdStagTooltip": "Switch to production STAG API",
+    "switchToDemoStagTooltip": "Switch to demo STAG API",
+    "activateDemoStagTooltip": "Activate STAG API DEMO mode",
+    "deactivateDemoStagTooltip": "Deactivate DEMO mode (use production STAG API)",
+    "faqButtonTooltip": "Help and FAQ",
+    "colorModeTooltip": "Switch schedule color mode (by course / by event type)"
+  }
+}
