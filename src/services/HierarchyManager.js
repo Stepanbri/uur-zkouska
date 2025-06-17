@@ -8,6 +8,7 @@ class HierarchyManager {
         this.workplaceMap = new Map(); // mapa číslo pracoviště -> workplace objekt
         this.isLoaded = false;
         this.isLoading = false;
+        this.currentLanguage = 'cs'; // aktuální jazyk pro názvy
     }
 
     // Načte hierarchii pracovišť z API
@@ -37,15 +38,16 @@ class HierarchyManager {
             else if (Array.isArray(response)) {
                 hierarchyData = response;
             }
-            
-            if (hierarchyData && hierarchyData.length > 0) {
+              if (hierarchyData && hierarchyData.length > 0) {
                 this.hierarchy = hierarchyData;
+                this.currentLanguage = language; // uložíme aktuální jazyk
                 this._buildMaps();
                 this.isLoaded = true;
                 console.log('Hierarchy loaded successfully:', {
                     totalWorkplaces: this.hierarchy.length,
                     faculties: this._getFaculties().length,
-                    departmentMappings: this.facultyMap.size
+                    departmentMappings: this.facultyMap.size,
+                    language: this.currentLanguage
                 });
                 return true;
             } else {
@@ -173,35 +175,35 @@ class HierarchyManager {
         courses.forEach(course => {
             const departmentCode = course.departmentCode;
             const faculty = this.getFacultyForDepartment(departmentCode);
-            
-            let facultyKey = 'UNKNOWN';
-            let facultyName = 'Neznámá fakulta';
+              let facultyKey = 'UNKNOWN';
+            let facultyName = this._getLocalizedText('Neznámá fakulta', 'Unknown Faculty');
             
             if (faculty) {
                 facultyKey = faculty.zkratka;
-                facultyName = faculty.nazev;            } else {
+                facultyName = this._getWorkplaceName(faculty);
+            } else {
                 // Speciální přípa    d pro REK nebo pracoviště přímo pod REK
                 const workplace = this.workplaceMap.get(departmentCode);
                 if (workplace) {
                     // Pokud je to přímo REK
                     if (workplace.zkratka === 'REK') {
                         facultyKey = 'REK';
-                        facultyName = 'Rektorát';
+                        facultyName = this._getLocalizedText('Rektorát', 'Rectorate');
                     }
                     // Pokud je nadřazené pracoviště REK nebo je to pracoviště bez nadřazeného
                     else if (workplace.nadrazenePracoviste === 'REK' || !workplace.nadrazenePracoviste) {
                         facultyKey = 'REK';
-                        facultyName = 'Rektorát a centrální pracoviště';
+                        facultyName = this._getLocalizedText('Rektorát a centrální pracoviště', 'Rectorate and Central Departments');
                     }
                     // Pokud pracoviště nepatří pod žádnou fakultu
                     else {
                         facultyKey = 'UNKNOWN';
-                        facultyName = 'Neznámá fakulta';
+                        facultyName = this._getLocalizedText('Neznámá fakulta', 'Unknown Faculty');
                     }
                 } else {
                     // Pokud pracoviště vůbec nenajdeme v hierarchii
                     facultyKey = 'UNKNOWN';
-                    facultyName = 'Neznámá fakulta';
+                    facultyName = this._getLocalizedText('Neznámá fakulta', 'Unknown Faculty');
                 }
             }
 
@@ -226,28 +228,48 @@ class HierarchyManager {
         return structure;
     }
 
-    // Získá název katedry/pracoviště
-    _getDepartmentName(departmentCode) {
-        const workplace = this.workplaceMap.get(departmentCode);
-        return workplace ? workplace.nazev : departmentCode;
+    // Helper funkce pro získání názvu pracoviště v aktuálním jazyce
+    _getWorkplaceName(workplace) {
+        if (!workplace) return '';
+        
+        // Pro češtinu nebo pokud anglický název neexistuje, použijeme český
+        if (this.currentLanguage === 'cs' || !workplace.anNazev) {
+            return workplace.nazev;
+        }
+        
+        // Pro ostatní jazyky preferujeme anglický název, pokud existuje
+        return workplace.anNazev || workplace.nazev;
     }
 
-    // Resetuje načtenou hierarchii (pro účely testování nebo obnovení)
+    // Získá název katedry/pracoviště v aktuálním jazyce
+    _getDepartmentName(departmentCode) {
+        const workplace = this.workplaceMap.get(departmentCode);
+        return workplace ? this._getWorkplaceName(workplace) : departmentCode;
+    }
+
+    // Helper funkce pro získání lokalizovaného textu
+    _getLocalizedText(czechText, englishText) {
+        if (this.currentLanguage === 'cs') {
+            return czechText;
+        }
+        return englishText;
+    }    // Resetuje načtenou hierarchii (pro účely testování nebo obnovení)
     reset() {
         this.hierarchy = null;
         this.facultyMap.clear();
         this.workplaceMap.clear();
         this.isLoaded = false;
         this.isLoading = false;
+        this.currentLanguage = 'cs';
     }
 
     // Získá informace o stavu načítání
-    getStatus() {
-        return {
+    getStatus() {        return {
             isLoaded: this.isLoaded,
             isLoading: this.isLoading,
             hierarchySize: this.hierarchy ? this.hierarchy.length : 0,
-            facultyMappings: this.facultyMap.size
+            facultyMappings: this.facultyMap.size,
+            currentLanguage: this.currentLanguage
         };
     }
 }
