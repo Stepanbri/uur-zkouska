@@ -323,14 +323,14 @@
       "failedCourses": "Předměty, které se nepodařilo zpracovat",
       "noItems": "Žádné položky v této kategorii."
     }
-  },
-  "courseBar": {
+  },  "courseBar": {
     "loadSingleFromSTAG": "Načíst předmět ze STAGu",
     "loadFromStudentPlan": "Načíst předměty dle studijního plánu",
     "removeAllCourses": "Odstranit všechny předměty",
     "removeAllCoursesTooltip": "Odstraní všechny načtené předměty a jejich zapsané akce.",
     "title": "Předměty",
-    "fromDemoStagTooltip": "Načteno z DEMO STAGu"
+    "fromDemoStagTooltip": "Načteno z DEMO STAGu",
+    "externalLinks": "Externí odkazy"
   },
   "editorPage": {
     "mobileDrawer": {

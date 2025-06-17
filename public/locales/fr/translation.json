@@ -330,7 +330,8 @@
     "removeAllCourses": "Supprimer toutes les matières",
     "removeAllCoursesTooltip": "Supprime toutes les matières chargées et leurs cours inscrits.",
     "title": "Matières",
-    "fromDemoStagTooltip": "Chargé depuis STAG DEMO"
+    "fromDemoStagTooltip": "Chargé depuis STAG DEMO",
+    "externalLinks": "Liens externes"
   },
   "editorPage": {
     "mobileDrawer": {

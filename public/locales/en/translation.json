@@ -320,14 +320,14 @@
       "failedCourses": "Courses that failed to process",
       "noItems": "No items in this category."
     }
-  },
-  "courseBar": {
+  },  "courseBar": {
     "loadSingleFromSTAG": "Load course from STAG",
     "loadFromStudentPlan": "Load courses from student plan",
     "removeAllCourses": "Remove all courses",
     "removeAllCoursesTooltip": "Remove all loaded courses and their enrolled events.",
     "title": "Courses",
-    "fromDemoStagTooltip": "Loaded from DEMO STAG"
+    "fromDemoStagTooltip": "Loaded from DEMO STAG",
+    "externalLinks": "External links"
   },
   "editorPage": {
     "mobileDrawer": {

@@ -2,7 +2,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import ScienceIcon from '@mui/icons-material/Science';
-import { Box, Chip, IconButton, Stack, Tooltip, Typography } from '@mui/material';
+import { Box, Chip, Divider, IconButton, Stack, Tooltip, Typography } from '@mui/material';
 import { useState } from 'react'; // Přidán useState
 import { useTranslation } from 'react-i18next';
 import { ENROLLMENT_KEYS_ORDER } from '../../../services/CourseClass';
@@ -136,12 +136,6 @@ const CourseNodeHeader = ({
                                         sx={{ fontSize: '0.7rem', cursor: 'default' }}
                                     />
                                 </Stack>
-                                <ExternalLinksComponent 
-                                    course={course} 
-                                    direction="row" 
-                                    size="small"
-                                    compact={true}
-                                />
                             </Stack>
                         )}
                     </Stack>
@@ -152,9 +146,23 @@ const CourseNodeHeader = ({
                         aria-label={t('tooltips.removeCourse', { courseName: course.name })}
                     >
                         <DeleteIcon fontSize="small" />
-                    </IconButton>
-                </Box>
+                    </IconButton>                </Box>
             </Tooltip>
+            
+            {/* Sekce externích odkazů s dividerem */}
+            {isExpanded && (
+                <Box sx={{ width: '100%', mt: 0 }}>
+                    <Divider sx={{ mb: 0.5, opacity: 0.6 }} />
+                    <ExternalLinksComponent 
+                        course={course} 
+                        direction="row" 
+                        size="small"
+                        compact={true}
+                        fullWidth={true}
+                    />
+                </Box>
+            )}
+            
             <GenericConfirmationDialog
                 open={isConfirmDeleteDialogOpen}
                 onClose={handleCloseConfirmDialog}

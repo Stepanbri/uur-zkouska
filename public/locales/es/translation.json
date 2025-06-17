@@ -330,7 +330,8 @@
     "removeAllCourses": "Eliminar todas las asignaturas",
     "removeAllCoursesTooltip": "Elimina todas las asignaturas cargadas y sus clases inscritas.",
     "title": "Asignaturas",
-    "fromDemoStagTooltip": "Cargado desde STAG DEMO"
+    "fromDemoStagTooltip": "Cargado desde STAG DEMO",
+    "externalLinks": "Enlaces externos"
   },
   "editorPage": {
     "mobileDrawer": {
