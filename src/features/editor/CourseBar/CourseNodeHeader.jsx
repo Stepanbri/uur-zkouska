@@ -86,7 +86,8 @@ const CourseNodeHeader = ({
                 >
                     <Stack direction="column" spacing={0.5} flexGrow={1} overflow="hidden" pr={1}>
                         {' '}
-                        <Typography                            variant="subtitle1"
+                        <Typography
+                            variant="subtitle1"
                             sx={{
                                 fontSize: '0.8rem', // Menší font pro předměty
                                 whiteSpace: 'nowrap',
@@ -119,7 +120,8 @@ const CourseNodeHeader = ({
                             >
                                 <Box component="span" sx={{ fontWeight: 600, flexShrink: 0 }}>
                                     {course.courseCode}
-                                </Box>                                <Box
+                                </Box>{' '}
+                                <Box
                                     component="span"
                                     sx={{
                                         fontWeight: 400,
