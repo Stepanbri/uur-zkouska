@@ -10,6 +10,7 @@ import { SnackbarProvider } from './contexts/SnackbarContext';
 import { StagApiProvider } from './contexts/StagApiContext';
 import { AppThemeProvider, useAppContextTheme } from './contexts/ThemeContext';
 import { WorkspaceProvider } from './contexts/WorkspaceContext';
+import { HierarchyProvider } from './contexts/HierarchyContext';
 
 import EditorPage from './features/editor/EditorPage.jsx';
 import FAQPage from './features/faq/FAQPage.jsx';
@@ -126,9 +127,11 @@ function App() {
         <AppThemeProvider>
             <SnackbarProvider>
                 <StagApiProvider>
-                    <WorkspaceProvider>
-                        <MainAppContent />
-                    </WorkspaceProvider>
+                    <HierarchyProvider>
+                        <WorkspaceProvider>
+                            <MainAppContent />
+                        </WorkspaceProvider>
+                    </HierarchyProvider>
                 </StagApiProvider>
             </SnackbarProvider>
         </AppThemeProvider>

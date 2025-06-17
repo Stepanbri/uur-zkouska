@@ -361,9 +361,20 @@ class StagApiService {
         if (!criteria.katedra || !criteria.zkratka || !criteria.rok || !criteria.semestr) {
             throw new Error('Katedra, zkratka, rok a semestr jsou povinné pro getRozvrhByPredmet.');
         }
+        lang = 'en';
         const params = { ...criteria, jenRozvrhoveAkce: true, lang };
         const response = await this._doRequest('rozvrhy/getRozvrhByPredmet', params, 'GET', true); // auth?
         return Array.isArray(response?.rozvrhovaAkce) ? response.rozvrhovaAkce : [];
+    }    /**
+     * Vrátí hierarchii pracovišť (fakulty, katedry, ústavy).
+     * Endpoint: ciselniky/getHierarchiePracovist
+     * @param {string} [lang='en'] - Jazyk odpovědi.
+     * @returns {Promise<object>} Response objekt s hierarchickou strukturou.
+     */
+    async getHierarchiePracovist(lang = 'en') {
+        const params = { lang };
+        const response = await this._doRequest('ciselniky/getHierarchiePracovist', params, 'GET', false);
+        return response;
     }
 }
 

@@ -3,12 +3,15 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SchoolIcon from '@mui/icons-material/School';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import BusinessIcon from '@mui/icons-material/Business';
 import { alpha, Box, Button, CircularProgress, Stack, Tooltip, Typography } from '@mui/material';
 import { SimpleTreeView, TreeItem } from '@mui/x-tree-view';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { EVENT_TYPE_TO_KEY_MAP } from '../../../services/CourseClass';
+import { useHierarchy } from '../../../contexts/HierarchyContext';
 import CourseNodeHeader from './CourseNodeHeader';
 import EventNode from './EventNode';
 
@@ -23,6 +26,7 @@ function CourseBar({
     onRemoveAllCourses, // Nová prop
 }) {
     const { t } = useTranslation();
+    const { getHierarchicalStructure, isLoaded: isHierarchyLoaded } = useHierarchy();
     const [expandedItems, setExpandedItems] = useState([]);
 
     const handleExpandedItemsChange = (event, itemIds) => {
@@ -42,8 +46,7 @@ function CourseBar({
             >
                 <CircularProgress />
                 <Typography sx={{ ml: 2 }}>{t('labels.loadingCourses')}</Typography>
-            </Box>
-        );
+            </Box>        );
     }
 
     let enrolledEventIds = new Set();
@@ -57,16 +60,264 @@ function CourseBar({
         );
     }
 
-    const coursesByDepartment = courses.reduce((acc, course) => {
+    // Získání hierarchické struktury fakult -> katedr -> kurzů
+    const hierarchicalStructure = isHierarchyLoaded 
+        ? getHierarchicalStructure(courses || [])
+        : {};
+
+    // Fallback pro případ, že hierarchie není načtena
+    const coursesByDepartment = courses ? courses.reduce((acc, course) => {
         const dept = course.departmentCode || t('labels.unknownDepartment');
         if (!acc[dept]) {
             acc[dept] = [];
         }
         acc[dept].push(course);
         return acc;
-    }, {});
+    }, {}) : {};
+
+    const useHierarchicalView = isHierarchyLoaded && Object.keys(hierarchicalStructure).length > 0;
 
     const getItemId = (prefix, id) => `${prefix}-${id}`;
+
+    // Render function pro hierarchické zobrazení
+    const renderHierarchicalView = () => {
+        return Object.entries(hierarchicalStructure).map(([facultyCode, facultyData]) => (
+            <TreeItem
+                key={getItemId('faculty', facultyCode)}
+                itemId={getItemId('faculty', facultyCode)}
+                label={
+                    <Typography
+                        sx={{
+                            fontWeight: 'bold',
+                            fontSize: '1.1rem',
+                            py: '6px',
+                            color: 'secondary.main',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 1,
+                        }}
+                    >
+                        <AccountBalanceIcon fontSize="small" />
+                        {facultyData.name}
+                    </Typography>
+                }
+                sx={{
+                    '& > .MuiTreeItem-content': {
+                        py: '4px',
+                        '&:hover': {
+                            backgroundColor: theme =>
+                                alpha(theme.palette.action.hover, 0.06),
+                        },
+                    },
+                }}
+            >
+                {Object.entries(facultyData.departments).map(([departmentCode, departmentData]) => (
+                    <TreeItem
+                        key={getItemId('dept', departmentCode)}
+                        itemId={getItemId('dept', departmentCode)}                        label={
+                            <Typography
+                                sx={{
+                                    fontWeight: 'bold',
+                                    fontSize: '1rem',
+                                    py: '4px',
+                                    color: 'primary.main',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: 1,
+                                }}
+                            >
+                                <BusinessIcon fontSize="small" />
+                                {departmentData.name || departmentCode}
+                            </Typography>
+                        }
+                        sx={{
+                            '& > .MuiTreeItem-content': {
+                                py: '2px',
+                                '&:hover': {
+                                    backgroundColor: theme =>
+                                        alpha(theme.palette.action.hover, 0.04),
+                                },
+                            },
+                        }}
+                    >
+                        {departmentData.courses.map(course => renderCourseItem(course))}
+                    </TreeItem>
+                ))}
+            </TreeItem>
+        ));
+    };    // Render function pro klasické zobrazení podle katedr
+    const renderDepartmentalView = () => {
+        return Object.entries(coursesByDepartment).map(([departmentCode, deptCourses]) => (
+            <TreeItem
+                key={getItemId('dept', departmentCode)}
+                itemId={getItemId('dept', departmentCode)}
+                label={
+                    <Typography
+                        sx={{
+                            fontWeight: 'bold',
+                            fontSize: '1rem',
+                            py: '4px',
+                            color: 'primary.main',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 1,
+                        }}
+                    >
+                        <BusinessIcon fontSize="small" />
+                        {departmentCode}
+                    </Typography>
+                }
+                sx={{
+                    '& > .MuiTreeItem-content': {
+                        py: '2px',
+                        '&:hover': {
+                            backgroundColor: theme =>
+                                alpha(theme.palette.action.hover, 0.04),
+                        },
+                    },
+                }}
+            >
+                {deptCourses.map(course => renderCourseItem(course))}
+            </TreeItem>
+        ));
+    };
+
+    // Společná render function pro kurz a jeho eventy
+    const renderCourseItem = (course) => {
+        const courseItemId = getItemId('course', course.id);
+        const isCourseExpanded = expandedItems.includes(courseItemId);
+        const enrolledHours = course.getEnrolledHours(enrolledEventIds);
+        const areAllReqsMet = course.areAllEnrollmentRequirementsMet(enrolledEventIds);
+
+        return (
+            <TreeItem
+                key={courseItemId}
+                itemId={courseItemId}
+                label={
+                    <CourseNodeHeader
+                        course={course}
+                        enrolledHours={enrolledHours}
+                        areAllRequirementsMet={areAllReqsMet}
+                        onRemoveCourse={onRemoveCourse}
+                        isExpanded={isCourseExpanded}
+                    />
+                }
+                sx={{
+                    '& > .MuiTreeItem-content': {
+                        py: '1px',
+                        '&:hover': {
+                            bgcolor: theme =>
+                                alpha(theme.palette.action.hover, 0.08),
+                        },
+                    },
+                    '& > .MuiTreeItem-content.Mui-focused, & > .MuiTreeItem-content.Mui-selected, & > .MuiTreeItem-content.Mui-selected.Mui-focused':
+                        {
+                            backgroundColor: theme =>
+                                alpha(theme.palette.primary.main, 0.12),
+                        },
+                }}
+            >
+                {course.events && course.events.length > 0 ? (
+                    [...course.events]
+                        .sort((a, b) => {
+                            const typeOrder = {
+                                PŘEDNÁŠKA: 1,
+                                CVIČENÍ: 2,
+                                SEMINÁŘ: 3,
+                            };
+                            const typeA = typeOrder[a.type.toUpperCase()] || 99;
+                            const typeB = typeOrder[b.type.toUpperCase()] || 99;
+
+                            if (typeA !== typeB) {
+                                return typeA - typeB;
+                            }
+
+                            if (a.day !== b.day) {
+                                return a.day - b.day;
+                            }
+
+                            const timeA = a.startTime.split(':').map(Number);
+                            const timeB = b.startTime.split(':').map(Number);
+                            return (
+                                timeA[0] * 60 + timeA[1] - (timeB[0] * 60 + timeB[1])
+                            );
+                        })
+                        .map(event => {
+                            const isEnrolled = enrolledEventIds.has(event.id);
+                            const normalizedEventType = event.type?.toLowerCase() || '';
+                            const eventTypeKey =
+                                EVENT_TYPE_TO_KEY_MAP[normalizedEventType] || normalizedEventType;
+                            const typeRequirementMetForCourse =
+                                course.isEnrollmentTypeRequirementMet(
+                                    eventTypeKey,
+                                    enrolledEventIds
+                                );
+                            let canEnroll = true;
+                            let disabledTooltipText = '';
+
+                            if (typeRequirementMetForCourse && !isEnrolled) {
+                                canEnroll = false;
+                                disabledTooltipText = t(
+                                    'tooltips.enrollDisabledTypeMet',
+                                    {
+                                        eventType: t(
+                                            `courseEvent.${eventTypeKey}`,
+                                            event.type
+                                        ),
+                                    }
+                                );
+                            }
+
+                            return (
+                                <TreeItem
+                                    key={getItemId('event', event.id)}
+                                    itemId={getItemId('event', event.id)}
+                                    label={
+                                        <EventNode
+                                            event={event}
+                                            isEnrolled={isEnrolled}
+                                            onToggleEvent={onToggleEvent}
+                                            canEnroll={isEnrolled ? true : canEnroll}
+                                            disabledTooltipText={disabledTooltipText}
+                                        />
+                                    }
+                                    sx={{
+                                        '& > .MuiTreeItem-content': {
+                                            p: '2px 0',
+                                            width: '100%',
+                                            cursor: 'default',
+                                            '&:hover': {
+                                                backgroundColor: 'transparent',
+                                            },
+                                        },
+                                        '& > .MuiTreeItem-content.Mui-focused, & > .MuiTreeItem-content.Mui-selected, & > .MuiTreeItem-content.Mui-selected.Mui-focused':
+                                            {
+                                                backgroundColor: 'transparent',
+                                            },
+                                        '& .MuiTreeItem-label': {
+                                            width: '100%',
+                                            p: 0,
+                                            m: 0,
+                                        },
+                                    }}
+                                />
+                            );
+                        })
+                ) : (
+                    <Typography
+                        sx={{
+                            fontStyle: 'italic',
+                            p: '8px 16px',
+                            fontSize: '0.8rem',
+                            color: 'text.disabled',
+                        }}
+                    >
+                        {t('labels.noEventsForCourse')}
+                    </Typography>
+                )}
+            </TreeItem>
+        );
+    };
 
     return (
         <Box
@@ -141,8 +392,7 @@ function CourseBar({
                 >
                     <Typography color="text.secondary">{t('labels.noCoursesToDisplay')}</Typography>
                 </Box>
-            ) : (
-                <Box sx={{ flexGrow: 1, overflowY: 'auto', scrollbarGutter: 'stable' }}>
+            ) : (                <Box sx={{ flexGrow: 1, overflowY: 'auto', scrollbarGutter: 'stable' }}>
                     <SimpleTreeView
                         expandedItems={expandedItems}
                         onExpandedItemsChange={handleExpandedItemsChange}
@@ -152,217 +402,7 @@ function CourseBar({
                             expandIcon: ChevronRightIcon,
                         }}
                     >
-                        {Object.entries(coursesByDepartment).map(
-                            ([departmentCode, deptCourses]) => (
-                                <TreeItem
-                                    key={getItemId('dept', departmentCode)}
-                                    itemId={getItemId('dept', departmentCode)}
-                                    label={
-                                        <Typography
-                                            sx={{
-                                                fontWeight: 'bold',
-                                                fontSize: '1rem',
-                                                py: '4px',
-                                                color: 'primary.main',
-                                            }}
-                                        >
-                                            {departmentCode}
-                                        </Typography>
-                                    }
-                                    sx={{
-                                        '& > .MuiTreeItem-content': {
-                                            py: '2px',
-                                            '&:hover': {
-                                                backgroundColor: theme =>
-                                                    alpha(theme.palette.action.hover, 0.04),
-                                            },
-                                        },
-                                    }}
-                                >
-                                    {deptCourses.map(course => {
-                                        const courseItemId = getItemId('course', course.id);
-                                        const isCourseExpanded =
-                                            expandedItems.includes(courseItemId);
-                                        const enrolledHours =
-                                            course.getEnrolledHours(enrolledEventIds);
-                                        const areAllReqsMet =
-                                            course.areAllEnrollmentRequirementsMet(
-                                                enrolledEventIds
-                                            );
-
-                                        return (
-                                            <TreeItem
-                                                key={courseItemId}
-                                                itemId={courseItemId}
-                                                label={
-                                                    <CourseNodeHeader
-                                                        course={course}
-                                                        enrolledHours={enrolledHours}
-                                                        areAllRequirementsMet={areAllReqsMet}
-                                                        onRemoveCourse={onRemoveCourse}
-                                                        isExpanded={isCourseExpanded}
-                                                    />
-                                                }
-                                                sx={{
-                                                    '& > .MuiTreeItem-content': {
-                                                        py: '1px',
-                                                        '&:hover': {
-                                                            bgcolor: theme =>
-                                                                alpha(
-                                                                    theme.palette.action.hover,
-                                                                    0.08
-                                                                ),
-                                                        },
-                                                    },
-                                                    '& > .MuiTreeItem-content.Mui-focused, & > .MuiTreeItem-content.Mui-selected, & > .MuiTreeItem-content.Mui-selected.Mui-focused':
-                                                        {
-                                                            backgroundColor: theme =>
-                                                                alpha(
-                                                                    theme.palette.primary.main,
-                                                                    0.12
-                                                                ),
-                                                        },
-                                                }}
-                                            >
-                                                {course.events && course.events.length > 0 ? (
-                                                    [...course.events]
-                                                        .sort((a, b) => {
-                                                            const typeOrder = {
-                                                                PŘEDNÁŠKA: 1,
-                                                                CVIČENÍ: 2,
-                                                                SEMINÁŘ: 3,
-                                                            };
-                                                            const typeA =
-                                                                typeOrder[a.type.toUpperCase()] ||
-                                                                99;
-                                                            const typeB =
-                                                                typeOrder[b.type.toUpperCase()] ||
-                                                                99;
-
-                                                            if (typeA !== typeB) {
-                                                                return typeA - typeB;
-                                                            }
-
-                                                            if (a.day !== b.day) {
-                                                                return a.day - b.day;
-                                                            }
-
-                                                            const timeA = a.startTime
-                                                                .split(':')
-                                                                .map(Number);
-                                                            const timeB = b.startTime
-                                                                .split(':')
-                                                                .map(Number);
-                                                            return (
-                                                                timeA[0] * 60 +
-                                                                timeA[1] -
-                                                                (timeB[0] * 60 + timeB[1])
-                                                            );
-                                                        })
-                                                        .map(event => {
-                                                            const isEnrolled = enrolledEventIds.has(
-                                                                event.id
-                                                            );
-                                                            const normalizedEventType =
-                                                                event.type?.toLowerCase() || '';
-                                                            const eventTypeKey =
-                                                                EVENT_TYPE_TO_KEY_MAP[
-                                                                    normalizedEventType
-                                                                ] || normalizedEventType;
-                                                            const typeRequirementMetForCourse =
-                                                                course.isEnrollmentTypeRequirementMet(
-                                                                    eventTypeKey,
-                                                                    enrolledEventIds
-                                                                );
-                                                            let canEnroll = true;
-                                                            let disabledTooltipText = '';
-
-                                                            if (
-                                                                typeRequirementMetForCourse &&
-                                                                !isEnrolled
-                                                            ) {
-                                                                canEnroll = false;
-                                                                disabledTooltipText = t(
-                                                                    'tooltips.enrollDisabledTypeMet',
-                                                                    {
-                                                                        eventType: t(
-                                                                            `courseEvent.${eventTypeKey}`,
-                                                                            event.type
-                                                                        ),
-                                                                    }
-                                                                );
-                                                            }
-
-                                                            return (
-                                                                <TreeItem
-                                                                    key={getItemId(
-                                                                        'event',
-                                                                        event.id
-                                                                    )}
-                                                                    itemId={getItemId(
-                                                                        'event',
-                                                                        event.id
-                                                                    )}
-                                                                    label={
-                                                                        <EventNode
-                                                                            event={event}
-                                                                            isEnrolled={isEnrolled}
-                                                                            onToggleEvent={
-                                                                                onToggleEvent
-                                                                            }
-                                                                            canEnroll={
-                                                                                isEnrolled
-                                                                                    ? true
-                                                                                    : canEnroll
-                                                                            }
-                                                                            disabledTooltipText={
-                                                                                disabledTooltipText
-                                                                            }
-                                                                        />
-                                                                    }
-                                                                    sx={{
-                                                                        '& > .MuiTreeItem-content':
-                                                                            {
-                                                                                p: '2px 0',
-                                                                                width: '100%',
-                                                                                cursor: 'default',
-                                                                                '&:hover': {
-                                                                                    backgroundColor:
-                                                                                        'transparent',
-                                                                                },
-                                                                            },
-                                                                        '& > .MuiTreeItem-content.Mui-focused, & > .MuiTreeItem-content.Mui-selected, & > .MuiTreeItem-content.Mui-selected.Mui-focused':
-                                                                            {
-                                                                                backgroundColor:
-                                                                                    'transparent',
-                                                                            },
-                                                                        '& .MuiTreeItem-label': {
-                                                                            width: '100%',
-                                                                            p: 0,
-                                                                            m: 0,
-                                                                        },
-                                                                    }}
-                                                                />
-                                                            );
-                                                        })
-                                                ) : (
-                                                    <Typography
-                                                        sx={{
-                                                            fontStyle: 'italic',
-                                                            p: '8px 16px',
-                                                            fontSize: '0.8rem',
-                                                            color: 'text.disabled',
-                                                        }}
-                                                    >
-                                                        {t('labels.noEventsForCourse')}
-                                                    </Typography>
-                                                )}
-                                            </TreeItem>
-                                        );
-                                    })}
-                                </TreeItem>
-                            )
-                        )}
+                        {useHierarchicalView ? renderHierarchicalView() : renderDepartmentalView()}
                     </SimpleTreeView>
                 </Box>
             )}
