@@ -84,17 +84,16 @@ const CourseNodeHeader = ({
                         py: '4px',
                     }}
                 >
-                    <Stack direction="column" spacing={0.5} flexGrow={1} overflow="hidden" pr={1}>
-                        <Typography
-                            variant="subtitle1"
-                            sx={{
-                                fontSize: '0.9rem',
+                    <Stack direction="column" spacing={0.5} flexGrow={1} overflow="hidden" pr={1}>                        <Typography
+                            variant="subtitle1"                            sx={{
+                                fontSize: '0.8rem', // Menší font pro předměty
                                 whiteSpace: 'nowrap',
                                 overflow: 'hidden',
                                 textOverflow: 'ellipsis',
                                 fontWeight: 500,
                                 display: 'flex',
                                 alignItems: 'center',
+                                color: 'rgba(255, 255, 255, 0.85)', // Mírně tmavší než fakulty
                             }}
                         >
                             {course.source === 'demo' && (
@@ -110,11 +109,27 @@ const CourseNodeHeader = ({
                                     whiteSpace: 'nowrap',
                                     overflow: 'hidden',
                                     textOverflow: 'ellipsis',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: 0.75, // Větší mezera mezi zkratkou a názvem
+                                    minWidth: 0, // Umožní flexu správně fungovat s ellipsis
                                 }}
                             >
-                                {course.courseCode} - {course.name}
+                                <Box component="span" sx={{ fontWeight: 600, flexShrink: 0 }}>{course.courseCode}</Box>
+                                <Box 
+                                    component="span" 
+                                    sx={{ 
+                                        fontWeight: 400, 
+                                        color: 'rgba(255, 255, 255, 0.7)',
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis',
+                                        minWidth: 0,
+                                    }}
+                                >
+                                    {course.name}
+                                </Box>
                             </Box>
-                        </Typography>                        {isExpanded && (
+                        </Typography>{isExpanded && (
                             <Stack direction="column" spacing={1}>
                                 <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap">
                                     <Chip

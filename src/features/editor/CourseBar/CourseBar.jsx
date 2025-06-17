@@ -3,8 +3,6 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SchoolIcon from '@mui/icons-material/School';
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import BusinessIcon from '@mui/icons-material/Business';
 import { alpha, Box, Button, CircularProgress, Stack, Tooltip, Typography } from '@mui/material';
 import { SimpleTreeView, TreeItem } from '@mui/x-tree-view';
 import { useState } from 'react';
@@ -63,42 +61,43 @@ function CourseBar({
     // Získání hierarchické struktury fakult -> katedr -> kurzů
     const hierarchicalStructure = isHierarchyLoaded 
         ? getHierarchicalStructure(courses || [])
-        : {};
-
-    // Fallback pro případ, že hierarchie není načtena
+        : {};    // Fallback pro případ, že hierarchie není načtena
     const coursesByDepartment = courses ? courses.reduce((acc, course) => {
         const dept = course.departmentCode || t('labels.unknownDepartment');
         if (!acc[dept]) {
-            acc[dept] = [];
+            acc[dept] = {
+                courses: [],
+                name: course.departmentName || dept // Pokusíme se získat plný název katedry
+            };
         }
-        acc[dept].push(course);
+        acc[dept].courses.push(course);
         return acc;
     }, {}) : {};
 
     const useHierarchicalView = isHierarchyLoaded && Object.keys(hierarchicalStructure).length > 0;
 
-    const getItemId = (prefix, id) => `${prefix}-${id}`;
-
-    // Render pro hierarchické zobrazení
+    const getItemId = (prefix, id) => `${prefix}-${id}`;    // Render pro hierarchické zobrazení
     const renderHierarchicalView = () => {
         return Object.entries(hierarchicalStructure).map(([facultyCode, facultyData]) => (
             <TreeItem
                 key={getItemId('faculty', facultyCode)}
-                itemId={getItemId('faculty', facultyCode)}
-                label={
-                    <Typography
-                        sx={{
-                            fontWeight: 'bold',
-                            fontSize: '1.1rem',
-                            py: '6px',
-                            color: 'secondary.main',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: 1,
-                        }}
-                    >
-                        {facultyData.name}
-                    </Typography>
+                itemId={getItemId('faculty', facultyCode)}                label={
+                    <Tooltip title={`${facultyCode} ${facultyData.name}`} placement="right">
+                        <Typography
+                            sx={{
+                                fontSize: '0.95rem', // Větší font pro fakulty
+                                py: '6px',
+                                color: 'rgba(255, 255, 255, 0.95)', // Světlejší barva
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 0.75,
+                                cursor: 'default'
+                            }}
+                        >
+                            <Box component="span" sx={{ fontWeight: 700 }}>{facultyCode}</Box> {/* Ještě tučnější */}
+                            <Box component="span" sx={{ fontWeight: 400, color: 'rgba(255, 255, 255, 0.8)' }}>{facultyData.name}</Box>
+                        </Typography>
+                    </Tooltip>
                 }
                 sx={{
                     '& > .MuiTreeItem-content': {
@@ -114,19 +113,22 @@ function CourseBar({
                     <TreeItem
                         key={getItemId('dept', departmentCode)}
                         itemId={getItemId('dept', departmentCode)}                        label={
-                            <Typography
-                                sx={{
-                                    fontWeight: 'bold',
-                                    fontSize: '1rem',
-                                    py: '4px',
-                                    color: 'primary.main',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: 1,
-                                }}
-                            >
-                                {departmentData.name || departmentCode}
-                            </Typography>
+                            <Tooltip title={`${departmentCode} ${departmentData.name || departmentCode}`} placement="right">
+                                <Typography
+                                    sx={{
+                                        fontSize: '0.875rem', // Středně velký font pro katedry
+                                        py: '4px',
+                                        color: 'rgba(255, 255, 255, 0.9)',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: 0.75,
+                                        cursor: 'default'
+                                    }}
+                                >
+                                    <Box component="span" sx={{ fontWeight: 650 }}>{departmentCode}</Box> {/* Mírně tučnější */}
+                                    <Box component="span" sx={{ fontWeight: 400, color: 'rgba(255, 255, 255, 0.7)' }}>{departmentData.name || departmentCode}</Box>
+                                </Typography>
+                            </Tooltip>
                         }
                         sx={{
                             '& > .MuiTreeItem-content': {
@@ -145,25 +147,26 @@ function CourseBar({
         ));
     };    // Render function pro klasické zobrazení podle katedr
     const renderDepartmentalView = () => {
-        return Object.entries(coursesByDepartment).map(([departmentCode, deptCourses]) => (
+        return Object.entries(coursesByDepartment).map(([departmentCode, deptData]) => (
             <TreeItem
                 key={getItemId('dept', departmentCode)}
-                itemId={getItemId('dept', departmentCode)}
-                label={
-                    <Typography
-                        sx={{
-                            fontWeight: 'bold',
-                            fontSize: '1rem',
-                            py: '4px',
-                            color: 'primary.main',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: 1,
-                        }}
-                    >
-                        <BusinessIcon fontSize="small" />
-                        {departmentCode}
-                    </Typography>
+                itemId={getItemId('dept', departmentCode)}                label={
+                    <Tooltip title={`${departmentCode} ${deptData.name}`} placement="right">
+                        <Typography
+                            sx={{
+                                fontSize: '0.875rem', // Středně velký font pro katedry
+                                py: '4px',
+                                color: 'rgba(255, 255, 255, 0.9)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 0.75,
+                                cursor: 'default'
+                            }}
+                        >
+                            <Box component="span" sx={{ fontWeight: 650 }}>{departmentCode}</Box> {/* Mírně tučnější */}
+                            <Box component="span" sx={{ fontWeight: 400, color: 'rgba(255, 255, 255, 0.7)' }}>{deptData.name}</Box>
+                        </Typography>
+                    </Tooltip>
                 }
                 sx={{
                     '& > .MuiTreeItem-content': {
@@ -175,7 +178,7 @@ function CourseBar({
                     },
                 }}
             >
-                {deptCourses.map(course => renderCourseItem(course))}
+                {deptData.courses.map(course => renderCourseItem(course))}
             </TreeItem>
         ));
     };
