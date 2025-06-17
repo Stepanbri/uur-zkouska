@@ -82,14 +82,13 @@ function CourseBar({
         return Object.entries(hierarchicalStructure).map(([facultyCode, facultyData]) => (
             <TreeItem
                 key={getItemId('faculty', facultyCode)}
-                itemId={getItemId('faculty', facultyCode)}
-                label={
+                itemId={getItemId('faculty', facultyCode)}                label={
                     <Tooltip title={`${facultyCode} ${facultyData.name}`} placement="right">
                         <Typography
                             sx={{
                                 fontSize: '0.95rem', // Větší font pro fakulty
                                 py: '6px',
-                                color: 'rgba(255, 255, 255, 0.95)', // Světlejší barva
+                                color: 'text.primary', // Používá theme barvy
                                 display: 'flex',
                                 alignItems: 'center',
                                 gap: 0.75,
@@ -98,11 +97,10 @@ function CourseBar({
                         >
                             <Box component="span" sx={{ fontWeight: 700 }}>
                                 {facultyCode}
-                            </Box>{' '}
-                            {/* Ještě tučnější */}
+                            </Box>
                             <Box
                                 component="span"
-                                sx={{ fontWeight: 400, color: 'rgba(255, 255, 255, 0.8)' }}
+                                sx={{ fontWeight: 400, color: 'text.secondary' }}
                             >
                                 {facultyData.name}
                             </Box>
@@ -122,8 +120,7 @@ function CourseBar({
                     <TreeItem
                         key={getItemId('dept', departmentCode)}
                         itemId={getItemId('dept', departmentCode)}
-                        label={
-                            <Tooltip
+                        label={                            <Tooltip
                                 title={`${departmentCode} ${departmentData.name || departmentCode}`}
                                 placement="right"
                             >
@@ -131,7 +128,7 @@ function CourseBar({
                                     sx={{
                                         fontSize: '0.875rem', // Středně velký font pro katedry
                                         py: '4px',
-                                        color: 'rgba(255, 255, 255, 0.9)',
+                                        color: 'text.primary',
                                         display: 'flex',
                                         alignItems: 'center',
                                         gap: 0.75,
@@ -140,11 +137,10 @@ function CourseBar({
                                 >
                                     <Box component="span" sx={{ fontWeight: 650 }}>
                                         {departmentCode}
-                                    </Box>{' '}
-                                    {/* Mírně tučnější */}
+                                    </Box>
                                     <Box
                                         component="span"
-                                        sx={{ fontWeight: 400, color: 'rgba(255, 255, 255, 0.7)' }}
+                                        sx={{ fontWeight: 400, color: 'text.secondary' }}
                                     >
                                         {departmentData.name || departmentCode}
                                     </Box>
@@ -173,12 +169,11 @@ function CourseBar({
                 key={getItemId('dept', departmentCode)}
                 itemId={getItemId('dept', departmentCode)}
                 label={
-                    <Tooltip title={`${departmentCode} ${deptData.name}`} placement="right">
-                        <Typography
+                    <Tooltip title={`${departmentCode} ${deptData.name}`} placement="right">                        <Typography
                             sx={{
                                 fontSize: '0.875rem', // Středně velký font pro katedry
                                 py: '4px',
-                                color: 'rgba(255, 255, 255, 0.9)',
+                                color: 'text.primary',
                                 display: 'flex',
                                 alignItems: 'center',
                                 gap: 0.75,
@@ -191,7 +186,7 @@ function CourseBar({
                             {/* Mírně tučnější */}
                             <Box
                                 component="span"
-                                sx={{ fontWeight: 400, color: 'rgba(255, 255, 255, 0.7)' }}
+                                sx={{ fontWeight: 400, color: 'text.secondary' }}
                             >
                                 {deptData.name}
                             </Box>

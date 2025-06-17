@@ -86,8 +86,7 @@ const CourseNodeHeader = ({
                 >
                     <Stack direction="column" spacing={0.5} flexGrow={1} overflow="hidden" pr={1}>
                         {' '}
-                        <Typography
-                            variant="subtitle1"
+                        <Typography                            variant="subtitle1"
                             sx={{
                                 fontSize: '0.8rem', // Menší font pro předměty
                                 whiteSpace: 'nowrap',
@@ -96,7 +95,7 @@ const CourseNodeHeader = ({
                                 fontWeight: 500,
                                 display: 'flex',
                                 alignItems: 'center',
-                                color: 'rgba(255, 255, 255, 0.85)', // Mírně tmavší než fakulty
+                                color: 'text.primary',
                             }}
                         >
                             {course.source === 'demo' && (
@@ -120,12 +119,11 @@ const CourseNodeHeader = ({
                             >
                                 <Box component="span" sx={{ fontWeight: 600, flexShrink: 0 }}>
                                     {course.courseCode}
-                                </Box>
-                                <Box
+                                </Box>                                <Box
                                     component="span"
                                     sx={{
                                         fontWeight: 400,
-                                        color: 'rgba(255, 255, 255, 0.7)',
+                                        color: 'text.secondary',
                                         overflow: 'hidden',
                                         textOverflow: 'ellipsis',
                                         minWidth: 0,
