@@ -1,0 +1,438 @@
+{
+  "appTitle": "西ボヘミア大学時間割プランナー",
+  "appTitleShort": "時間割プランナー",
+  "nav": {
+    "editor": "時間割エディタ",
+    "faq": "FAQ",
+    "landing": "ホーム"
+  },
+  "languageToggle": "言語",
+  "themeToggle": {
+    "light": "ライトモード",
+    "dark": "ダークモード",
+    "lightTooltip": "ライトモードに切り替え",
+    "darkTooltip": "ダークモードに切り替え"
+  },
+  "common": {
+    "loading": "読み込み中...",
+    "saving": "保存中...",
+    "processing": "処理中...",
+    "processingStudentPlan": "学生データを処理中...",
+    "processingCourse": "科目を処理中...",
+    "loadingApp": "ワークスペースを読み込み中...",
+    "error": "エラー",
+    "success": "成功",
+    "warning": "警告",
+    "info": "情報",
+    "cancel": "キャンセル",
+    "add": "追加",
+    "save": "保存",
+    "delete": "削除",
+    "confirm": "確認",
+    "continue": "続行",
+    "close": "閉じる",
+    "notSpecified": "-",
+    "unknownType": "不明なタイプ",
+    "noAdditionalInfo": "追加情報なし",
+    "scheduleNotAvailable": "時間割が利用できないか、読み込み中です。",
+    "workspaceNotInitializedYet": "ワークスペースがまだ読み込まれていません。"
+  },
+  "alerts": {
+    "workspaceSaved": "ワークスペースが保存されました。",
+    "loadedDummyData": "サンプルデータが読み込まれました。",
+    "workspaceLoadedFromLocalStorage": "ワークスペースがローカルストレージから読み込まれました。",
+    "stagLoginSuccessful": "STAGへのログインが成功しました。",
+    "stagLoginNoRoles": "ログインは成功しましたが、ロールが見つからないか、ユーザー情報が不足しています。",
+    "courseRemoved": "科目 {{courseId}} が削除されました。",
+    "allCoursesRemoved": "すべての科目が削除されました。",
+    "confirmRemoveAllCourses": "読み込まれたすべての科目とその登録された授業を時間割から削除してもよろしいですか？この操作は元に戻せません。",
+    "confirmRemoveCourseTitle": "科目を削除しますか？",
+    "internalError": "アプリケーション内部エラー。",
+    "eventFull": "科目 {{courseCode}} の「{{eventType}}」の定員が満員です。",
+    "typeRequirementMet": "科目 {{courseCode}} の「{{eventType}}」タイプの必要な授業数が既に満たされています。",
+    "eventEnrolled": "科目 {{courseCode}} の「{{eventType}}」が登録されました。",
+    "eventUnenrolled": "科目 {{courseCode}} の「{{eventType}}」の登録が解除されました。",
+    "courseOverwritten": "科目 {{courseCode}} が新しいデータで上書きされました。",
+    "courseAdded": "科目 {{courseCode}} が追加されました。",
+    "stagSubjectNotFound": "科目 {{subjectCode}} がSTAGシステムで見つかりませんでした。",
+    "stagLoadError": "STAG APIとの通信エラー。",
+    "identitySelectedLog": "ロール/アイデンティティ {{stagUser}} が選択されました。",
+    "fetchStudentInfoErrorNoStudyDetails": "STAGから学生の専攻IDを取得できませんでした。",
+    "fetchStudentInfoErrorNoData": "STAGから学生の完全な情報を取得できませんでした。",
+    "fetchStudentInfoError": "学生の詳細を読み込めませんでした。",
+    "loadingStudyPlanSubjects": "学習計画の科目を読み込み中...",
+    "noStudentContextForPlan": "科目を読み込むための学生コンテキスト（専攻ID）が不足しています。",
+    "noSubjectsFoundForField": "指定された専攻と計画バージョンで科目が見つかりませんでした。",
+    "noSubjectsMatchCriteria": "指定された学年、学期、ステータスの条件に一致する科目が見つかりませんでした。",
+    "fetchingSubjectDetailsCount": "{{count}}科目の詳細と時間割授業を読み込み中...",
+    "studyPlanLoadSummary_one": "{{added}}科目が追加され、{{overwritten}}科目が上書きされました。{{failed}}の処理に失敗しました。",
+    "studyPlanLoadSummary_few": "{{added}}科目が追加され、{{overwritten}}科目が上書きされました。{{failed}}の処理に失敗しました。",
+    "studyPlanLoadSummary_many": "{{added}}科目が追加され、{{overwritten}}科目が上書きされました。{{failed}}の処理に失敗しました。",
+    "studyPlanLoadSummary_other": "{{added}}科目が追加され、{{overwritten}}科目が上書きされました。{{failed}}の処理に失敗しました。",
+    "studyPlanLoadError": "学習計画の科目読み込み中にエラーが発生しました。",
+    "identitySelectionCancelledAndTicketCleared": "アイデンティティの選択がキャンセルされました。STAGセッションが終了されました。",
+    "studyParamsSelectionCancelled": "学習パラメータの選択がキャンセルされました。STAGセッションが終了されました。",
+    "confirmRemoveCourse": "科目 {{courseName}} ({{courseStagId}}) を削除し、現在の時間割からその登録されたすべての授業を削除してもよろしいですか？",
+    "workspaceCleared": "ワークスペースがクリアされました。",
+    "workspaceExported": "ワークスペースが正常にエクスポートされました。",
+    "workspaceExportFailed": "ワークスペースのエクスポートに失敗しました。",
+    "workspaceImported": "ワークスペースが正常にインポートされました。",
+    "workspaceImportFailed": "ワークスペースのインポートに失敗しました。ファイルが破損しているか、無効な形式です。",
+    "fileReadError": "ファイル読み取りエラー。",
+    "imageSaveError": "時間割画像の保存エラー。",
+    "allPreferencesRemove": "すべての設定が削除されました。",
+    "confirmRemoveAllPreferences": "設定されたすべての設定を削除してもよろしいですか？この操作は元に戻せません。",
+    "workspaceNotInitializedYet": "ワークスペースがまだ読み込まれていません。"
+  },
+  "courseEvent": {
+    "monday": "月曜日",
+    "tuesday": "火曜日",
+    "wednesday": "水曜日",
+    "thursday": "木曜日",
+    "friday": "金曜日",
+    "saturday": "土曜日",
+    "sunday": "日曜日",
+    "lecture": "講義",
+    "practical": "演習",
+    "seminar": "セミナー",
+    "přednáška": "講義",
+    "cvičení ": "演習",
+    "seminář": "セミナー",
+    "credit": "単位",
+    "block": "集中講義",
+    "unknown": "不明なタイプ",
+    "recurrence": "繰り返し",
+    "recurrenceShort": {
+      "každýtýden": "",
+      "sudýtýden": "偶",
+      "lichýtýden": "奇",
+      "jednorázově": "単発",
+      "jiný": "その他"
+    },
+    "každýtýden": "毎週",
+    "sudýtýden": "偶数週",
+    "lichýtýden": "奇数週",
+    "jednorázově": "単発",
+    "jiný": "その他"
+  },
+  "enrollmentShort": {
+    "lecture": "講",
+    "practical": "演",
+    "seminar": "セ"
+  },
+  "labels": {
+    "credits": "{{count}}単位",
+    "credits_plural": "{{count}}単位",
+    "requirementsMet": "要件満了 ({{count}})",
+    "requirementsMetSimple": "要件満了",
+    "remaining": "残り: {{needed}} (登録: {{enrolledCount}})",
+    "remainingSimple": "残り",
+    "eventType": "授業タイプ",
+    "enrolled": "登録済み",
+    "enroll": "登録",
+    "room": "教室",
+    "virtualEvent": "オンライン授業",
+    "capacity": "定員",
+    "maxCapacityPrefix": "最大:",
+    "full": "満員",
+    "instructor": "講師",
+    "notes": "備考",
+    "recurrence": "繰り返し",
+    "loadingCourses": "科目を読み込み中...",
+    "unknownDepartment": "不明な学科",
+    "noCoursesToDisplay": "表示する科目がありません。科目を追加するか、保存された状態を読み込んでください。",
+    "noEventsForCourse": "この科目には時間割授業がありません。",
+    "time": "時間",
+    "enrolledStatus": "登録済み",
+    "notEnrolledStatus": "未登録"
+  },
+  "tooltips": {
+    "removeCourse": "科目 {{courseName}} をワークスペースから削除",
+    "requiredEnrollments": "必要な登録: {{enrolledReqStr}}",
+    "enrollAction": "授業を時間割に登録",
+    "unenrollAction": "授業を時間割から削除",
+    "enrollDisabledCapacityFull": "この授業の定員が満員です。",
+    "enrollDisabledTypeMet": "この科目の「{{eventType}}」タイプの必要な授業数が既に満たされています。"
+  },
+  "propertiesBar": {
+    "title": "生成設定",
+    "addPreferenceButton": "設定を追加",
+    "generateButton": "時間割を生成",
+    "generateScheduleLog": "設定を使用して時間割を生成中...",
+    "generateScheduleAlert": "{{count}}個のアクティブな設定で時間割生成が開始されました。",
+    "generateScheduleSuccess": "時間割が正常に生成されました。",
+    "generateScheduleFailure": "指定された条件を満たす時間割を生成できませんでした。",
+    "addDialog": {
+      "title": "新しい設定を追加",
+      "preferenceType": "設定タイプ"
+    },
+    "preferenceList": {
+      "noPreferences": "まだ設定が追加されていません。"
+    },
+    "preferenceItem": {
+      "increasePriority": "優先度を上げる",
+      "decreasePriority": "優先度を下げる",
+      "toggleActive": "設定をアクティブ/非アクティブ",
+      "deactivatePreference": "設定を無効化",
+      "activatePreference": "設定を有効化",
+      "deletePreference": "設定を削除"
+    },
+    "removeAllPreferences": "すべての設定を削除",
+    "removeAllPreferencesTooltip": "設定されたすべての設定を削除。"
+  },
+  "preferences": {
+    "types": {
+      "FREE_DAY": {
+        "label": "週の空き日",
+        "shortLabel": "空き日"
+      },
+      "AVOID_TIMES": {
+        "label": "時間帯を避ける",
+        "shortLabel": "時間帯回避"
+      },
+      "PREFER_INSTRUCTOR": {
+        "label": "講師を優先",
+        "shortLabel": "講師優先"
+      }
+    },
+    "params": {
+      "day": "曜日",
+      "startTime": "開始時刻",
+      "endTime": "終了時刻",
+      "courseCode": "科目コード",
+      "instructorName": "講師名",
+      "eventType": "時間割授業タイプ"
+    },
+    "displayLabels": {
+      "freeDay": "空き日: {{day}}",
+      "avoidTimes": "{{day}}回避: {{startTime}} - {{endTime}}",
+      "preferInstructor": "{{courseCode}} ({{eventType}}) で {{instructorName}} を優先"
+    },
+    "dayOptions": {
+      "PO": "月曜日",
+      "UT": "火曜日",
+      "ST": "水曜日",
+      "CT": "木曜日",
+      "PA": "金曜日",
+      "SO": "土曜日",
+      "NE": "日曜日",
+      "pondělí": "月曜日",
+      "úterý": "火曜日",
+      "středa": "水曜日",
+      "čtvrtek": "木曜日",
+      "pátek": "金曜日",
+      "sobota": "土曜日",
+      "neděle": "日曜日",
+      "monday": "月曜日",
+      "tuesday": "火曜日",
+      "wednesday": "水曜日",
+      "thursday": "木曜日",
+      "friday": "金曜日",
+      "saturday": "土曜日",
+      "sunday": "日曜日"
+    },
+    "alerts": {
+      "added": "設定が正常に追加されました。",
+      "deleted": "設定が削除されました。",
+      "allDeleted": "すべての設定が削除されました。",
+      "updated": "設定が更新されました。",
+      "priorityChanged": "設定の優先度が変更されました。",
+      "activityChanged": "設定のアクティビティが変更されました。"
+    }
+  },
+  "Dialogs": {
+    "deletePreference": {
+      "title": "設定を削除",
+      "message": "設定 {{preferenceLabel}} を削除してもよろしいですか？"
+    },
+    "selectStudyParams": {
+      "title": "専攻科目読み込みパラメータ",
+      "studentInfo": "読み込み対象:",
+      "studyProgram": "プログラム/専攻:",
+      "studyYearNumLabel": "学年",
+      "scheduleAcademicYearLabel": "バージョン",
+      "semesterLabel": "科目の学期",
+      "semesterZS": "冬学期 (ZS)",
+      "semesterLS": "夏学期 (LS)",
+      "semesterBoth": "両方 (ZS と LS)",
+      "subjectStatusesTitle": "読み込む科目のステータス:",
+      "statusAll": "すべて",
+      "statusA": "A (必修)",
+      "statusB": "B (選択必修)",
+      "statusC": "C (選択)",
+      "submitButton": "科目を読み込み",
+      "errorNoStatusSelected": "少なくとも1つの科目ステータスを選択する必要があります。",
+      "errorStudyYearInvalid": "学年は数字である必要があります（例：1-9）。",
+      "errorScheduleYearInvalid": "時間割の学年が無効です（形式：YYYY/YY）。",
+      "errorSemesterRequired": "学期は必須です。"
+    },
+    "selectIdentity": {
+      "title": "STAGアイデンティティ/ロール選択",
+      "loadingRoles": "ロールを読み込み中...",
+      "errorNoTicket": "ロールを読み込むための有効なSTAGチケットがありません。再度ログインしてください。",
+      "noValidRolesFound": "有効なSTAGロール/アイデンティティが見つかりませんでした。",
+      "noRolesFound": "あなたのアカウントにSTAGロール/アイデンティティが見つかりませんでした。",
+      "errorFetchingRoles": "STAGロールの読み込みに失敗しました。",
+      "pleaseSelectRole": "ロールを1つ選択してください。",
+      "noRolesAvailable": "あなたのアカウントに現在利用可能なSTAGロールがないか、読み込みに失敗しました。"
+    },
+    "loadFromStudentRedirect": {
+      "title": "学習計画に基づく科目読み込み",
+      "p1": "学習計画に基づいて科目を読み込むには、情報システムSTAGにログインする必要があります。",
+      "p2": "「続行」をクリックすると、西ボヘミア大学のログインページ（Orionログイン）にリダイレクトされます。ログイン成功後、時間割プランナーアプリケーションに自動的に戻ります。",
+      "p3": "このアプリケーションはログイン情報を保存しません。取得した一時的なアクセスキー（チケット）は、このセッション中にSTAG APIとの通信にのみ使用されます。",
+      "faqLink": "セキュリティとログイン機能についての詳細情報",
+      "continueButton": "ログインに進む"
+    },
+    "loadCourseFromSTAG": {
+      "title": "STAGから科目を読み込み",
+      "courseCodeLabel": "科目コード（例：KIV/PPA）",
+      "academicYearLabel": "バージョン",
+      "semesterLabel": "学期",
+      "semesterZS": "冬学期 (ZS)",
+      "semesterLS": "夏学期 (LS)",
+      "submitButton": "読み込み",
+      "errorCourseCodeRequired": "科目コードは必須です。",
+      "errorCourseCodeFormat": "無効なコード形式（例：KIV/PPA または KIV/ZEP-E）",
+      "errorYearRequired": "学年は必須です。",
+      "errorYearFormat": "無効な年形式（例：2024/24）。",
+      "errorSemesterRequired": "学期は必須です。"
+    },
+    "existingCourseWarning": {
+      "title": "科目は既に存在します",
+      "message": "科目 \"{{courseIdentifier}}\" は既に読み込まれています。STAGから新しいデータ（年、学期、授業）で既存のデータを上書きしますか？",
+      "confirmButton": "上書き"
+    },
+    "loadingProcess": {
+      "defaultMessage": "リクエストを処理中..."
+    },
+    "confirmation": {
+      "overwriteListTitle": "次の項目が上書きされます:",
+      "addListTitle": "次の項目が追加されます:",
+      "courseDetails": "年: {{year}}, 学期: {{semester}}"
+    },
+    "studentPlanOverwrite": {
+      "title": "計画からの科目読み込みを確認",
+      "message": "次の操作により、ワークスペースに新しい科目が追加され、既存の科目（学科/科目コードが同じ場合）が指定された年と学期のSTAGデータで上書きされる可能性があります。続行しますか？"
+    },
+    "summary": {
+      "title": "科目読み込み結果",
+      "overallResult": "学習計画からの科目読み込みプロセスが完了しました。",
+      "addedCourses": "正常に追加された科目",
+      "overwrittenCourses": "上書きされた科目",
+      "failedCourses": "処理に失敗した科目",
+      "noItems": "このカテゴリには項目がありません。"
+    }
+  },
+  "courseBar": {
+    "loadSingleFromSTAG": "STAGから科目を読み込み",
+    "loadFromStudentPlan": "学習計画に基づく科目読み込み",
+    "removeAllCourses": "すべての科目を削除",
+    "removeAllCoursesTooltip": "読み込まれたすべての科目とその登録された授業を削除します。",
+    "title": "科目",
+    "fromDemoStagTooltip": "DEMO STAGから読み込まれました"
+  },
+  "editorPage": {
+    "mobileDrawer": {
+      "coursesTitle": "科目",
+      "propertiesTitle": "設定",
+      "coursesTab": "科目",
+      "propertiesTab": "設定"
+    }
+  },
+  "schedule": {
+    "dayTime": "曜日/時間",
+    "switcherTitle": "時間割のバリエーション",
+    "primarySchedule": "メイン時間割",
+    "generatedSchedule": "生成された時間割 No. {{number}}"
+  },
+  "landingPage": {
+    "hero": {
+      "title": "西ボヘミア大学時間割プランナー",
+      "description": "学期の時間割を簡単に計画し、時間を最適化し、履修登録に備えましょう。西ボヘミア大学の学生のための直感的なツール。",
+      "editorButton": "プランナーを開始",
+      "universityButton": "西ボヘミア大学ウェブサイト"
+    },
+    "functions": {
+      "sectionTitle": "主要機能",
+      "intro": "学期計画を簡単にし、効率を最大化するツールを発見してください。",
+      "func1": {
+        "title": "STAGからの読み込み",
+        "desc": "科目コードまたは学習計画に基づいて、科目とその時間割授業を大学システムIS/STAGから直接インポート。"
+      },
+      "func2": {
+        "title": "ビジュアル時間割エディタ",
+        "desc": "チェコ形式の直感的な表形式表示で時間割を明確に作成・編集。"
+      },
+      "func3": {
+        "title": "設定管理",
+        "desc": "優先事項を定義 - 空き日、避けたい時間、優先講師。"
+      },
+      "func4": {
+        "title": "自動生成",
+        "desc": "科目と設定した設定に基づいて最適な時間割バリエーションを提案。"
+      },
+      "func5": {
+        "title": "保存とエクスポート",
+        "desc": "ブラウザで作業を保存し、ワークスペースをファイルにエクスポート、または完成した時間割を画像としてダウンロード。"
+      },
+      "func6": {
+        "title": "レスポンシブデザイン",
+        "desc": "コンピューター、タブレット、スマートフォンで快適に時間割を計画。"
+      }
+    },
+    "tech": {
+      "sectionTitle": "使用技術",
+      "versionLabel": "バージョン",
+      "reactDesc": "ユーザーインターフェース構築のための現代的なJavaScriptライブラリ。",
+      "muiDesc": "Material Designを実装する包括的なReactコンポーネントセット。",
+      "viteDesc": "フロントエンドWebプロジェクトの高速ビルドのための次世代ツール。",
+      "i18nextDesc": "JavaScriptアプリケーション用の強力な国際化フレームワーク。"
+    },
+    "author": {
+      "sectionTitle": "プロジェクトについて",
+      "namePlaceholder": "シュチェパーン・ブルジーザ",
+      "summary": "この時間割プランナーは、西ボヘミア大学応用科学部のKIV/UUR科目の学期プロジェクトとして作成されました。KIV/UURはユーザーインターフェースデザインの基本原則に焦点を当てています。プロジェクトの目標は、学生が正式な事前登録期間前に時間割を作成するための現代的でユーザーフレンドリーなツールを作成することでした。学期プロジェクトとして始まりましたが、開発は継続しており、新機能の追加とバグの修正が行われています。品質の高い科目を指導してくださったIng. Richard Lipka, Ph.D.とIng. Michal Nykl, Ph.D.に感謝いたします。",
+      "githubButton": "GitHubのソースコード"
+    }
+  },
+  "faqPage": {
+    "title": "よくある質問 (FAQ)",
+    "q1": "西ボヘミア大学時間割プランナーとは何ですか？",
+    "a1": "西ボヘミア大学時間割プランナーは、西ボヘミア大学プルゼンの学生と職員のために学生によって設計された非公式ツールです。主な目標は、最適な時間割作成プロセスを簡素化し、効率化することです。STAGシステムから科目とその時間割授業を簡単に読み込み、明確な表で視覚化し、ユーザー定義の設定（例：「水曜日を空けたい」）に基づいて衝突のない時間割バリアントを自動生成できます。",
+    "q2": "アプリケーションの主な機能は何ですか？",
+    "a2": "- 特定の学年と学期についてSTAGから個別科目を読み込み。\n- ログイン後の学生の学習計画からすべての科目を読み込み。\n- 手動で時間割授業を登録・削除できるビジュアル時間割エディタ。\n- 設定に基づいて衝突のない組み合わせを見つける自動時間割ジェネレータ。\n- 「空き日」、「時間を避ける」、「講師を優先」などの設定サポート。\n- 簡単な共有やバックアップのためのワークスペース（科目、設定、現在の時間割）のファイル保存・読み込み。\n- 最終時間割の画像エクスポート。\n- ライトモードとダークモードの切り替え。",
+    "q3": "ログインは必要ですか？安全ですか？",
+    "a3": "個別に読み込まれた科目から手動で時間割を作成するなどの基本機能にはログインは不要です。ログインは「学生計画から科目を読み込み」機能でのみ必要です。\n\nセキュリティについて:\n- アプリケーションはログイン名やパスワードを保存しません。\n- すべてのログインプロセスは西ボヘミア大学の安全なページ（Orionログイン）でのみ行われます。\n- ログイン成功後、アプリケーションはSTAG APIとの認証済み通信に使用される一時的で有効期限付きの「チケット」のみを取得します。このチケットはセッション中のみ保存され、ブラウザウィンドウを閉じるかSTAGからログアウトすると削除されます。",
+    "q4": "「DEMO」モードとは何ですか？",
+    "a4": "DEMOモードはテストと実演目的で使用されます。アクティブな場合、すべての通信は本番（ライブ）STAGシステムではなく、公開されている「デモ」バージョンで行われます。デモSTAGのデータは最新でない可能性があり、開発およびテスト目的でのみ使用されます。このモードは、実際のデータを使用せずにアプリケーションを試したい場合や、本番STAGが一時的に利用できない場合に便利です。\n\nDEMOモードは、時間割上のツールバーのボタン（「DEMO」というラベルの付いた切り替えアイコン）を使用してアクティブ化/非アクティブ化できます。DEMOモードがアクティブな場合、アプリケーションの右上角に「DEMO」表示が表示されます。このモードでは、すべての操作がデモ版STAGに対して実行されるため、読み込まれるデータは古いか不完全な可能性があります。",
+    "q5": "時間割ジェネレータと設定はどのように機能しますか？",
+    "a5": "ジェネレータは、相互に衝突しない登録された時間割授業のすべての可能な組み合わせを見つけようとします。右パネルの設定を使用して作業を詳細化できます。\n\n各設定には独自の優先度があります（数字が低いほど優先度が高い）。ジェネレータは最初に最高優先度の設定を満たそうとします。すべての設定を満たす時間割が見つからない場合、少なくともいくつかの有効な時間割を見つけるために、一部の低優先度設定を段階的に無視する場合があります。設定を削除せずに一時的に無効化するには、切り替えスイッチを使用できます。",
+    "q6": "時間割を保存したり友人と共有したりできますか？",
+    "a6": "はい。時間割上のツールバーにエクスポートとインポートのアイコンがあります。「ワークスペースをエクスポート」ボタンは、すべての読み込まれた科目、設定された設定、現在表示されている時間割を含むJSON形式のファイルをダウンロードします。このファイルをバックアップしたり、他の人に送信したりできます。他の人は「ワークスペースをインポート」ボタンを使用してそれを自分のアプリケーションに読み込み、あなたの設定を正確に見ることができます。",
+    "q7": "バグを見つけたか、改善のアイデアがあります。どうすればよいですか？",
+    "a7": "素晴らしい！これは学生プロジェクトなので、フィードバックは非常に歓迎されます。バグの報告や新機能の提案については、プロジェクトのGitHubの「Issues」タブをご利用ください：https://github.com/stepanbri/uwb-schedule-editor/issues。",
+    "q8": "なぜ西ボヘミア大学の外部ページ経由でログインする必要があるのですか？",
+    "a8": "この手順はOAuth 2.0と呼ばれ、第三者アプリケーション（このようなもの）にパスワードを提供することなく、データへの制限されたアクセスを与える標準的で安全な方法です。西ボヘミア大学のページでパスワードを入力することで、私たちのアプリケーションがそれを見ることがないという保証があります。アプリケーションは、STAGからあなたの学習データを読み込む権限を与える一時的なキー（チケット）のみを受け取ります。これは、GoogleやFacebookアカウントを使用して他のサービスにログインするのと同じ原理です。",
+    "q9": "時間割の色は何を意味しますか？",
+    "a9": "時間割授業は、ツールバーのボタンで切り替えることができる2つの方法で色分けできます:\n1. 授業タイプによる色分け: これがデフォルトモードです。各授業タイプ（講義、演習、セミナー）には特定の色があります（例：講義は赤、演習は緑）。これにより、時間割の授業タイプを視覚的に素早く区別できます。\n2. 科目による色分け: このモードでは、各科目（例：KIV/PPA）に独自の色が割り当てられます。この科目に属するすべての授業は、この色の背景を持ちます。授業タイプを区別するために、各時間割授業の左側に小さな色付きの「フッター」があり、その色は指定された授業タイプの色（講義、演習...）に対応します。",
+    "q10": "授業の繰り返し略語（KT、ST、LT）は何を意味しますか？",
+    "a10": "STAGシステムから取得されるこれらの略語は、指定された時間割授業の頻度を決定します:\n- KT（毎週）: 授業は学期中毎週行われます。\n- ST（偶数週）: 授業は学期の偶数週のみ行われます。\n- LT（奇数週）: 授業は学期の奇数週のみ行われます。\n- 単発（単発）: 授業は特定の1回の日程でのみ行われます。",
+    "q11": "授業の繰り返し略語（KT、ST、LT）は何を意味しますか？",
+    "a11": "STAGシステムから取得されるこれらの略語は、指定された時間割授業の頻度を決定します:\n- KT（毎週）: 授業は学期中毎週行われます。\n- ST（偶数週）: 授業は学期の偶数週のみ行われます。\n- LT（奇数週）: 授業は学期の奇数週のみ行われます。\n- 単発（単発）: 授業は特定の1回の日程でのみ行われます。"
+  },
+  "scheduleToolbar": {
+    "downloadImageTooltip": "現在の時間割を画像（.png）としてダウンロード",
+    "exportWorkspaceTooltip": "現在のワークスペース（科目、時間割、設定）をファイル（.json）にエクスポート",
+    "importWorkspaceTooltip": "ファイル（.json）からワークスペースをインポート",
+    "resetWorkspaceCleanTooltip": "ワークスペースをリセット（すべてクリア）",
+    "resetWorkspaceCleanTitle": "ワークスペースをクリアしますか？",
+    "confirmResetWorkspaceClean": "ワークスペース全体をクリアしてもよろしいですか？この操作は元に戻せません。",
+    "switchToProdStagTooltip": "本番STAG APIに切り替え",
+    "switchToDemoStagTooltip": "デモSTAG APIに切り替え",
+    "activateDemoStagTooltip": "DEMO STAG APIモードを有効化",
+    "deactivateDemoStagTooltip": "DEMOモードを無効化（本番STAG APIを使用）",
+    "faqButtonTooltip": "ヘルプとFAQ",
+    "colorModeTooltip": "時間割の色を切り替え（科目別/授業タイプ別）"
+  }
+}

@@ -25,9 +25,7 @@ const MainAppContent = () => {
     const { t, i18n } = useTranslation();
     const location = useLocation();
     const { mode, toggleColorMode } = useAppContextTheme();
-    const theme = useTheme();
-
-    // Lokální stav pro jazyk, synchronizovaný s i18next a localStorage
+    const theme = useTheme();    // Lokální stav pro jazyk, synchronizovaný s i18next a localStorage
     const [currentLanguage, setCurrentLanguage] = useState(() => {
         const storedLang = localStorage.getItem('i18nextLng');
         return storedLang ? storedLang.split('-')[0] : 'cs';
@@ -35,10 +33,20 @@ const MainAppContent = () => {
     // Stav pro ovládání viditelnosti mobilního menu
     const [mobileOpen, setMobileOpen] = useState(false);
 
+    // Definice dostupných jazyků
+    const languages = [
+        { code: 'cs', name: 'Čeština' },
+        { code: 'en', name: 'English' },
+        { code: 'es', name: 'Español' },
+        { code: 'fr', name: 'Français' },
+        { code: 'ja', name: '日本語' },
+        { code: 'uk', name: 'Українська' },
+    ];
+
     // Efekt pro nastavení jazyka při prvním načtení komponenty
     useEffect(() => {
         const savedLang = localStorage.getItem('i18nextLng')?.split('-')[0];
-        const targetLang = savedLang && ['cs', 'en'].includes(savedLang) ? savedLang : 'cs';
+        const targetLang = savedLang && languages.some(lang => lang.code === savedLang) ? savedLang : 'cs';
         setCurrentLanguage(targetLang);
         if (i18n.language !== targetLang) {
             i18n.changeLanguage(targetLang);
@@ -46,14 +54,11 @@ const MainAppContent = () => {
     }, [i18n]);
 
     // Zjištění, zda se jedná o mobilní zobrazení pro responzivní chování
-    const isMobileOrSmaller = useMediaQuery(theme.breakpoints.down('sm'));
+    const isMobileOrSmaller = useMediaQuery(theme.breakpoints.down('sm'));    const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
-    const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
-
-    const toggleLanguage = () => {
-        const newLanguage = currentLanguage === 'cs' ? 'en' : 'cs';
-        setCurrentLanguage(newLanguage);
-        i18n.changeLanguage(newLanguage);
+    const changeLanguage = (lang) => {
+        setCurrentLanguage(lang);
+        i18n.changeLanguage(lang);
     };
 
     // Definice navigačních položek pro předání do hlavičky a postranního menu
@@ -65,13 +70,13 @@ const MainAppContent = () => {
     return (
         <>
             <CssBaseline />
-            <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-                <Header
+            <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>                <Header
                     navItems={navItems}
                     mode={mode}
                     currentLanguage={currentLanguage}
+                    languages={languages}
+                    changeLanguage={changeLanguage}
                     toggleColorMode={toggleColorMode}
-                    toggleLanguage={toggleLanguage}
                     onDrawerToggle={handleDrawerToggle}
                     isMobileOrSmaller={isMobileOrSmaller}
                 />
@@ -80,8 +85,9 @@ const MainAppContent = () => {
                     navItems={navItems}
                     mode={mode}
                     currentLanguage={currentLanguage}
+                    languages={languages}
+                    changeLanguage={changeLanguage}
                     toggleColorMode={toggleColorMode}
-                    toggleLanguage={toggleLanguage}
                     onDrawerToggle={handleDrawerToggle}
                     mobileOpen={mobileOpen}
                     isMobileOrSmaller={isMobileOrSmaller}

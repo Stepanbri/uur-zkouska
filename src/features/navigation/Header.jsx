@@ -2,10 +2,14 @@ import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import LanguageIcon from '@mui/icons-material/Language';
 import MenuIcon from '@mui/icons-material/Menu';
-import { AppBar, Box, Button, Container, IconButton, Toolbar, Tooltip } from '@mui/material';
+import { AppBar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Tooltip } from '@mui/material';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import Logo from '../../Logo';
+
+// Import flag icons
+import '/node_modules/flag-icons/css/flag-icons.min.css';
 
 /**
  * Komponenta hlavičky aplikace.
@@ -14,9 +18,10 @@ import Logo from '../../Logo';
  * @param {object} props - Vlastnosti komponenty.
  * @param {Array<object>} props.navItems - Pole navigačních položek k zobrazení.
  * @param {string} props.mode - Aktuální barevný motiv ('light' nebo 'dark').
- * @param {string} props.currentLanguage - Aktuálně zvolený jazyk ('cs' nebo 'en').
+ * @param {string} props.currentLanguage - Aktuálně zvolený jazyk.
+ * @param {Array<object>} props.languages - Pole dostupných jazyků.
  * @param {Function} props.toggleColorMode - Funkce pro přepnutí barevného motivu.
- * @param {Function} props.toggleLanguage - Funkce pro přepnutí jazyka.
+ * @param {Function} props.changeLanguage - Funkce pro změnu jazyka.
  * @param {Function} props.onDrawerToggle - Funkce pro otevření/zavření postranního menu.
  * @param {boolean} props.isMobileOrSmaller - Příznak, zda je zobrazení pro mobilní zařízení.
  */
@@ -24,13 +29,41 @@ const Header = ({
     navItems,
     mode,
     currentLanguage,
+    languages,
     toggleColorMode,
-    toggleLanguage,
+    changeLanguage,
     onDrawerToggle,
     isMobileOrSmaller,
 }) => {
     const { t } = useTranslation();
     const location = useLocation();
+    
+    // State pro menu výběru jazyka
+    const [languageMenuAnchor, setLanguageMenuAnchor] = useState(null);
+    const isLanguageMenuOpen = Boolean(languageMenuAnchor);
+    
+    const handleLanguageMenuOpen = (event) => {
+        setLanguageMenuAnchor(event.currentTarget);
+    };
+    
+    const handleLanguageMenuClose = () => {
+        setLanguageMenuAnchor(null);
+    };
+    
+    const handleLanguageChange = (langCode) => {
+        changeLanguage(langCode);
+        handleLanguageMenuClose();
+    };
+      // Funkce pro získání kódu vlajky
+    const getFlagCode = (langCode) => {
+        switch (langCode) {
+            case 'en': return 'gb';
+            case 'cs': return 'cz';
+            case 'uk': return 'ua';
+            case 'ja': return 'jp';
+            default: return langCode;
+        }
+    };
 
     return (
         <AppBar position="static">
@@ -68,14 +101,14 @@ const Header = ({
                                 >
                                     {t(item.textKey)}
                                 </Button>
-                            ))}
-                            {/* Tlačítko pro přepnutí jazyka */}
+                            ))}                            {/* Tlačítko pro výběr jazyka */}
                             <Button
                                 color="inherit"
-                                onClick={toggleLanguage}
+                                onClick={handleLanguageMenuOpen}
                                 variant="outlined"
                                 size="small"
                                 startIcon={<LanguageIcon />}
+                                endIcon={<span className={`fi fi-${getFlagCode(currentLanguage)}`} style={{ marginLeft: '4px' }} />}
                                 sx={{
                                     ml: 1,
                                     mr: 0.5,
@@ -83,9 +116,42 @@ const Header = ({
                                     color: 'white',
                                     '& .MuiButton-startIcon': { mr: 0.5 },
                                 }}
+                                aria-controls={isLanguageMenuOpen ? 'language-menu' : undefined}
+                                aria-haspopup="true"
+                                aria-expanded={isLanguageMenuOpen ? 'true' : undefined}
                             >
                                 {currentLanguage.toUpperCase()}
                             </Button>
+                              {/* Menu výběru jazyka */}
+                            <Menu
+                                id="language-menu"
+                                anchorEl={languageMenuAnchor}
+                                open={isLanguageMenuOpen}
+                                onClose={handleLanguageMenuClose}
+                                slotProps={{
+                                    list: {
+                                        'aria-labelledby': 'language-button',
+                                    },
+                                }}
+                            >
+                                {languages.map((lang) => (
+                                    <MenuItem 
+                                        key={lang.code}
+                                        onClick={() => handleLanguageChange(lang.code)}
+                                        selected={currentLanguage === lang.code}
+                                        sx={{ 
+                                            display: 'flex',
+                                            justifyContent: 'space-between',
+                                            minWidth: '140px',
+                                            gap: 1
+                                        }}
+                                    >
+                                        <span>{lang.name}</span>
+                                        <span className={`fi fi-${getFlagCode(lang.code)}`} />
+                                    </MenuItem>
+                                ))}
+                            </Menu>
+                            
                             {/* Tlačítko pro přepnutí motivu */}
                             <Tooltip
                                 title={

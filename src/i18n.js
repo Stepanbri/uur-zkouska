@@ -9,7 +9,7 @@ i18n.use(HttpApi) // Načítá překlady např. z /public/locales
     .use(LanguageDetector) // Detekuje jazyk uživatele
     .use(initReactI18next) // Předává i18n instanci do react-i18next
     .init({
-        supportedLngs: ['cs', 'en'], // Podporované jazyky aplikace
+        supportedLngs: ['cs', 'en', 'es', 'fr', 'ja', 'uk'], // Podporované jazyky aplikace
         fallbackLng: 'cs', // Výchozí jazyk, pokud není detekovaný jazyk podporován
         debug: import.meta.env.DEV, // Zapnutí debug módu v development prostředí
         interpolation: {

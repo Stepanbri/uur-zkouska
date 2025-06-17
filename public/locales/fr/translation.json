@@ -1,0 +1,438 @@
+{
+  "appTitle": "Planificateur d'Emploi du Temps UBO",
+  "appTitleShort": "Planificateur d'Emploi du Temps",
+  "nav": {
+    "editor": "Éditeur d'Emploi du Temps",
+    "faq": "FAQ",
+    "landing": "Accueil"
+  },
+  "languageToggle": "Langue",
+  "themeToggle": {
+    "light": "Mode clair",
+    "dark": "Mode sombre",
+    "lightTooltip": "Basculer vers le mode clair",
+    "darkTooltip": "Basculer vers le mode sombre"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "saving": "Sauvegarde...",
+    "processing": "Traitement...",
+    "processingStudentPlan": "Traitement des données étudiant...",
+    "processingCourse": "Traitement de la matière...",
+    "loadingApp": "Chargement de l'espace de travail...",
+    "error": "Erreur",
+    "success": "Succès",
+    "warning": "Avertissement",
+    "info": "Information",
+    "cancel": "Annuler",
+    "add": "Ajouter",
+    "save": "Sauvegarder",
+    "delete": "Supprimer",
+    "confirm": "Confirmer",
+    "continue": "Continuer",
+    "close": "Fermer",
+    "notSpecified": "-",
+    "unknownType": "Type inconnu",
+    "noAdditionalInfo": "Aucune information supplémentaire",
+    "scheduleNotAvailable": "L'emploi du temps n'est pas disponible ou se charge.",
+    "workspaceNotInitializedYet": "L'espace de travail n'a pas encore été chargé."
+  },
+  "alerts": {
+    "workspaceSaved": "Espace de travail sauvegardé.",
+    "loadedDummyData": "Données d'exemple chargées.",
+    "workspaceLoadedFromLocalStorage": "Espace de travail chargé depuis le stockage local.",
+    "stagLoginSuccessful": "Connexion à STAG réussie.",
+    "stagLoginNoRoles": "Connexion réussie, mais aucun rôle trouvé ou informations utilisateur manquantes.",
+    "courseRemoved": "La matière {{courseId}} a été supprimée.",
+    "allCoursesRemoved": "Toutes les matières ont été supprimées.",
+    "confirmRemoveAllCourses": "Voulez-vous vraiment supprimer toutes les matières chargées et leurs cours inscrits de l'emploi du temps ? Cette action est irréversible.",
+    "confirmRemoveCourseTitle": "Supprimer la matière ?",
+    "internalError": "Erreur interne de l'application.",
+    "eventFull": "La capacité du cours '{{eventType}}' de la matière {{courseCode}} est pleine.",
+    "typeRequirementMet": "Le nombre requis de cours de type '{{eventType}}' pour la matière {{courseCode}} est déjà atteint.",
+    "eventEnrolled": "Le cours '{{eventType}}' de la matière {{courseCode}} a été inscrit.",
+    "eventUnenrolled": "Le cours '{{eventType}}' de la matière {{courseCode}} a été désinscrit.",
+    "courseOverwritten": "La matière {{courseCode}} a été remplacée par de nouvelles données.",
+    "courseAdded": "La matière {{courseCode}} a été ajoutée.",
+    "stagSubjectNotFound": "La matière {{subjectCode}} n'a pas été trouvée dans le système STAG.",
+    "stagLoadError": "Erreur de communication avec l'API STAG.",
+    "identitySelectedLog": "Rôle/Identité {{stagUser}} sélectionné.",
+    "fetchStudentInfoErrorNoStudyDetails": "Impossible d'obtenir l'ID de spécialisation de l'étudiant depuis STAG.",
+    "fetchStudentInfoErrorNoData": "Impossible d'obtenir les informations complètes de l'étudiant depuis STAG.",
+    "fetchStudentInfoError": "Impossible de charger les détails de l'étudiant.",
+    "loadingStudyPlanSubjects": "Chargement des matières du plan d'études...",
+    "noStudentContextForPlan": "Contexte étudiant manquant (ID de spécialisation) pour charger les matières.",
+    "noSubjectsFoundForField": "Aucune matière trouvée pour la spécialisation et version du plan spécifiées.",
+    "noSubjectsMatchCriteria": "Aucune matière trouvée correspondant aux critères spécifiés d'année, semestre et statut.",
+    "fetchingSubjectDetailsCount": "Chargement des détails et cours d'emploi du temps pour {{count}} matières...",
+    "studyPlanLoadSummary_one": "{{added}} matière ajoutée, {{overwritten}} matière remplacée. {{failed}} n'a pas pu être traité.",
+    "studyPlanLoadSummary_few": "{{added}} matières ajoutées, {{overwritten}} matières remplacées. {{failed}} n'ont pas pu être traitées.",
+    "studyPlanLoadSummary_many": "{{added}} matières ajoutées, {{overwritten}} matières remplacées. {{failed}} n'ont pas pu être traitées.",
+    "studyPlanLoadSummary_other": "{{added}} matières ajoutées, {{overwritten}} matières remplacées. {{failed}} n'ont pas pu être traitées.",
+    "studyPlanLoadError": "Erreur lors du chargement des matières du plan d'études.",
+    "identitySelectionCancelledAndTicketCleared": "Sélection d'identité annulée. Session STAG terminée.",
+    "studyParamsSelectionCancelled": "Sélection des paramètres d'études annulée. Session STAG terminée.",
+    "confirmRemoveCourse": "Voulez-vous vraiment supprimer la matière {{courseName}} ({{courseStagId}}) et désinscrire tous ses cours inscrits de l'emploi du temps actuel ?",
+    "workspaceCleared": "Espace de travail effacé.",
+    "workspaceExported": "Espace de travail exporté avec succès.",
+    "workspaceExportFailed": "L'export de l'espace de travail a échoué.",
+    "workspaceImported": "Espace de travail importé avec succès.",
+    "workspaceImportFailed": "L'import de l'espace de travail a échoué. Le fichier peut être corrompu ou avoir un format invalide.",
+    "fileReadError": "Erreur de lecture du fichier.",
+    "imageSaveError": "Erreur de sauvegarde de l'image de l'emploi du temps.",
+    "allPreferencesRemoved": "Toutes les préférences ont été supprimées.",
+    "confirmRemoveAllPreferences": "Voulez-vous vraiment supprimer toutes les préférences configurées ? Cette action est irréversible.",
+    "workspaceNotInitializedYet": "L'espace de travail n'a pas encore été chargé."
+  },
+  "courseEvent": {
+    "monday": "Lundi",
+    "tuesday": "Mardi",
+    "wednesday": "Mercredi",
+    "thursday": "Jeudi",
+    "friday": "Vendredi",
+    "saturday": "Samedi",
+    "sunday": "Dimanche",
+    "lecture": "Cours magistral",
+    "practical": "Travaux pratiques",
+    "seminar": "Séminaire",
+    "přednáška": "Cours magistral",
+    "cvičení ": "Travaux pratiques",
+    "seminář": "Séminaire",
+    "credit": "Crédit",
+    "block": "Enseignement en bloc",
+    "unknown": "Type inconnu",
+    "recurrence": "Récurrence",
+    "recurrenceShort": {
+      "každýtýden": "",
+      "sudýtýden": "Pair",
+      "lichýtýden": "Impair",
+      "jednorázově": "Une fois",
+      "jiný": "Autre"
+    },
+    "každýtýden": "Chaque semaine",
+    "sudýtýden": "Semaine paire",
+    "lichýtýden": "Semaine impaire",
+    "jednorázově": "Une fois",
+    "jiný": "Autre"
+  },
+  "enrollmentShort": {
+    "lecture": "CM",
+    "practical": "TP",
+    "seminar": "S"
+  },
+  "labels": {
+    "credits": "{{count}} crédit",
+    "credits_plural": "{{count}} crédits",
+    "requirementsMet": "Exigences remplies ({{count}})",
+    "requirementsMetSimple": "Exigences remplies",
+    "remaining": "Restant : {{needed}} (Inscr : {{enrolledCount}})",
+    "remainingSimple": "Restant",
+    "eventType": "Type de cours",
+    "enrolled": "Inscrit",
+    "enroll": "S'inscrire",
+    "room": "Salle",
+    "virtualEvent": "Cours virtuel",
+    "capacity": "Capacité",
+    "maxCapacityPrefix": "Max :",
+    "full": "Complet",
+    "instructor": "Enseignant",
+    "notes": "Notes",
+    "recurrence": "Récurrence",
+    "loadingCourses": "Chargement des matières...",
+    "unknownDepartment": "Département inconnu",
+    "noCoursesToDisplay": "Aucune matière à afficher. Ajoutez une matière ou chargez un état sauvegardé.",
+    "noEventsForCourse": "Cette matière n'a aucun cours d'emploi du temps.",
+    "time": "Heure",
+    "enrolledStatus": "Inscrit",
+    "notEnrolledStatus": "Non inscrit"
+  },
+  "tooltips": {
+    "removeCourse": "Supprimer la matière {{courseName}} de l'espace de travail",
+    "requiredEnrollments": "Inscriptions requises : {{enrolledReqStr}}",
+    "enrollAction": "Inscrire le cours dans votre emploi du temps",
+    "unenrollAction": "Désinscrire le cours de votre emploi du temps",
+    "enrollDisabledCapacityFull": "La capacité de ce cours est pleine.",
+    "enrollDisabledTypeMet": "Le nombre requis de cours de type \"{{eventType}}\" pour cette matière est déjà atteint."
+  },
+  "propertiesBar": {
+    "title": "Configuration de Génération",
+    "addPreferenceButton": "Ajouter une préférence",
+    "generateButton": "Générer l'Emploi du Temps",
+    "generateScheduleLog": "Génération de l'emploi du temps avec les préférences...",
+    "generateScheduleAlert": "La génération de l'emploi du temps a commencé avec {{count}} préférences actives.",
+    "generateScheduleSuccess": "Les emplois du temps ont été générés avec succès.",
+    "generateScheduleFailure": "Impossible de générer un emploi du temps respectant les critères spécifiés.",
+    "addDialog": {
+      "title": "Ajouter une nouvelle préférence",
+      "preferenceType": "Type de préférence"
+    },
+    "preferenceList": {
+      "noPreferences": "Aucune préférence n'a encore été ajoutée."
+    },
+    "preferenceItem": {
+      "increasePriority": "Augmenter la priorité",
+      "decreasePriority": "Diminuer la priorité",
+      "toggleActive": "Activer/désactiver la préférence",
+      "deactivatePreference": "Désactiver la préférence",
+      "activatePreference": "Activer la préférence",
+      "deletePreference": "Supprimer la préférence"
+    },
+    "removeAllPreferences": "Supprimer toutes les préférences",
+    "removeAllPreferencesTooltip": "Supprimer toutes les préférences configurées."
+  },
+  "preferences": {
+    "types": {
+      "FREE_DAY": {
+        "label": "Journée libre de la semaine",
+        "shortLabel": "Journée libre"
+      },
+      "AVOID_TIMES": {
+        "label": "Éviter un créneau horaire",
+        "shortLabel": "Éviter horaire"
+      },
+      "PREFER_INSTRUCTOR": {
+        "label": "Préférer un enseignant",
+        "shortLabel": "Préf. enseignant"
+      }
+    },
+    "params": {
+      "day": "Jour",
+      "startTime": "Heure de début",
+      "endTime": "Heure de fin",
+      "courseCode": "Code de matière",
+      "instructorName": "Nom de l'enseignant",
+      "eventType": "Type de cours d'emploi du temps"
+    },
+    "displayLabels": {
+      "freeDay": "Journée libre : {{day}}",
+      "avoidTimes": "Éviter {{day}} : {{startTime}} - {{endTime}}",
+      "preferInstructor": "Préférer {{instructorName}} pour {{courseCode}} ({{eventType}})"
+    },
+    "dayOptions": {
+      "PO": "Lundi",
+      "UT": "Mardi",
+      "ST": "Mercredi",
+      "CT": "Jeudi",
+      "PA": "Vendredi",
+      "SO": "Samedi",
+      "NE": "Dimanche",
+      "pondělí": "Lundi",
+      "úterý": "Mardi",
+      "středa": "Mercredi",
+      "čtvrtek": "Jeudi",
+      "pátek": "Vendredi",
+      "sobota": "Samedi",
+      "neděle": "Dimanche",
+      "monday": "Lundi",
+      "tuesday": "Mardi",
+      "wednesday": "Mercredi",
+      "thursday": "Jeudi",
+      "friday": "Vendredi",
+      "saturday": "Samedi",
+      "sunday": "Dimanche"
+    },
+    "alerts": {
+      "added": "Préférence ajoutée avec succès.",
+      "deleted": "La préférence a été supprimée.",
+      "allDeleted": "Toutes les préférences ont été supprimées.",
+      "updated": "La préférence a été mise à jour.",
+      "priorityChanged": "La priorité de la préférence a été modifiée.",
+      "activityChanged": "L'activité de la préférence a été changée."
+    }
+  },
+  "Dialogs": {
+    "deletePreference": {
+      "title": "Supprimer la préférence",
+      "message": "Voulez-vous vraiment supprimer la préférence {{preferenceLabel}} ?"
+    },
+    "selectStudyParams": {
+      "title": "Paramètres pour charger les matières de la spécialisation",
+      "studentInfo": "Chargement pour :",
+      "studyProgram": "Programme/Spécialisation :",
+      "studyYearNumLabel": "Année",
+      "scheduleAcademicYearLabel": "Version",
+      "semesterLabel": "Semestre des matières",
+      "semesterZS": "Hiver (ZS)",
+      "semesterLS": "Été (LS)",
+      "semesterBoth": "Les deux (ZS et LS)",
+      "subjectStatusesTitle": "Statuts des matières à charger :",
+      "statusAll": "Tous",
+      "statusA": "A (Obligatoire)",
+      "statusB": "B (Optionnel obligatoire)",
+      "statusC": "C (Optionnel)",
+      "submitButton": "Charger les matières",
+      "errorNoStatusSelected": "Vous devez sélectionner au moins un statut de matière.",
+      "errorStudyYearInvalid": "L'année d'études doit être un nombre (ex. 1-9).",
+      "errorScheduleYearInvalid": "L'année académique pour les cours d'emploi du temps est invalide (format AAAA/AA).",
+      "errorSemesterRequired": "Le semestre est obligatoire."
+    },
+    "selectIdentity": {
+      "title": "Sélection d'Identité/Rôle STAG",
+      "loadingRoles": "Chargement des rôles...",
+      "errorNoTicket": "Ticket STAG valide manquant pour charger les rôles. Essayez de vous connecter à nouveau.",
+      "noValidRolesFound": "Aucun rôle/identité STAG valide trouvé.",
+      "noRolesFound": "Aucun rôle/identité STAG trouvé pour votre compte.",
+      "errorFetchingRoles": "Impossible de charger les rôles STAG.",
+      "pleaseSelectRole": "Veuillez sélectionner un rôle.",
+      "noRolesAvailable": "Aucun rôle STAG n'est actuellement disponible pour votre compte ou n'a pu être chargé."
+    },
+    "loadFromStudentRedirect": {
+      "title": "Charger les matières selon le plan d'études",
+      "p1": "Pour charger les matières selon votre plan d'études, il est nécessaire de se connecter au système d'information STAG.",
+      "p2": "Après avoir cliqué sur \"Continuer\", vous serez redirigé vers la page de connexion d'UBO (Orion login). Après une connexion réussie, vous serez automatiquement ramené à l'application Planificateur d'Emploi du Temps.",
+      "p3": "Cette application ne sauvegarde pas vos identifiants de connexion. La clé d'accès temporaire obtenue (ticket) n'est utilisée que pour la communication avec l'API STAG pendant cette session.",
+      "faqLink": "Plus d'informations sur la sécurité et le fonctionnement de la connexion",
+      "continueButton": "Continuer vers la connexion"
+    },
+    "loadCourseFromSTAG": {
+      "title": "Charger une matière depuis STAG",
+      "courseCodeLabel": "Code de matière (ex. KIV/PPA)",
+      "academicYearLabel": "Version",
+      "semesterLabel": "Semestre",
+      "semesterZS": "Hiver (ZS)",
+      "semesterLS": "Été (LS)",
+      "submitButton": "Charger",
+      "errorCourseCodeRequired": "Le code de matière est obligatoire.",
+      "errorCourseCodeFormat": "Format de code invalide (ex. KIV/PPA ou KIV/ZEP-E)",
+      "errorYearRequired": "L'année académique est obligatoire.",
+      "errorYearFormat": "Format d'année invalide (ex. 2024/24).",
+      "errorSemesterRequired": "Le semestre est obligatoire."
+    },
+    "existingCourseWarning": {
+      "title": "La matière existe déjà",
+      "message": "La matière \"{{courseIdentifier}}\" est déjà chargée. Voulez-vous remplacer ses données existantes (année, semestre, cours) par de nouvelles données de STAG ?",
+      "confirmButton": "Remplacer"
+    },
+    "loadingProcess": {
+      "defaultMessage": "Traitement de la demande..."
+    },
+    "confirmation": {
+      "overwriteListTitle": "Les éléments suivants seront remplacés :",
+      "addListTitle": "Les éléments suivants seront ajoutés :",
+      "courseDetails": "Année : {{year}}, Semestre : {{semester}}"
+    },
+    "studentPlanOverwrite": {
+      "title": "Confirmer le chargement des matières du plan",
+      "message": "L'action suivante peut ajouter de nouvelles matières et remplacer les existantes dans votre espace de travail (si elles ont le même département/code de matière) avec les données de STAG pour l'année et le semestre spécifiés. Voulez-vous continuer ?"
+    },
+    "summary": {
+      "title": "Résultat du chargement des matières",
+      "overallResult": "Le processus de chargement des matières du plan d'études est terminé.",
+      "addedCourses": "Matières ajoutées avec succès",
+      "overwrittenCourses": "Matières remplacées",
+      "failedCourses": "Matières qui n'ont pas pu être traitées",
+      "noItems": "Aucun élément dans cette catégorie."
+    }
+  },
+  "courseBar": {
+    "loadSingleFromSTAG": "Charger une matière depuis STAG",
+    "loadFromStudentPlan": "Charger les matières selon le plan d'études",
+    "removeAllCourses": "Supprimer toutes les matières",
+    "removeAllCoursesTooltip": "Supprime toutes les matières chargées et leurs cours inscrits.",
+    "title": "Matières",
+    "fromDemoStagTooltip": "Chargé depuis STAG DEMO"
+  },
+  "editorPage": {
+    "mobileDrawer": {
+      "coursesTitle": "Matières",
+      "propertiesTitle": "Préférences",
+      "coursesTab": "Matières",
+      "propertiesTab": "Préférences"
+    }
+  },
+  "schedule": {
+    "dayTime": "Jour/Heure",
+    "switcherTitle": "Variantes d'emploi du temps",
+    "primarySchedule": "Emploi du temps principal",
+    "generatedSchedule": "Emploi du temps généré n°{{number}}"
+  },
+  "landingPage": {
+    "hero": {
+      "title": "Planificateur d'Emploi du Temps pour UBO",
+      "description": "Planifiez facilement votre emploi du temps semestriel, optimisez votre temps et préparez-vous aux inscriptions. Outil intuitif pour les étudiants de l'Université de Bohême Occidentale.",
+      "editorButton": "Lancer le Planificateur",
+      "universityButton": "Site Web UBO"
+    },
+    "functions": {
+      "sectionTitle": "Fonctions Clés",
+      "intro": "Découvrez les outils qui simplifieront la planification de votre semestre et maximiseront votre efficacité.",
+      "func1": {
+        "title": "Chargement depuis STAG",
+        "desc": "Importez les matières et leurs cours d'emploi du temps directement depuis le système universitaire IS/STAG selon le code de matière ou votre plan d'études."
+      },
+      "func2": {
+        "title": "Éditeur Visuel d'Emploi du Temps",
+        "desc": "Construisez et éditez clairement votre emploi du temps dans un affichage tabulaire intuitif au format tchèque."
+      },
+      "func3": {
+        "title": "Gestion des Préférences",
+        "desc": "Définissez vos priorités - journées libres, heures à éviter, ou enseignants préférés."
+      },
+      "func4": {
+        "title": "Génération Automatique",
+        "desc": "Obtenez des propositions de variantes optimales d'emploi du temps basées sur vos matières et préférences configurées."
+      },
+      "func5": {
+        "title": "Sauvegarde et Export",
+        "desc": "Sauvegardez votre travail dans le navigateur, exportez l'espace de travail vers un fichier, ou téléchargez l'emploi du temps fini comme image."
+      },
+      "func6": {
+        "title": "Design Responsive",
+        "desc": "Planifiez votre emploi du temps confortablement sur ordinateur, tablette et téléphone mobile."
+      }
+    },
+    "tech": {
+      "sectionTitle": "Technologies Utilisées",
+      "versionLabel": "Version",
+      "reactDesc": "Bibliothèque JavaScript moderne pour créer des interfaces utilisateur.",
+      "muiDesc": "Ensemble complet de composants React implémentant Material Design.",
+      "viteDesc": "Outil de nouvelle génération pour la construction rapide de projets web frontend.",
+      "i18nextDesc": "Framework d'internationalisation puissant pour les applications JavaScript."
+    },
+    "author": {
+      "sectionTitle": "À Propos du Projet",
+      "namePlaceholder": "Štěpán Bříza",
+      "summary": "Ce Planificateur d'emploi du temps a été créé dans le cadre d'un travail semestriel pour la matière KIV/UUR à la Faculté des Sciences Appliquées de l'Université de Bohême Occidentale à Pilsen. KIV/UUR se concentre sur les principes de base de la conception d'interfaces utilisateur. L'objectif du travail était de créer un outil moderne et convivial pour que les étudiants composent leur emploi du temps avant la période officielle de pré-inscription. Bien que le projet ait commencé comme un travail semestriel, son développement continue, de nouvelles fonctions sont ajoutées et les erreurs sont corrigées. Je tiens à remercier M. Ing. Richard Lipka, Ph.D., et M. Ing. Michal Nykl, Ph.D., pour la matière bien dirigée.",
+      "githubButton": "Code Source sur GitHub"
+    }
+  },
+  "faqPage": {
+    "title": "Questions Fréquemment Posées (FAQ)",
+    "q1": "Qu'est-ce que le Planificateur d'Emploi du Temps UBO ?",
+    "a1": "Le Planificateur d'Emploi du Temps UBO est un outil non officiel conçu par des étudiants pour les étudiants et employés de l'Université de Bohême Occidentale à Pilsen. Son objectif principal est de simplifier et rendre plus efficace le processus de création d'un emploi du temps optimal. Il permet de charger facilement les matières et leurs cours d'emploi du temps depuis le système STAG, la visualisation dans un tableau clair et la génération automatique de variantes d'emploi du temps sans conflits basées sur des préférences définies par l'utilisateur (ex. 'je veux avoir mercredi libre').",
+    "q2": "Quelles sont les principales fonctions de l'application ?",
+    "a2": "- Chargement de matières individuelles depuis STAG pour une année académique et un semestre spécifiques.\n- Chargement de toutes les matières du plan d'études de l'étudiant après connexion.\n- Éditeur visuel d'emploi du temps avec possibilité d'inscription et désinscription manuelle de cours d'emploi du temps.\n- Générateur automatique d'emplois du temps qui cherche des combinaisons sans conflits basées sur les préférences.\n- Support de préférences comme 'journée libre', 'éviter les heures' ou 'préférer un enseignant'.\n- Sauvegarde et chargement de l'espace de travail (matières, préférences, emploi du temps actuel) vers un fichier pour un partage ou une sauvegarde facile.\n- Export de l'emploi du temps final comme image.\n- Basculement entre mode clair et sombre.",
+    "q3": "Dois-je me connecter ? Est-ce sécurisé ?",
+    "a3": "La connexion n'est pas nécessaire pour les fonctions de base comme composer manuellement l'emploi du temps à partir de matières chargées individuellement. La connexion n'est requise que pour la fonction 'Charger les matières du plan de l'étudiant'.\n\nConcernant la sécurité :\n- L'application ne sauvegarde JAMAIS votre nom d'utilisateur ni mot de passe.\n- Tout le processus de connexion se déroule exclusivement sur les pages sécurisées d'UBO (Orion login).\n- Après une connexion réussie, l'application n'obtient qu'un 'ticket' temporaire et à validité limitée, qui sert à la communication autorisée avec l'API STAG. Ce ticket n'est sauvegardé que pendant votre session et est supprimé après fermeture de la fenêtre du navigateur ou déconnexion de STAG.",
+    "q4": "Que signifie le mode 'DEMO' ?",
+    "a4": "Le mode DEMO sert à des fins de test et de démonstration. Quand il est actif, toute la communication ne se fait pas avec le système STAG de production (en direct), mais avec sa version 'demo' publiquement disponible. Les données dans le STAG demo peuvent ne pas être à jour et servent uniquement à des fins de développement et de test. Ce mode est utile si vous voulez juste essayer l'application sans avoir besoin de travailler avec des données réelles, ou si le STAG de production est temporairement indisponible.\n\nVous pouvez activer/désactiver le mode DEMO en utilisant le bouton dans la barre d'outils au-dessus de l'emploi du temps (icône de commutateur avec le texte 'DEMO'). Quand le mode DEMO est actif, une désignation 'DEMO' s'affiche dans le coin supérieur droit de l'application. Dans ce mode, toutes les opérations sont effectuées contre la version demo de STAG, ce qui signifie que les données chargées peuvent être obsolètes ou incomplètes.",
+    "q5": "Comment fonctionnent le générateur d'emplois du temps et les préférences ?",
+    "a5": "Le générateur essaie de trouver toutes les combinaisons possibles de cours d'emploi du temps inscrits qui sont mutuellement sans conflits. Vous pouvez préciser son travail en utilisant les préférences dans le panneau de droite.\n\nChaque préférence a sa priorité (plus le nombre est bas, plus la priorité est haute). Le générateur essaie d'abord de satisfaire les préférences avec la plus haute priorité. S'il ne trouve aucun emploi du temps qui satisferait toutes les préférences, il peut graduellement ignorer certaines préférences moins prioritaires pour trouver au moins quelques emplois du temps valides. Vous pouvez temporairement désactiver les préférences avec le commutateur sans avoir à les supprimer.",
+    "q6": "Puis-je sauvegarder mon emploi du temps ou le partager avec un ami ?",
+    "a6": "Oui. Dans la barre d'outils au-dessus de l'emploi du temps, vous trouverez des icônes pour l'export et l'import. Le bouton 'Exporter l'espace de travail' télécharge un fichier au format JSON qui contient toutes vos matières chargées, préférences configurées et emploi du temps actuellement affiché. Vous pouvez sauvegarder ce fichier ou l'envoyer à quelqu'un, qui peut le charger en utilisant le bouton 'Importer l'espace de travail' dans son application et voir exactement votre configuration.",
+    "q7": "J'ai trouvé une erreur ou j'ai une idée d'amélioration. Que faire ?",
+    "a7": "Super ! Comme c'est un projet étudiant, les retours sont très bienvenus. Pour signaler des erreurs ou suggérer de nouvelles fonctions, veuillez utiliser l'onglet 'Issues' sur GitHub du projet : https://github.com/stepanbri/uwb-schedule-editor/issues.",
+    "q8": "Pourquoi dois-je me connecter via une page externe d'UBO ?",
+    "a8": "Cette procédure s'appelle OAuth 2.0 et c'est une façon standard et sécurisée de donner à une application tierce (comme celle-ci) un accès limité à vos données sans avoir à lui fournir votre mot de passe. En saisissant le mot de passe sur les pages d'UBO, vous avez l'assurance que notre application ne le verra jamais. L'application ne reçoit qu'une clé temporaire (ticket) qui l'autorise à charger vos données d'études depuis STAG. C'est le même principe que quand vous vous connectez à d'autres services en utilisant votre compte Google ou Facebook.",
+    "q9": "Que signifient les couleurs dans l'emploi du temps ?",
+    "a9": "Les cours d'emploi du temps peuvent être distingués par couleurs de deux façons, entre lesquelles on peut basculer avec le bouton dans la barre d'outils :\n1. Couleurs par type de cours : C'est le mode par défaut. Chaque type de cours (cours magistral, travaux pratiques, séminaire) a sa couleur spécifique (ex. rouge pour les cours magistraux, vert pour les travaux pratiques). Cela aide à distinguer visuellement rapidement les types de cours d'emploi du temps dans l'emploi du temps.\n2. Couleurs par matière : Dans ce mode, chaque matière (ex. KIV/PPA) a sa couleur unique assignée. Tous les cours appartenant à cette matière auront alors cette couleur de fond. Pour distinguer le type de cours sert un petit 'pied' coloré sur le côté gauche de chaque cours d'emploi du temps, dont la couleur correspond à la couleur du type de cours donné (cours magistral, travaux pratiques...).",
+    "q10": "Que signifient les abréviations de récurrence des cours (KT, ST, LT) ?",
+    "a10": "Ces abréviations, reprises du système STAG, déterminent à quelle fréquence le cours d'emploi du temps donné a lieu :\n- KT (Chaque semaine) : Le cours a lieu chaque semaine dans le semestre.\n- ST (Semaine paire) : Le cours a lieu seulement les semaines paires du semestre.\n- LT (Semaine impaire) : Le cours a lieu seulement les semaines impaires du semestre.\n- Une fois (Une fois) : Le cours a lieu seulement à un terme spécifique.",
+    "q11": "Que signifient les abréviations de récurrence des cours (KT, ST, LT) ?",
+    "a11": "Ces abréviations, reprises du système STAG, déterminent à quelle fréquence le cours d'emploi du temps donné a lieu :\n- KT (Chaque semaine) : Le cours a lieu chaque semaine dans le semestre.\n- ST (Semaine paire) : Le cours a lieu seulement les semaines paires du semestre.\n- LT (Semaine impaire) : Le cours a lieu seulement les semaines impaires du semestre.\n- Une fois (Une fois) : Le cours a lieu seulement à un terme spécifique."
+  },
+  "scheduleToolbar": {
+    "downloadImageTooltip": "Télécharger l'emploi du temps actuel comme image (.png)",
+    "exportWorkspaceTooltip": "Exporter l'espace de travail actuel (matières, emploi du temps, préférences) vers un fichier (.json)",
+    "importWorkspaceTooltip": "Importer l'espace de travail depuis un fichier (.json)",
+    "resetWorkspaceCleanTooltip": "Réinitialiser l'espace de travail (effacer tout)",
+    "resetWorkspaceCleanTitle": "Effacer l'espace de travail ?",
+    "confirmResetWorkspaceClean": "Voulez-vous vraiment effacer tout l'espace de travail ? Cette action est irréversible.",
+    "switchToProdStagTooltip": "Basculer vers l'API STAG de production",
+    "switchToDemoStagTooltip": "Basculer vers l'API STAG demo",
+    "activateDemoStagTooltip": "Activer le mode DEMO de l'API STAG",
+    "deactivateDemoStagTooltip": "Désactiver le mode DEMO (utiliser l'API STAG de production)",
+    "faqButtonTooltip": "Aide et FAQ",
+    "colorModeTooltip": "Basculer les couleurs de l'emploi du temps (par matière / type de cours)"
+  }
+}

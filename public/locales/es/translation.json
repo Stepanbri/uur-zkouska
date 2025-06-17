@@ -1,0 +1,438 @@
+{
+  "appTitle": "Planificador de Horarios UBO",
+  "appTitleShort": "Planificador de Horarios",
+  "nav": {
+    "editor": "Editor de Horarios",
+    "faq": "FAQ",
+    "landing": "Inicio"
+  },
+  "languageToggle": "Idioma",
+  "themeToggle": {
+    "light": "Modo claro",
+    "dark": "Modo oscuro",
+    "lightTooltip": "Cambiar a modo claro",
+    "darkTooltip": "Cambiar a modo oscuro"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "saving": "Guardando...",
+    "processing": "Procesando...",
+    "processingStudentPlan": "Procesando datos del estudiante...",
+    "processingCourse": "Procesando asignatura...",
+    "loadingApp": "Cargando espacio de trabajo...",
+    "error": "Error",
+    "success": "Éxito",
+    "warning": "Advertencia",
+    "info": "Información",
+    "cancel": "Cancelar",
+    "add": "Añadir",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "confirm": "Confirmar",
+    "continue": "Continuar",
+    "close": "Cerrar",
+    "notSpecified": "-",
+    "unknownType": "Tipo desconocido",
+    "noAdditionalInfo": "Sin información adicional",
+    "scheduleNotAvailable": "El horario no está disponible o se está cargando.",
+    "workspaceNotInitializedYet": "El espacio de trabajo aún no se ha cargado."
+  },
+  "alerts": {
+    "workspaceSaved": "Espacio de trabajo guardado.",
+    "loadedDummyData": "Datos de ejemplo cargados.",
+    "workspaceLoadedFromLocalStorage": "Espacio de trabajo cargado desde Local Storage.",
+    "stagLoginSuccessful": "Inicio de sesión en STAG exitoso.",
+    "stagLoginNoRoles": "Inicio de sesión exitoso, pero no se encontraron roles o falta información del usuario.",
+    "courseRemoved": "La asignatura {{courseId}} ha sido eliminada.",
+    "allCoursesRemoved": "Todas las asignaturas han sido eliminadas.",
+    "confirmRemoveAllCourses": "¿Realmente desea eliminar todas las asignaturas cargadas y sus clases inscritas del horario? Esta acción es irreversible.",
+    "confirmRemoveCourseTitle": "¿Eliminar asignatura?",
+    "internalError": "Error interno de la aplicación.",
+    "eventFull": "La capacidad de la clase '{{eventType}}' de la asignatura {{courseCode}} está llena.",
+    "typeRequirementMet": "El número requerido de clases de tipo '{{eventType}}' para la asignatura {{courseCode}} ya está cumplido.",
+    "eventEnrolled": "La clase '{{eventType}}' de la asignatura {{courseCode}} ha sido inscrita.",
+    "eventUnenrolled": "La clase '{{eventType}}' de la asignatura {{courseCode}} ha sido desinscrita.",
+    "courseOverwritten": "La asignatura {{courseCode}} ha sido sobrescrita con nuevos datos.",
+    "courseAdded": "La asignatura {{courseCode}} ha sido añadida.",
+    "stagSubjectNotFound": "La asignatura {{subjectCode}} no fue encontrada en el sistema STAG.",
+    "stagLoadError": "Error al comunicarse con la API de STAG.",
+    "identitySelectedLog": "Rol/Identidad {{stagUser}} seleccionado.",
+    "fetchStudentInfoErrorNoStudyDetails": "No se pudo obtener el ID de especialización del estudiante desde STAG.",
+    "fetchStudentInfoErrorNoData": "No se pudo obtener información completa del estudiante desde STAG.",
+    "fetchStudentInfoError": "No se pudieron cargar los detalles del estudiante.",
+    "loadingStudyPlanSubjects": "Cargando asignaturas del plan de estudios...",
+    "noStudentContextForPlan": "Falta contexto del estudiante (ID de especialización) para cargar asignaturas.",
+    "noSubjectsFoundForField": "No se encontraron asignaturas para la especialización y versión del plan especificadas.",
+    "noSubjectsMatchCriteria": "No se encontraron asignaturas que coincidan con los criterios especificados de año, semestre y estado.",
+    "fetchingSubjectDetailsCount": "Cargando detalles y clases de horario para {{count}} asignaturas...",
+    "studyPlanLoadSummary_one": "Se añadió {{added}} asignatura, se sobrescribió {{overwritten}} asignatura. {{failed}} no se pudo procesar.",
+    "studyPlanLoadSummary_few": "Se añadieron {{added}} asignaturas, se sobrescribieron {{overwritten}} asignaturas. {{failed}} no se pudieron procesar.",
+    "studyPlanLoadSummary_many": "Se añadieron {{added}} asignaturas, se sobrescribieron {{overwritten}} asignaturas. {{failed}} no se pudieron procesar.",
+    "studyPlanLoadSummary_other": "Se añadieron {{added}} asignaturas, se sobrescribieron {{overwritten}} asignaturas. {{failed}} no se pudieron procesar.",
+    "studyPlanLoadError": "Error al cargar asignaturas del plan de estudios.",
+    "identitySelectionCancelledAndTicketCleared": "Selección de identidad cancelada. Sesión STAG terminada.",
+    "studyParamsSelectionCancelled": "Selección de parámetros de estudio cancelada. Sesión STAG terminada.",
+    "confirmRemoveCourse": "¿Realmente desea eliminar la asignatura {{courseName}} ({{courseStagId}}) y desinscribir todas sus clases inscritas del horario actual?",
+    "workspaceCleared": "Espacio de trabajo limpiado.",
+    "workspaceExported": "Espacio de trabajo exportado exitosamente.",
+    "workspaceExportFailed": "Falló la exportación del espacio de trabajo.",
+    "workspaceImported": "Espacio de trabajo importado exitosamente.",
+    "workspaceImportFailed": "Falló la importación del espacio de trabajo. El archivo puede estar dañado o tener un formato inválido.",
+    "fileReadError": "Error al leer el archivo.",
+    "imageSaveError": "Error al guardar la imagen del horario.",
+    "allPreferencesRemoved": "Todas las preferencias han sido eliminadas.",
+    "confirmRemoveAllPreferences": "¿Realmente desea eliminar todas las preferencias configuradas? Esta acción es irreversible.",
+    "workspaceNotInitializedYet": "El espacio de trabajo aún no se ha cargado."
+  },
+  "courseEvent": {
+    "monday": "Lunes",
+    "tuesday": "Martes",
+    "wednesday": "Miércoles",
+    "thursday": "Jueves",
+    "friday": "Viernes",
+    "saturday": "Sábado",
+    "sunday": "Domingo",
+    "lecture": "Conferencia",
+    "practical": "Práctica",
+    "seminar": "Seminario",
+    "přednáška": "Conferencia",
+    "cvičení ": "Práctica",
+    "seminář": "Seminario",
+    "credit": "Crédito",
+    "block": "Enseñanza en bloque",
+    "unknown": "Tipo desconocido",
+    "recurrence": "Repetición",
+    "recurrenceShort": {
+      "každýtýden": "",
+      "sudýtýden": "Par",
+      "lichýtýden": "Impar",
+      "jednorázově": "Una vez",
+      "jiný": "Otro"
+    },
+    "každýtýden": "Cada semana",
+    "sudýtýden": "Semana par",
+    "lichýtýden": "Semana impar",
+    "jednorázově": "Una vez",
+    "jiný": "Otro"
+  },
+  "enrollmentShort": {
+    "lecture": "C",
+    "practical": "P",
+    "seminar": "S"
+  },
+  "labels": {
+    "credits": "{{count}} crédito",
+    "credits_plural": "{{count}} créditos",
+    "requirementsMet": "Requisitos cumplidos ({{count}})",
+    "requirementsMetSimple": "Requisitos cumplidos",
+    "remaining": "Quedan: {{needed}} (Inscr: {{enrolledCount}})",
+    "remainingSimple": "Quedan",
+    "eventType": "Tipo de clase",
+    "enrolled": "Inscrito",
+    "enroll": "Inscribir",
+    "room": "Aula",
+    "virtualEvent": "Clase virtual",
+    "capacity": "Capacidad",
+    "maxCapacityPrefix": "Máx:",
+    "full": "Lleno",
+    "instructor": "Instructor",
+    "notes": "Notas",
+    "recurrence": "Repetición",
+    "loadingCourses": "Cargando asignaturas...",
+    "unknownDepartment": "Departamento desconocido",
+    "noCoursesToDisplay": "No hay asignaturas para mostrar. Añada una asignatura o cargue un estado guardado.",
+    "noEventsForCourse": "Esta asignatura no tiene clases de horario.",
+    "time": "Hora",
+    "enrolledStatus": "Inscrito",
+    "notEnrolledStatus": "No inscrito"
+  },
+  "tooltips": {
+    "removeCourse": "Eliminar asignatura {{courseName}} del espacio de trabajo",
+    "requiredEnrollments": "Inscripciones requeridas: {{enrolledReqStr}}",
+    "enrollAction": "Inscribir clase en su horario",
+    "unenrollAction": "Desinscribir clase de su horario",
+    "enrollDisabledCapacityFull": "La capacidad de esta clase está llena.",
+    "enrollDisabledTypeMet": "El número requerido de clases de tipo \"{{eventType}}\" para esta asignatura ya está cumplido."
+  },
+  "propertiesBar": {
+    "title": "Configuración de Generación",
+    "addPreferenceButton": "Añadir preferencia",
+    "generateButton": "Generar Horario",
+    "generateScheduleLog": "Generando horario con preferencias...",
+    "generateScheduleAlert": "La generación del horario se ha iniciado con {{count}} preferencias activas.",
+    "generateScheduleSuccess": "Los horarios se han generado exitosamente.",
+    "generateScheduleFailure": "No se pudo generar ningún horario que cumpla los criterios especificados.",
+    "addDialog": {
+      "title": "Añadir nueva preferencia",
+      "preferenceType": "Tipo de preferencia"
+    },
+    "preferenceList": {
+      "noPreferences": "Aún no se han añadido preferencias."
+    },
+    "preferenceItem": {
+      "increasePriority": "Aumentar prioridad",
+      "decreasePriority": "Disminuir prioridad",
+      "toggleActive": "Activar/desactivar preferencia",
+      "deactivatePreference": "Desactivar preferencia",
+      "activatePreference": "Activar preferencia",
+      "deletePreference": "Eliminar preferencia"
+    },
+    "removeAllPreferences": "Eliminar todas las preferencias",
+    "removeAllPreferencesTooltip": "Eliminar todas las preferencias configuradas."
+  },
+  "preferences": {
+    "types": {
+      "FREE_DAY": {
+        "label": "Día libre de la semana",
+        "shortLabel": "Día libre"
+      },
+      "AVOID_TIMES": {
+        "label": "Evitar bloque de tiempo",
+        "shortLabel": "Evitar horario"
+      },
+      "PREFER_INSTRUCTOR": {
+        "label": "Preferir instructor",
+        "shortLabel": "Pref. instructor"
+      }
+    },
+    "params": {
+      "day": "Día",
+      "startTime": "Hora de inicio",
+      "endTime": "Hora de fin",
+      "courseCode": "Código de asignatura",
+      "instructorName": "Nombre del instructor",
+      "eventType": "Tipo de clase de horario"
+    },
+    "displayLabels": {
+      "freeDay": "Día libre: {{day}}",
+      "avoidTimes": "Evitar {{day}}: {{startTime}} - {{endTime}}",
+      "preferInstructor": "Preferir {{instructorName}} para {{courseCode}} ({{eventType}})"
+    },
+    "dayOptions": {
+      "PO": "Lunes",
+      "UT": "Martes",
+      "ST": "Miércoles",
+      "CT": "Jueves",
+      "PA": "Viernes",
+      "SO": "Sábado",
+      "NE": "Domingo",
+      "pondělí": "Lunes",
+      "úterý": "Martes",
+      "středa": "Miércoles",
+      "čtvrtek": "Jueves",
+      "pátek": "Viernes",
+      "sobota": "Sábado",
+      "neděle": "Domingo",
+      "monday": "Lunes",
+      "tuesday": "Martes",
+      "wednesday": "Miércoles",
+      "thursday": "Jueves",
+      "friday": "Viernes",
+      "saturday": "Sábado",
+      "sunday": "Domingo"
+    },
+    "alerts": {
+      "added": "Preferencia añadida exitosamente.",
+      "deleted": "La preferencia ha sido eliminada.",
+      "allDeleted": "Todas las preferencias han sido eliminadas.",
+      "updated": "La preferencia ha sido actualizada.",
+      "priorityChanged": "La prioridad de la preferencia ha sido modificada.",
+      "activityChanged": "La actividad de la preferencia ha sido cambiada."
+    }
+  },
+  "Dialogs": {
+    "deletePreference": {
+      "title": "Eliminar preferencia",
+      "message": "¿Realmente desea eliminar la preferencia {{preferenceLabel}}?"
+    },
+    "selectStudyParams": {
+      "title": "Parámetros para cargar asignaturas de la especialización",
+      "studentInfo": "Cargando para:",
+      "studyProgram": "Programa/Especialización:",
+      "studyYearNumLabel": "Año",
+      "scheduleAcademicYearLabel": "Versión",
+      "semesterLabel": "Semestre de asignaturas",
+      "semesterZS": "Invierno (ZS)",
+      "semesterLS": "Verano (LS)",
+      "semesterBoth": "Ambos (ZS y LS)",
+      "subjectStatusesTitle": "Estados de asignaturas a cargar:",
+      "statusAll": "Todos",
+      "statusA": "A (Obligatorio)",
+      "statusB": "B (Optativo obligatorio)",
+      "statusC": "C (Optativo)",
+      "submitButton": "Cargar asignaturas",
+      "errorNoStatusSelected": "Debe seleccionar al menos un estado de asignatura.",
+      "errorStudyYearInvalid": "El año de estudio debe ser un número (ej. 1-9).",
+      "errorScheduleYearInvalid": "El año académico para clases de horario es inválido (formato AAAA/AA).",
+      "errorSemesterRequired": "El semestre es obligatorio."
+    },
+    "selectIdentity": {
+      "title": "Selección de Identidad/Rol STAG",
+      "loadingRoles": "Cargando roles...",
+      "errorNoTicket": "Falta ticket STAG válido para cargar roles. Intente iniciar sesión nuevamente.",
+      "noValidRolesFound": "No se encontraron roles/identidades STAG válidos.",
+      "noRolesFound": "No se encontraron roles/identidades STAG para su cuenta.",
+      "errorFetchingRoles": "No se pudieron cargar los roles STAG.",
+      "pleaseSelectRole": "Por favor, seleccione un rol.",
+      "noRolesAvailable": "No hay roles STAG disponibles actualmente para su cuenta o no se pudieron cargar."
+    },
+    "loadFromStudentRedirect": {
+      "title": "Cargar asignaturas según plan de estudios",
+      "p1": "Para cargar asignaturas según su plan de estudios es necesario iniciar sesión en el sistema de información STAG.",
+      "p2": "Después de hacer clic en \"Continuar\" será redirigido a la página de inicio de sesión de UBO (Orion login). Después del inicio de sesión exitoso será automáticamente devuelto a la aplicación Planificador de Horarios.",
+      "p3": "Esta aplicación no guarda sus credenciales de inicio de sesión. La clave de acceso temporal obtenida (ticket) se usa solo para comunicación con la API STAG durante esta sesión.",
+      "faqLink": "Más información sobre seguridad y funcionamiento del inicio de sesión",
+      "continueButton": "Continuar al inicio de sesión"
+    },
+    "loadCourseFromSTAG": {
+      "title": "Cargar asignatura desde STAG",
+      "courseCodeLabel": "Código de asignatura (ej. KIV/PPA)",
+      "academicYearLabel": "Versión",
+      "semesterLabel": "Semestre",
+      "semesterZS": "Invierno (ZS)",
+      "semesterLS": "Verano (LS)",
+      "submitButton": "Cargar",
+      "errorCourseCodeRequired": "El código de asignatura es obligatorio.",
+      "errorCourseCodeFormat": "Formato de código inválido (ej. KIV/PPA o KIV/ZEP-E)",
+      "errorYearRequired": "El año académico es obligatorio.",
+      "errorYearFormat": "Formato de año inválido (ej. 2024/24).",
+      "errorSemesterRequired": "El semestre es obligatorio."
+    },
+    "existingCourseWarning": {
+      "title": "La asignatura ya existe",
+      "message": "La asignatura \"{{courseIdentifier}}\" ya está cargada. ¿Desea sobrescribir sus datos existentes (año, semestre, clases) con nuevos datos de STAG?",
+      "confirmButton": "Sobrescribir"
+    },
+    "loadingProcess": {
+      "defaultMessage": "Procesando solicitud..."
+    },
+    "confirmation": {
+      "overwriteListTitle": "Los siguientes elementos serán sobrescritos:",
+      "addListTitle": "Los siguientes elementos serán añadidos:",
+      "courseDetails": "Año: {{year}}, Semestre: {{semester}}"
+    },
+    "studentPlanOverwrite": {
+      "title": "Confirmar carga de asignaturas desde plan",
+      "message": "La siguiente acción puede añadir nuevas asignaturas y sobrescribir las existentes en su espacio de trabajo (si tienen el mismo departamento/código de asignatura) con datos de STAG para el año y semestre especificados. ¿Desea continuar?"
+    },
+    "summary": {
+      "title": "Resultado de carga de asignaturas",
+      "overallResult": "El proceso de carga de asignaturas del plan de estudios se ha completado.",
+      "addedCourses": "Asignaturas añadidas exitosamente",
+      "overwrittenCourses": "Asignaturas sobrescritas",
+      "failedCourses": "Asignaturas que no se pudieron procesar",
+      "noItems": "No hay elementos en esta categoría."
+    }
+  },
+  "courseBar": {
+    "loadSingleFromSTAG": "Cargar asignatura desde STAG",
+    "loadFromStudentPlan": "Cargar asignaturas según plan de estudios",
+    "removeAllCourses": "Eliminar todas las asignaturas",
+    "removeAllCoursesTooltip": "Elimina todas las asignaturas cargadas y sus clases inscritas.",
+    "title": "Asignaturas",
+    "fromDemoStagTooltip": "Cargado desde STAG DEMO"
+  },
+  "editorPage": {
+    "mobileDrawer": {
+      "coursesTitle": "Asignaturas",
+      "propertiesTitle": "Preferencias",
+      "coursesTab": "Asignaturas",
+      "propertiesTab": "Preferencias"
+    }
+  },
+  "schedule": {
+    "dayTime": "Día/Hora",
+    "switcherTitle": "Variantes de horario",
+    "primarySchedule": "Horario principal",
+    "generatedSchedule": "Horario generado n.° {{number}}"
+  },
+  "landingPage": {
+    "hero": {
+      "title": "Planificador de Horarios para UBO",
+      "description": "Planifique fácilmente su horario semestral, optimice su tiempo y prepárese para las inscripciones. Herramienta intuitiva para estudiantes de la Universidad de Bohemia Occidental.",
+      "editorButton": "Iniciar Planificador",
+      "universityButton": "Web UBO"
+    },
+    "functions": {
+      "sectionTitle": "Funciones Clave",
+      "intro": "Descubra herramientas que simplificarán la planificación de su semestre y maximizarán su eficiencia.",
+      "func1": {
+        "title": "Carga desde STAG",
+        "desc": "Importe asignaturas y sus clases de horario directamente del sistema universitario IS/STAG según código de asignatura o su plan de estudios."
+      },
+      "func2": {
+        "title": "Editor Visual de Horarios",
+        "desc": "Construya y edite claramente su horario en una vista tabular intuitiva en formato checo."
+      },
+      "func3": {
+        "title": "Gestión de Preferencias",
+        "desc": "Defina sus prioridades - días libres, horarios que desea evitar, o instructores preferidos."
+      },
+      "func4": {
+        "title": "Generación Automática",
+        "desc": "Obtenga propuestas de variantes óptimas de horario basadas en sus asignaturas y preferencias configuradas."
+      },
+      "func5": {
+        "title": "Guardado y Exportación",
+        "desc": "Guarde su trabajo en el navegador, exporte el espacio de trabajo a un archivo, o descargue el horario terminado como imagen."
+      },
+      "func6": {
+        "title": "Diseño Responsivo",
+        "desc": "Planifique su horario cómodamente en computadora, tableta y teléfono móvil."
+      }
+    },
+    "tech": {
+      "sectionTitle": "Tecnologías Utilizadas",
+      "versionLabel": "Versión",
+      "reactDesc": "Biblioteca JavaScript moderna para crear interfaces de usuario.",
+      "muiDesc": "Conjunto completo de componentes React que implementan Material Design.",
+      "viteDesc": "Herramienta de nueva generación para construcción rápida de proyectos web frontend.",
+      "i18nextDesc": "Marco de internacionalización potente para aplicaciones JavaScript."
+    },
+    "author": {
+      "sectionTitle": "Sobre el Proyecto",
+      "namePlaceholder": "Štěpán Bříza",
+      "summary": "Este Planificador de horarios surgió como parte del trabajo semestral en el marco de la asignatura KIV/UUR en la Facultad de Ciencias Aplicadas de la Universidad de Bohemia Occidental en Pilsen. KIV/UUR se enfoca en los principios básicos del diseño de interfaces de usuario. El objetivo del trabajo fue crear una herramienta moderna y amigable para que los estudiantes armen su horario antes del término oficial de preinscripción. Aunque el proyecto surgió como trabajo semestral, continúa su desarrollo, se añaden nuevas funciones y se corrigen errores. Me gustaría agradecer al Ing. Richard Lipka, Ph.D., y al Ing. Michal Nykl, Ph.D., por la asignatura bien dirigida.",
+      "githubButton": "Código Fuente en GitHub"
+    }
+  },
+  "faqPage": {
+    "title": "Preguntas Frecuentes (FAQ)",
+    "q1": "¿Qué es el Planificador de Horarios UBO?",
+    "a1": "El Planificador de Horarios UBO es una herramienta no oficial diseñada por estudiantes para estudiantes y empleados de la Universidad de Bohemia Occidental en Pilsen. Su objetivo principal es simplificar y hacer más eficiente el proceso de crear un horario óptimo. Permite cargar fácilmente asignaturas y sus clases de horario del sistema STAG, visualización en tabla clara y generación automática de variantes de horario sin conflictos basadas en preferencias definidas por el usuario (ej. 'quiero tener libre el miércoles').",
+    "q2": "¿Cuáles son las funciones principales de la aplicación?",
+    "a2": "- Carga de asignaturas individuales desde STAG para año académico y semestre específicos.\n- Carga de todas las asignaturas del plan de estudios del estudiante después del inicio de sesión.\n- Editor visual de horarios con posibilidad de inscripción y desinscripción manual de clases de horario.\n- Generador automático de horarios que busca combinaciones sin conflictos basadas en preferencias.\n- Soporte de preferencias como 'día libre', 'evitar horarios' o 'preferir instructor'.\n- Guardado y carga del espacio de trabajo (asignaturas, preferencias, horario actual) en archivo para fácil compartición o respaldo.\n- Exportación del horario final como imagen.\n- Cambio entre modo claro y oscuro.",
+    "q3": "¿Debo iniciar sesión? ¿Es seguro?",
+    "a3": "El inicio de sesión no es necesario para funciones básicas como armar manualmente el horario a partir de asignaturas cargadas individualmente. El inicio de sesión solo se requiere para la función 'Cargar asignaturas del plan del estudiante'.\n\nRespecto a la seguridad:\n- La aplicación NUNCA guarda su nombre de usuario ni contraseña.\n- Todo el proceso de inicio de sesión ocurre exclusivamente en páginas seguras de UBO (Orion login).\n- Después del inicio de sesión exitoso, la aplicación obtiene solo un 'ticket' temporal y de validez limitada, que sirve para comunicación autorizada con la API STAG. Este ticket se guarda solo durante su sesión y se elimina al cerrar la ventana del navegador o al cerrar sesión en STAG.",
+    "q4": "¿Qué significa el modo 'DEMO'?",
+    "a4": "El modo DEMO sirve para propósitos de prueba y demostración. Cuando está activo, toda la comunicación no ocurre con el sistema STAG de producción (en vivo), sino con su versión 'demo' públicamente disponible. Los datos en el STAG demo pueden no estar actualizados y sirven solo para propósitos de desarrollo y prueba. Este modo es útil si solo desea probar la aplicación sin necesidad de trabajar con datos reales, o si el STAG de producción está temporalmente no disponible.\n\nPuede activar/desactivar el modo DEMO usando el botón en la barra de herramientas sobre el horario (ícono de interruptor con texto 'DEMO'). Cuando el modo DEMO está activo, se muestra una designación 'DEMO' en la esquina superior derecha de la aplicación. En este modo, todas las operaciones se realizan contra la versión demo de STAG, lo que significa que los datos cargados pueden estar desactualizados o incompletos.",
+    "q5": "¿Cómo funciona el generador de horarios y las preferencias?",
+    "a5": "El generador trata de encontrar todas las combinaciones posibles de clases de horario inscritas que sean mutuamente sin conflictos. Puede precisar su trabajo usando preferencias en el panel derecho.\n\nCada preferencia tiene su prioridad (cuanto menor el número, mayor la prioridad). El generador intenta primero cumplir las preferencias con mayor prioridad. Si no encuentra ningún horario que cumpla todas las preferencias, puede gradualmente ignorar algunas preferencias de menor prioridad para encontrar al menos algunos horarios válidos. Puede desactivar temporalmente las preferencias con el interruptor sin tener que eliminarlas.",
+    "q6": "¿Puedo guardar mi horario o compartirlo con un amigo?",
+    "a6": "Sí. En la barra de herramientas sobre el horario encontrará íconos para exportar e importar. El botón 'Exportar espacio de trabajo' descarga un archivo en formato JSON que contiene todas sus asignaturas cargadas, preferencias configuradas y horario actualmente mostrado. Puede respaldar este archivo o enviárselo a cualquiera, quien puede cargarlo usando el botón 'Importar espacio de trabajo' en su aplicación y ver exactamente su configuración.",
+    "q7": "Encontré un error o tengo una idea para mejora. ¿Qué hacer?",
+    "a7": "¡Excelente! Como se trata de un proyecto estudiantil, la retroalimentación es muy bienvenida. Para reportar errores o sugerencias de nuevas funciones por favor use la pestaña 'Issues' en GitHub del proyecto: https://github.com/stepanbri/uwb-schedule-editor/issues.",
+    "q8": "¿Por qué debo iniciar sesión a través de una página externa de UBO?",
+    "a8": "Este procedimiento se llama OAuth 2.0 y es una forma estándar y segura de otorgar a una aplicación de terceros (como esta) acceso limitado a sus datos sin tener que proporcionarle su contraseña. Al ingresar la contraseña en las páginas de UBO, tiene la certeza de que nuestra aplicación nunca la verá. La aplicación recibe solo una clave temporal (ticket) que la autoriza a cargar sus datos de estudio desde STAG. Es el mismo principio que cuando inicia sesión en otros servicios usando su cuenta de Google o Facebook.",
+    "q9": "¿Qué significan los colores en el horario?",
+    "a9": "Las clases de horario pueden distinguirse por colores de dos maneras, entre las cuales se puede cambiar con el botón en la barra de herramientas:\n1. Colores por tipo de clase: Este es el modo predeterminado. Cada tipo de clase (conferencia, práctica, seminario) tiene su color específico (ej. rojo para conferencias, verde para prácticas). Esto ayuda a distinguir visualmente rápidamente los tipos de clases de horario en el horario.\n2. Colores por asignatura: En este modo cada asignatura (ej. KIV/PPA) tiene asignado su color único. Todas las clases pertenecientes a esta asignatura tendrán entonces este color de fondo. Para distinguir el tipo de clase sirve un pequeño 'pie' de color en el lado izquierdo de cada clase de horario, cuyo color corresponde al color del tipo de clase dado (conferencia, práctica...).",
+    "q10": "¿Qué significan las abreviaciones de repetición de clases (KT, ST, LT)?",
+    "a10": "Estas abreviaciones, tomadas del sistema STAG, determinan con qué frecuencia ocurre la clase de horario dada:\n- KT (Cada semana): La clase ocurre cada semana en el semestre.\n- ST (Semana par): La clase ocurre solo en semanas pares del semestre.\n- LT (Semana impar): La clase ocurre solo en semanas impares del semestre.\n- Una vez (Una vez): La clase ocurre solo en un término específico.",
+    "q11": "¿Qué significan las abreviaciones de repetición de clases (KT, ST, LT)?",
+    "a11": "Estas abreviaciones, tomadas del sistema STAG, determinan con qué frecuencia ocurre la clase de horario dada:\n- KT (Cada semana): La clase ocurre cada semana en el semestre.\n- ST (Semana par): La clase ocurre solo en semanas pares del semestre.\n- LT (Semana impar): La clase ocurre solo en semanas impares del semestre.\n- Una vez (Una vez): La clase ocurre solo en un término específico."
+  },
+  "scheduleToolbar": {
+    "downloadImageTooltip": "Descargar horario actual como imagen (.png)",
+    "exportWorkspaceTooltip": "Exportar espacio de trabajo actual (asignaturas, horario, preferencias) a archivo (.json)",
+    "importWorkspaceTooltip": "Importar espacio de trabajo desde archivo (.json)",
+    "resetWorkspaceCleanTooltip": "Resetear espacio de trabajo (limpiar todo)",
+    "resetWorkspaceCleanTitle": "¿Limpiar espacio de trabajo?",
+    "confirmResetWorkspaceClean": "¿Realmente desea limpiar todo el espacio de trabajo? Esta acción es irreversible.",
+    "switchToProdStagTooltip": "Cambiar a API STAG de producción",
+    "switchToDemoStagTooltip": "Cambiar a API STAG demo",
+    "activateDemoStagTooltip": "Activar modo DEMO de API STAG",
+    "deactivateDemoStagTooltip": "Desactivar modo DEMO (usar API STAG de producción)",
+    "faqButtonTooltip": "Ayuda y FAQ",
+    "colorModeTooltip": "Cambiar colores del horario (por asignatura / tipo de clase)"
+  }
+}
