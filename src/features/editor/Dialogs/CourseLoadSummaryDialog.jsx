@@ -12,9 +12,11 @@ import {
     ListItemIcon,
     ListItemText,
     Typography,
+    Box,
 } from '@mui/material';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import ExternalLinksComponent from '../../../components/ExternalLinksComponent';
 
 const CourseLoadSummaryDialog = ({ open, onClose, summary }) => {
     const { t } = useTranslation();
@@ -65,16 +67,34 @@ const CourseLoadSummaryDialog = ({ open, onClose, summary }) => {
                             borderRadius: 1,
                             mt: 2,
                         }}
-                    >
-                        {allItems.map((item, index) => (
-                            <ListItem key={index} divider={index < allItems.length - 1}>
-                                <ListItemIcon sx={{ minWidth: 36 }}>
-                                    {getIconForStatus(item.status)}
-                                </ListItemIcon>
-                                <ListItemText
-                                    primary={item.name}
-                                    primaryTypographyProps={{ variant: 'body2' }}
-                                />
+                    >                        {allItems.map((item, index) => (
+                            <ListItem 
+                                key={index} 
+                                divider={index < allItems.length - 1}
+                                sx={{ display: 'block' }}
+                            >
+                                <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                                    <ListItemIcon sx={{ minWidth: 36 }}>
+                                        {getIconForStatus(item.status)}
+                                    </ListItemIcon>
+                                    <ListItemText
+                                        primary={item.name}
+                                        primaryTypographyProps={{ variant: 'body2' }}
+                                    />
+                                </Box>
+                                {item.departmentCode && item.courseCode && (
+                                    <Box sx={{ ml: 4.5 }}>
+                                        <ExternalLinksComponent 
+                                            course={{ 
+                                                departmentCode: item.departmentCode, 
+                                                courseCode: item.courseCode 
+                                            }} 
+                                            direction="row" 
+                                            size="small"
+                                            compact={true}
+                                        />
+                                    </Box>
+                                )}
                             </ListItem>
                         ))}
                     </List>

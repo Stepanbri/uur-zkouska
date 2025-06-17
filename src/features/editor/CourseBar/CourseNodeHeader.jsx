@@ -7,6 +7,7 @@ import { useState } from 'react'; // Přidán useState
 import { useTranslation } from 'react-i18next';
 import { ENROLLMENT_KEYS_ORDER } from '../../../services/CourseClass';
 import GenericConfirmationDialog from '../Dialogs/GenericConfirmationDialog'; // Import dialogu
+import ExternalLinksComponent from '../../../components/ExternalLinksComponent';
 
 const CourseNodeHeader = ({
     course,
@@ -113,26 +114,33 @@ const CourseNodeHeader = ({
                             >
                                 {course.courseCode} - {course.name}
                             </Box>
-                        </Typography>
-                        {isExpanded && (
-                            <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap">
-                                <Chip
-                                    icon={
-                                        areAllRequirementsMet ? (
-                                            <CheckCircleOutlineIcon fontSize="small" />
-                                        ) : (
-                                            <HourglassEmptyIcon fontSize="small" />
-                                        )
-                                    }
-                                    label={
-                                        areAllRequirementsMet
-                                            ? `${t('labels.requirementsMetSimple', 'Požadavky splněny')} (${enrolledHours.total}h)`
-                                            : `${t('labels.remainingSimple', 'Zbývá')}: ${neededStr || '0h'}`
-                                    }
+                        </Typography>                        {isExpanded && (
+                            <Stack direction="column" spacing={1}>
+                                <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap">
+                                    <Chip
+                                        icon={
+                                            areAllRequirementsMet ? (
+                                                <CheckCircleOutlineIcon fontSize="small" />
+                                            ) : (
+                                                <HourglassEmptyIcon fontSize="small" />
+                                            )
+                                        }
+                                        label={
+                                            areAllRequirementsMet
+                                                ? `${t('labels.requirementsMetSimple', 'Požadavky splněny')} (${enrolledHours.total}h)`
+                                                : `${t('labels.remainingSimple', 'Zbývá')}: ${neededStr || '0h'}`
+                                        }
+                                        size="small"
+                                        color={areAllRequirementsMet ? 'success' : 'warning'}
+                                        variant="outlined"
+                                        sx={{ fontSize: '0.7rem', cursor: 'default' }}
+                                    />
+                                </Stack>
+                                <ExternalLinksComponent 
+                                    course={course} 
+                                    direction="row" 
                                     size="small"
-                                    color={areAllRequirementsMet ? 'success' : 'warning'}
-                                    variant="outlined"
-                                    sx={{ fontSize: '0.7rem', cursor: 'default' }}
+                                    compact={true}
                                 />
                             </Stack>
                         )}

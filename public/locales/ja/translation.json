@@ -431,8 +431,11 @@
     "switchToProdStagTooltip": "本番STAG APIに切り替え",
     "switchToDemoStagTooltip": "デモSTAG APIに切り替え",
     "activateDemoStagTooltip": "DEMO STAG APIモードを有効化",
-    "deactivateDemoStagTooltip": "DEMOモードを無効化（本番STAG APIを使用）",
-    "faqButtonTooltip": "ヘルプとFAQ",
+    "deactivateDemoStagTooltip": "DEMOモードを無効化（本番STAG APIを使用）",    "faqButtonTooltip": "ヘルプとFAQ",
     "colorModeTooltip": "時間割の色を切り替え（科目別/授業タイプ別）"
+  },
+  "externalLinks": {
+    "stagSylabus": "IS/STAGでシラバスを表示",
+    "courseware": "ZCU Coursewareで開く"
   }
 }

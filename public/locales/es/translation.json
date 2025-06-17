@@ -431,8 +431,11 @@
     "switchToProdStagTooltip": "Cambiar a API STAG de producción",
     "switchToDemoStagTooltip": "Cambiar a API STAG demo",
     "activateDemoStagTooltip": "Activar modo DEMO de API STAG",
-    "deactivateDemoStagTooltip": "Desactivar modo DEMO (usar API STAG de producción)",
-    "faqButtonTooltip": "Ayuda y FAQ",
+    "deactivateDemoStagTooltip": "Desactivar modo DEMO (usar API STAG de producción)",    "faqButtonTooltip": "Ayuda y FAQ",
     "colorModeTooltip": "Cambiar colores del horario (por asignatura / tipo de clase)"
+  },
+  "externalLinks": {
+    "stagSylabus": "Ver programa en IS/STAG",
+    "courseware": "Abrir en ZCU Courseware"
   }
 }

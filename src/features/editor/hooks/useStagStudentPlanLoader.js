@@ -343,9 +343,10 @@ export const useStagStudentPlanLoader = () => {
                         useDemoApi
                     );
 
-                    addCourse(courseDataForWorkspace);
-                    const subjectIdentifier = {
+                    addCourse(courseDataForWorkspace);                    const subjectIdentifier = {
                         name: `${subjectData.rawSubject.katedra}/${subjectData.rawSubject.zkratka} - ${subjectData.rawSubject.nazev}`,
+                        departmentCode: subjectData.rawSubject.katedra,
+                        courseCode: subjectData.rawSubject.zkratka,
                     };
                     if (subjectData.operation === 'overwritten') {
                         coursesOverwritten.push(subjectIdentifier);

@@ -431,8 +431,11 @@
     "switchToProdStagTooltip": "Přepnout na produkční STAG API",
     "switchToDemoStagTooltip": "Přepnout na demo STAG API",
     "activateDemoStagTooltip": "Aktivovat DEMO režim STAG API",
-    "deactivateDemoStagTooltip": "Deaktivovat DEMO režim (použít produkční STAG API)",
-    "faqButtonTooltip": "Nápověda a FAQ",
+    "deactivateDemoStagTooltip": "Deaktivovat DEMO režim (použít produkční STAG API)",    "faqButtonTooltip": "Nápověda a FAQ",
     "colorModeTooltip": "Přepnout barvy rozvrhu (dle předmětu / typu akce)"
+  },
+  "externalLinks": {
+    "stagSylabus": "Zobrazit sylabus v IS/STAG",
+    "courseware": "Otevřít v ZČU Courseware"
   }
 }

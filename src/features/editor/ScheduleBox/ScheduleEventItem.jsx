@@ -14,6 +14,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { EVENT_TYPE_TO_KEY_MAP } from '../../../services/CourseClass';
 import { getEventTypePatterns } from '../../../styles/patterns';
+import ExternalLinksComponent from '../../../components/ExternalLinksComponent';
 
 // Funkce pro získání barvy rozvrhové akce na základě typu a tématu
 // Vrací barvu pozadí nebo plnou barvu podle varianty
@@ -232,12 +233,18 @@ function ScheduleEventItem({ eventData, course, style, scheduleColorMode, isEnro
                             `courseEvent.${eventData.recurrence.toLowerCase().replace(/\s+/g, '')}`,
                             eventData.recurrence
                         )}
-                    </Typography>
-                    {eventData.note && (
+                    </Typography>                    {eventData.note && (
                         <Typography variant="body2" sx={{ mt: 1, fontStyle: 'italic' }}>
                             {t('labels.notes', 'Poznámka')}: {eventData.note}
                         </Typography>
                     )}
+                    
+                    <Divider sx={{ my: 1 }} />
+                    <ExternalLinksComponent 
+                        course={course} 
+                        direction="column" 
+                        size="small"
+                    />
                 </Paper>
             </Popover>
         </>

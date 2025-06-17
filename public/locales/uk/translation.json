@@ -431,8 +431,11 @@
     "switchToProdStagTooltip": "Переключити на продукційний STAG API",
     "switchToDemoStagTooltip": "Переключити на demo STAG API",
     "activateDemoStagTooltip": "Активувати режим DEMO STAG API",
-    "deactivateDemoStagTooltip": "Деактивувати режим DEMO (використовувати продукційний STAG API)",
-    "faqButtonTooltip": "Довідка та FAQ",
+    "deactivateDemoStagTooltip": "Деактивувати режим DEMO (використовувати продукційний STAG API)",    "faqButtonTooltip": "Довідка та FAQ",
     "colorModeTooltip": "Переключити кольори розкладу (за предметом / типом заняття)"
+  },
+  "externalLinks": {
+    "stagSylabus": "Переглянути силабус в IS/STAG",
+    "courseware": "Відкрити в ZCU Courseware"
   }
 }
